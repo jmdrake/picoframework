@@ -22,6 +22,7 @@ function insertfrompost($sql, $conn){
             $sql .= ", ";
     }
     $sql .= ")";
+    echo $sql;
     if ($conn->query($sql) === TRUE) {
         echo "New record created successfully";
     } else {

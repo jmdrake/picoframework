@@ -23,7 +23,7 @@ $(document).ready(function() {
         currentuser = data;
         if(currentuser!==userpage)
             $("#fantoggle").show();
-        isFan(userpage, currentuser, function(data){        
+        isFan(currentuser, userpage,  function(data){        
             $("#fantoggle").html(data);
         });           
     });  
@@ -31,6 +31,7 @@ $(document).ready(function() {
     $("#fantoggle").click(function(){
         if($("#fantoggle").html()=="Fan")
             addFan({"fan":currentuser, "fanof":userpage}, function(data){
+                console.log(data);
                 $("#fantoggle").html("Unfan");
             })
         else

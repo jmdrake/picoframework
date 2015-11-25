@@ -25,14 +25,14 @@ function getProfileData(id, callback){
     })
 }
 
-function isFan(user1, user2, callback){    
-    $.get("./controllers/isfan.php?user1=" + user1 + "&user2=" + user2, function(data){
-        console.log(JSON.parse(data).length);
-        if(JSON.parse(data).length==0) {            
+function isFan(fan, fanof, callback){    
+    $.get("./controllers/isfan.php?fan=" + fan + "&fanof=" + fanof, function(data){                      
+        if(JSON.parse(data).length==0) {
             callback("Fan");            
         } else {            
             callback("Unfan");   
-        }            
+        } 
+        console.log(data);
     });
 }
 
