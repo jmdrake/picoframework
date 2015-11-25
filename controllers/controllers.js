@@ -6,8 +6,7 @@
 * To change this template use Tools | Templates.
 */
 
-function addUser(data, callback){
-    console.log(data);
+function addUser(data, callback){    
     $.post("./controllers/adduser.php", data, function(results){
         callback(results);
     })

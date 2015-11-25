@@ -6,10 +6,10 @@
 * To change this template use Tools | Templates.
 */
 
-$("#btnRegister").click(function(){     
-    console.log(form2json($("#register_form")));
+$("#btnRegister").click(function(){         
     addUser(form2json($("#register_form")), function(results){
-        console.log(results)
+        console.log(results);
+        clearForm($("#register_form"))
     });
 });
 
