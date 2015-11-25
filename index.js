@@ -8,7 +8,8 @@
 
 $(document).ready(function() {
     // executes when HTML-Document is loaded and DOM is ready
-    userpage = window.location.search.split("=")[1];
+    var userpage = window.location.search.split("=")[1];
+    var currentuser;
     if(userpage=="")
         window.location.replace("welcome.html");
     
@@ -18,18 +19,22 @@ $(document).ready(function() {
         $(".name").html(data["name"]);
     });
 
-    getCurrentUser(function(currentuser){
-        if(currentuser==userpage)
-            $("#fantoggle").hide();
+    getCurrentUser(function(data){
+        currentuser = data;
+        if(currentuser!==userpage)
+            $("#fantoggle").show();
         isFan(userpage, currentuser, function(data){        
-            if(data.indexOf("true") >= 0) {            
-                console.log("UnFan");
-                $("#fantoggle").html("Unfan");            
-            } else {
-                console.log("Fan");
-                $("#fantoggle").html("Fan");            
-            }
+            $("#fantoggle").html(data);
         });           
-    });        
+    });  
+    
+    $("#fantoggle").click(function(){
+        if($("#fantoggle").html()=="Fan")
+            addFan({"fan":currentuser, "fanof":userpage}, function(data){
+                $("#fantoggle").html("Unfan");
+            })
+        else
+            alert("Unfan");
+    })
 });
 

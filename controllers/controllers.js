@@ -12,6 +12,13 @@ function addUser(data, callback){
     })
 }
 
+function addFan(jsondata, callback){
+    $.post("./controllers/addfan.php", jsondata, function(results){
+        callback(results);
+    })
+}
+
+
 function getProfileData(id, callback){    
     $.get("./controllers/getprofiledata.php?user=" + id, function(data){        
         callback(JSON.parse(data)[0])
@@ -20,7 +27,12 @@ function getProfileData(id, callback){
 
 function isFan(user1, user2, callback){    
     $.get("./controllers/isfan.php?user1=" + user1 + "&user2=" + user2, function(data){
-        callback(data);
+        console.log(JSON.parse(data).length);
+        if(JSON.parse(data).length==0) {            
+            callback("Fan");            
+        } else {            
+            callback("Unfan");   
+        }            
     });
 }
 
