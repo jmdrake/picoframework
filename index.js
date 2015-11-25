@@ -14,6 +14,9 @@ $(document).ready(function() {
     
     getProfileData(userpage, function(data){
         $(".name").html(data["name"]);
+        if(data=[])
+            window.location.replace("welcome.html");
+        console.log("User data : " + data + "|");
     });
 
     getCurrentUser(function(currentuser){
