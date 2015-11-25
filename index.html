@@ -87,37 +87,37 @@
                         </div>                        
                     </div>
                 </div>
-                                        <div className="col-xs-9">
-                            <p>{this.props.post.text}</p>
-                            <ul className="list-inline">
-                                <li><a href="#">2 Days Ago</a></li>
-                                <li><a href="#"><i className="glyphicon glyphicon-comment" ></i> {this.state.commentcount} Comments</a></li>
-                                <li><a href="#"><i className="glyphicon glyphicon-share" ></i> 34 Shares</a></li>
-                            </ul>
-                            <form onSubmit = {this.handleSubmit}>
-                                <div className="input-group">
-                                    <div className="input-group-btn">
-                                        <button className="btn btn-default">Like</button>
-                                        <button className="btn btn-default"><i className="glyphicon glyphicon-share"></i></button>
-                                        <button className="btn btn-default" onClick={this.deletePost.bind(null, this.props.post)}>
-                                            <i className="glyphicon glyphicon-trash"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" className="form-control" placeholder="Add a comment.." ref="comment"/>
-                                </div>
-                            </form>
-                            <div className="w3-container">
-                                <Comments comments={this.state.comments}/>
+                <div className="col-xs-9">
+                    <p>{this.props.post.text}</p>
+                    <ul className="list-inline">
+                        <li><a href="#">2 Days Ago</a></li>
+                        <li><a href="#"><i className="glyphicon glyphicon-comment" ></i> {this.state.commentcount} Comments</a></li>
+                        <li><a href="#"><i className="glyphicon glyphicon-share" ></i> 34 Shares</a></li>
+                    </ul>
+                    <form onSubmit = {this.handleSubmit}>
+                        <div className="input-group">
+                            <div className="input-group-btn">
+                                <button className="btn btn-default">Like</button>
+                                <button className="btn btn-default"><i className="glyphicon glyphicon-share"></i></button>
+                                <button className="btn btn-default" onClick={this.deletePost.bind(null, this.props.post)}>
+                                    <i className="glyphicon glyphicon-trash"></i>
+                                </button>
                             </div>
+                            <input type="text" className="form-control" placeholder="Add a comment.." ref="comment"/>
                         </div>
-                        <div className="col-xs-3"></div>
+                    </form>
+                    <div className="w3-container">
+                        <Comments comments={this.state.comments}/>
+                    </div>
+                </div>
+                <div className="col-xs-3"></div>
 
             </div>
         </section>
         <footer>
         </footer>
         <script src="./js/jquery.js"></script>
-        <script src="./model.js"></script>
-        <script src="./controller.js"></script>
+        <script src="./controllers/controllers.js"></script>
+        <script src="index.js"></script>
     </body>
 </html>
