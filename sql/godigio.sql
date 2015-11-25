@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `Comments` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `text` varchar(1000) NOT NULL,
   `user` int(11) NOT NULL,
   `post` int(11) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `Comments` (
 --
 
 CREATE TABLE IF NOT EXISTS `FanMatrix` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `fan` int(50) NOT NULL,
   `fanof` int(50) NOT NULL,
   PRIMARY KEY (`ID`)
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `FanMatrix` (
 --
 
 CREATE TABLE IF NOT EXISTS `Inbox` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `to` int(11) NOT NULL,
   `from` int(11) NOT NULL,
   `text` varchar(1000) NOT NULL,
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `Inbox` (
 --
 
 CREATE TABLE IF NOT EXISTS `Likes` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `post` int(11) NOT NULL,
   `user` int(11) NOT NULL,
   `like_dislike` tinyint(4) NOT NULL,
@@ -82,8 +82,8 @@ CREATE TABLE IF NOT EXISTS `Likes` (
 -- Table structure for table `Post`
 --
 
-CREATE TABLE IF NOT EXISTS `Post` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `Posts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `text` varchar(1000) NOT NULL,
   `user` int(11) NOT NULL,
   `post_shared` int(11) NOT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `Post` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE IF NOT EXISTS `Users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(80) NOT NULL,
   `email` varchar(50) NOT NULL,
