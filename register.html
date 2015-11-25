@@ -1,0 +1,45 @@
+<!--
+To change this template use Tools | Templates.
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="./css/w3.css"/>
+    </head>
+    <body>
+        <br/><br/>
+        <header class="w3-top">
+            <nav class="w3-topnav w3-black">
+                <a href="#">Home</a>
+                <a href="#">Post</a>
+                <a href="#" id="fantoggle">Fan</a>
+                <span>Search <input style="color: #000000"/></span>
+            </nav>            
+        </header>
+        <img src="./images/newgodigiologo.png" width="100px"/>
+        <div class="w3-form w3-third" id="register_form">
+            <div class="w3-group">      
+                <input class="w3-input" name="email" id="email" style="width:100%;" type="text" required="true">
+                <label class="w3-label">Email</label>
+            </div>
+            <div class="w3-group">      
+                <input class="w3-input" name="name" id="name" style="width:100%;" type="text" required="true">
+                <label class="w3-label">Name</label>
+            </div>
+            <div class="w3-group">      
+                <input class="w3-input" name="password" id="password" style="width:100%;" type="password" required="true">
+                <label class="w3-label">Password</label>
+            </div>            
+            <div class="w3-group">      
+                <input class="w3-input" name="password_confirm" id="password_confirm" style="width:100%;" type="password" required="true">
+                <label class="w3-label">Password Confirm</label>
+            </div>                        
+            <button type="button" id="btnRegister" class="w3-btn w3-right w3-theme">Register</button>
+        </div>  
+        <script src="./js/jquery.js"></script>
+        <script src="./js/form2json.js"></script>
+        <script src="./controllers/controllers.js"></script>
+        <script src="register.js"></script>
+    </body>
+</html>

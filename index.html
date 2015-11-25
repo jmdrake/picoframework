@@ -1,0 +1,123 @@
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="./css/w3.css"/>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">        
+    </head>
+    <body>        
+        <br/><br/>
+        <header class="w3-top">
+            <nav class="w3-topnav w3-black">
+                <a href="#">Home</a>
+                <a href="#">Post</a>
+                <a href="#" id="fantoggle">Fan</a>
+                <span>Search <input style="color: #000000"/></span>
+            </nav>            
+        </header>
+        <img src="./images/newgodigiologo.png" width="100px"/>
+        <section class="w3-row-padding">
+            <div class="w3-half">
+                <div id="profile" class="w3-card-4">
+                    <h1>Profile for <span class="name"></span></h1>
+                    <div class="w3-img">
+                        <img id="profileimg" src="./images/profile-icon.png"/>
+                    </div>
+                    <div>
+                        Fans: <span class="fancount"></span>  Fan of: <span class="fanofcount"></span>  Posts: <span class="postcount"></span>
+                    </div>
+                </div>
+                <div id="fans" class="w3-card-4">
+                    <h1>Fans of <span class="name"></span></h1>
+                    <div id="fanlist" class="w3-row-padding">
+                        <div id="fantemplate" class="w3-col m3 s6" style="display:none">
+                            <a href="">
+                                <img src="./images/100x100.jpg" width="110" height="90"/>
+                            </a>
+                            <div class="desc"></div>
+                        </div>                        
+                    </div>
+                </div>
+                <div id="fanof" class="w3-card-4">
+                    <h1><span class="name"></span> Is A Fan Of</h1>
+                    <div id="fanoflist" class="w3-row-padding">
+                        <div id="fanoftemplate" class="w3-col m3 s6" style="display:none">
+                            <a href="">
+                                <img src="./images/100x100.jpg" width="110" height="90"/>
+                            </a>
+                            <div class="desc"></div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+            <div class="w3-half"> 
+                <div id="postform" class="w3-card-4">  
+                    <div class="w3-row-padding w3-light-grey">
+                        <h4>What's New</h4>
+                        <textarea class="w3-input"></textarea>
+                        <nav class="w3-topnav">
+                            <a href="#">
+                                <i class="fa fa-image" onclick="imageselect();"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fa fa-camera"></i>
+                            </a>
+                        </nav>
+                        <input type="file" ref="picFile" accept="image/*" style="display:none" onchange="handlefile();"/>
+                        <div ref="imageupload">
+                            <img id="uploadimg" src="" style="display:none" width="100px" height="100px"/>
+                        </div>
+                        <button className="btn btn-primary pull-right" onclick="handlesubmit();">Post</button>
+                    </div>
+                </div>
+                <div id="timeline" class="w3-card-4">                    
+                    <h1>Timeline</h1>                                      
+                    <div class="w3-card" id="post_template">
+                        <div class="w3-row">
+                            <div class="w3-third">
+                                <img src="./images/100x100.jpg" class="w3-circle"/>
+                            </div>
+                            <div>
+                                This is my message
+                            </div>
+                            <nav class="w3-topnav">
+                                <a href="#"><i class="fa fa-heart"></i></a><span>0</span>
+                                <a href="#"><i class="fa fa-retweet"></i></a><span>0</span>
+                                <a href="#"><i class="fa fa-comment"></i></a><span>0</span>                                
+                            </nav>            
+                        </div>                        
+                    </div>
+                </div>
+                <div className="col-xs-9">
+                    <p>{this.props.post.text}</p>
+                    <ul className="list-inline">
+                        <li><a href="#">2 Days Ago</a></li>
+                        <li><a href="#"><i className="glyphicon glyphicon-comment" ></i> {this.state.commentcount} Comments</a></li>
+                        <li><a href="#"><i className="glyphicon glyphicon-share" ></i> 34 Shares</a></li>
+                    </ul>
+                    <form onSubmit = {this.handleSubmit}>
+                        <div className="input-group">
+                            <div className="input-group-btn">
+                                <button className="btn btn-default">Like</button>
+                                <button className="btn btn-default"><i className="glyphicon glyphicon-share"></i></button>
+                                <button className="btn btn-default" onClick={this.deletePost.bind(null, this.props.post)}>
+                                    <i className="glyphicon glyphicon-trash"></i>
+                                </button>
+                            </div>
+                            <input type="text" className="form-control" placeholder="Add a comment.." ref="comment"/>
+                        </div>
+                    </form>
+                    <div className="w3-container">
+                        <Comments comments={this.state.comments}/>
+                    </div>
+                </div>
+                <div className="col-xs-3"></div>
+
+            </div>
+        </section>
+        <footer>
+        </footer>
+        <script src="./js/jquery.js"></script>
+        <script src="./controllers/controllers.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>
