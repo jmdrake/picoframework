@@ -24,3 +24,15 @@ function isFan(user1, user2, callback){
         callback(data);
     });
 }
+
+function login(data, callback){    
+    $.post("./controllers/login.php", data, function(results){
+        callback(results);
+    })
+}
+
+function getCurrentUser(callback){
+    $.get("./controllers/getcurrentuser.php", function(data){
+        callback(data);
+    })
+}

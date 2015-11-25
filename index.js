@@ -9,20 +9,25 @@
 $(document).ready(function() {
     // executes when HTML-Document is loaded and DOM is ready
     userpage = window.location.search.split("=")[1];
-    currentuser = 1;
-    console.log("Looking up profile for : " + userpage);
+    if(userpage=="")
+        window.location.replace("welcome.html");
+    
     getProfileData(userpage, function(data){
         $(".name").html(data["name"]);
     });
-        
-    isFan(userpage, currentuser, function(data){        
-        if(data.indexOf("true") >= 0) {            
-            console.log("UnFan");
-            $("#fantoggle").html("Unfan");            
-        } else {
-            console.log("Fan");
-            $("#fantoggle").html("Fan");            
-        }
-    });   
+
+    getCurrentUser(function(currentuser){
+        if(currentuser==userpage)
+            $("#fantoggle").hide();
+        isFan(userpage, currentuser, function(data){        
+            if(data.indexOf("true") >= 0) {            
+                console.log("UnFan");
+                $("#fantoggle").html("Unfan");            
+            } else {
+                console.log("Fan");
+                $("#fantoggle").html("Fan");            
+            }
+        });           
+    });        
 });
 

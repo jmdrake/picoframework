@@ -9,9 +9,8 @@
 require "../php/querytojson.php";
 require "../php/config.php";
 
-$user = $_GET["user"];
-$sql = "SELECT name, image FROM users WHERE id = " . $user;
 $conn = open_connection();
+$sql = "SELECT name, image FROM Users WHERE id = '" . $_GET["user"] ."'";
 echo querytojson($sql, $conn);
 $conn->close();
 ?>
