@@ -13,10 +13,9 @@ $(document).ready(function() {
         window.location.replace("welcome.html");
     
     getProfileData(userpage, function(data){
-        $(".name").html(data["name"]);
-        if(data=[])
+        if(data==undefined)
             window.location.replace("welcome.html");
-        console.log("User data : " + data + "|");
+        $(".name").html(data["name"]);
     });
 
     getCurrentUser(function(currentuser){

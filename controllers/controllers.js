@@ -13,8 +13,7 @@ function addUser(data, callback){
 }
 
 function getProfileData(id, callback){    
-    $.get("./controllers/getprofiledata.php?user=" + id, function(data){
-        console.log(data);
+    $.get("./controllers/getprofiledata.php?user=" + id, function(data){        
         callback(JSON.parse(data)[0])
     })
 }
