@@ -18,6 +18,11 @@ function addFan(jsondata, callback){
     })
 }
 
+function deleteFan(jsondata, callback){
+    $.post("./controllers/deletefan.php", jsondata, function(results){
+        callback(results);
+    })
+}
 
 function getProfileData(id, callback){    
     $.get("./controllers/getprofiledata.php?user=" + id, function(data){        
@@ -47,3 +52,4 @@ function getCurrentUser(callback){
         callback(data);
     })
 }
+

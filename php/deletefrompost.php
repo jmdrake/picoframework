@@ -21,7 +21,8 @@ function insertfrompost($sql, $conn){
         if($i+1 < $numfields)
             $sql .= ", ";
     }
-    $sql .= ")";    
+    $sql .= ")";
+    echo $sql;
     if ($conn->query($sql) === TRUE) {
         echo "New record created successfully";
     } else {

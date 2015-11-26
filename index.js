@@ -34,8 +34,11 @@ $(document).ready(function() {
                 console.log(data);
                 $("#fantoggle").html("Unfan");
             })
-        else
-            alert("Unfan");
+        else            
+            deleteFan({"fan":currentuser, "fanof":userpage}, function(data){
+                console.log(data);
+                $("#fantoggle").html("Fan");
+            })
     })
 });
 
