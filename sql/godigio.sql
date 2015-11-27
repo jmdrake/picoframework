@@ -114,3 +114,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+insert into Users(name, email, password) values('Test User1', 'testuser1@mail.com', 'pass');
+insert into Users(name, email, password) values('Test User2', 'testuser2@mail.com', 'pass');
+insert into Users(name, email, password) values('Test User3', 'testuser3@mail.com', 'pass');
