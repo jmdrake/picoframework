@@ -21,7 +21,7 @@ $(document).ready(function() {
 
     getCurrentUser(function(data){
         currentuser = data;
-        if(currentuser!==userpage)
+        if((currentuser!==userpage)&&(currentuser!=""))
             $("#fantoggle").show();
         isFan(currentuser, userpage,  function(data){        
             $("#fantoggle").html(data);

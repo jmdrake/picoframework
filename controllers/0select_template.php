@@ -8,9 +8,10 @@
 
 require "../php/querytojson.php";
 require "../php/config.php";
+require "../php/mark_sql_get.php";
 
 $conn = open_connection();
-$sql = "SELECT SQL";
+$sql = mark_sql_get("SELECT SQL");
 echo querytojson($sql, $conn);
 $conn->close();
 ?>

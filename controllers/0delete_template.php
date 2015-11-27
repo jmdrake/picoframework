@@ -7,12 +7,10 @@
  */
 
 require "../php/config.php";
+require "../php/deletefrompost.php";
 
 $conn = open_connection();
 $sql = "DELETE SQL";
-if ($conn->query($sql) === TRUE) {
-    echo "Record deleted successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
+echo deletefrompost($sql, $conn);
+$conn->close();
 ?>

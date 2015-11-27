@@ -8,7 +8,7 @@
 
 require "../php/querytojson.php";
 require "../php/config.php";
-require "../php/mark_sql_get.php"
+require "../php/mark_sql_get.php";
 
 $conn = open_connection();
 $sql = mark_sql_get("SELECT name, image FROM Users WHERE id = [user]");

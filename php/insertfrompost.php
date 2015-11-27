@@ -5,7 +5,7 @@
  * Reads fields from form post or AJAX call and inserts them into the database
  * Usage Example:
  * $conn = open_connection();
- * echo insertfrompost("INSERT INTO user(name, email, password)");
+ * echo insertfrompost("INSERT INTO user(name, email, password)", $conn);
  * $conn.close_connection();
  */
 
