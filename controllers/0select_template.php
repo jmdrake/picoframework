@@ -1,9 +1,9 @@
 <?php
 /*
- * File : getprofiledata.php
+ * File : 
  * Input type: GET
- * Inputs: user
- * Outputs: Returns name and image fields from user profile
+ * Inputs: 
+ * Outputs: 
  */
 
 require "../php/querytojson.php";

@@ -53,3 +53,8 @@ function getCurrentUser(callback){
     })
 }
 
+function getFanOfList(fanof, callback){
+    $.get("./controllers/getfanoflist.php?user="+fanof, function(data){
+        callback(data);
+    })
+}

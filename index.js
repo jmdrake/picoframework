@@ -28,6 +28,10 @@ $(document).ready(function() {
         });           
     });  
     
+    getFanOfList(userpage, function(fanlist){
+        $(".fanofcount").html(JSON.parse(fanlist).length)
+    })
+
     $("#fantoggle").click(function(){
         if($("#fantoggle").html()=="Fan")
             addFan({"fan":currentuser, "fanof":userpage}, function(data){
