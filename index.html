@@ -14,16 +14,27 @@
                 <a href="#" id="fantoggle" style="display:none"></a>
             </nav>            
         </header>
-        <img src="./images/newgodigiologo.png" width="100px"/>
+        <img src="./images/newgodigiologo.png" alt="Godigio logo" width="100px"/>
         <section class="w3-row-padding">
             <div class="w3-third">
                 <div id="profile" class="w3-card-4">
-                    <h1>Profile for <span class="name"></span></h1>
-                    <div class="w3-img">
-                        <img id="profileimg" src="./images/profile-icon.png" width="200"/>
+                    <h3>Profile for <span class="name"></span></h3>
+                    <div class="w3-row">
+                        <div class="w3-img w3-half">
+                            <img id="profileimg" src="./images/profile-icon.png" alt="user profile image" width="200px"/>
+                        </div>
+                        <div class="w3-half">
+                            <div>DOB : </div>
+                            <div>Gender : </div>
+                            <div>Marital : </div>
+                            <div>Location : </div>
+                            <a href="editprofile.html" class="w3-btn">Edit Profile</a>
+                        </div>
                     </div>
                     <div>
-                        Fans: <span class="fancount"></span>  Fan of: <span class="fanofcount"></span>  Posts: <span class="postcount"></span>
+                        Fans: <span class="fancount"></span>  
+                        Fan of: <span class="fanofcount"></span>  
+                        Posts: <span class="postcount"></span>                        
                     </div>
                 </div>
                 <div id="fans" class="w3-card-4">
@@ -31,7 +42,7 @@
                     <div id="fanlist" class="w3-row-padding">
                         <div id="fantemplate" class="w3-col m3 s6" style="display:none">
                             <a href="">
-                                <img src="./images/100x100.jpg" width="110" height="90"/>
+                                <img src="./images/100x100.jpg" alt="fan profile image" width="110" height="90"/>
                             </a>
                             <div class="desc"></div>
                         </div>                        
@@ -42,7 +53,7 @@
                     <div id="fanoflist" class="w3-row-padding">
                         <div id="fanoftemplate" class="w3-col m3 s6" style="display:none">
                             <a href="">
-                                <img src="./images/100x100.jpg" width="110" height="90"/>
+                                <img src="./images/100x100.jpg" alt="post profile image" width="110" height="90"/>
                             </a>
                             <div class="desc"></div>
                         </div>                        
@@ -62,18 +73,18 @@
                                 <i class="fa fa-camera"></i>
                             </a>
                         </nav>
-                        <input type="file" ref="picFile" accept="image/*" style="display:none" onchange="handlefile();"/>
-                        <div ref="imageupload">
-                            <img id="uploadimg" src="" style="display:none" width="100px" height="100px"/>
+                        <input type="file" accept="image/*" style="display:none" onchange="handlefile();"/>
+                        <div id="imageupload">
+                            <img id="uploadimg" src="../images/100x100.jpg" alt="upload image" style="display:none" width="100px" height="100px"/>
                         </div>
-                        <button className="btn btn-primary pull-right" onclick="handlesubmit();">Post</button>
+                        <button class="btn btn-primary pull-right" onclick="handlesubmit();">Post</button>
                     </div>
                 </div>
                 <div id="timeline" class="w3-card-4">                    
                     <h1>Timeline</h1>                                      
                     <div class="w3-card w3-row" id="post_template">                        
                         <div class="w3-third">
-                            <img src="./images/100x100.jpg" class="w3-circle"/>
+                            <img src="./images/100x100.jpg" alt="post profile image" class="w3-circle"/>
                         </div>
                         <div>
                             This is my first message
@@ -87,7 +98,7 @@
                         <div class="w3-container">
                             <div class="w3-card w3-row">
                                 <div class="w3-third">
-                                    <img src="./images/100x100.jpg" class="w3-circle"/>
+                                    <img src="./images/100x100.jpg" alt="post profile image" class="w3-circle"/>
                                 </div>
                                 <div>
                                     First Comment
@@ -100,7 +111,7 @@
                             </div>
                             <div class="w3-card w3-row">
                                 <div class="w3-third">
-                                    <img src="./images/100x100.jpg" class="w3-circle"/>
+                                    <img src="./images/100x100.jpg" alt="post profile image" class="w3-circle"/>
                                     <p>Test User 1</p>
                                 </div>
                                 <div>
@@ -117,7 +128,7 @@
                     <div class="w3-card" id="post_template">
                         <div class="w3-row">
                             <div class="w3-third">
-                                <img src="./images/100x100.jpg" class="w3-circle"/>
+                                <img src="./images/100x100.jpg" alt="post profile image" class="w3-circle"/>
                             </div>
                             <div>
                                 This is my second message
