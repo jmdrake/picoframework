@@ -1,10 +1,11 @@
-function readURL(input) {
+function readURL(input, previewimg) {
 
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $(input).next('img').attr('src', e.target.result);
+            $(previewimg).attr('src', e.target.result);
+            console.log(e.target.result);
         }
 
         reader.readAsDataURL(input.files[0]);
@@ -29,16 +30,4 @@ function uploadFile(input) {
         }
      });    
 }
-
-$(document).ready(function(){
-    console.log("Ready");    
-})
-$(".upload").change(function(){
-    readURL(this);
-});
-
-$("#preview-img").onclick = function () {
-    console.log("Preview Image");
-    $('#imageupload').click()
-};
 
