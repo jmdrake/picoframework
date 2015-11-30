@@ -1,11 +1,20 @@
 <?php
-require "../php/config.php";
-require "../php/insertfrompost.php";
-$conn = open_connection();
+/*
+ * File : getprofiledata.php
+ * Input type: GET
+ * Inputs: user
+ * Outputs: Returns name and image fields from user profile
+ */
 
-// $sql = "SELECT id FROM Users WHERE email='" . $_POST["email"] . "' AND password='" . $_POST["password"] . "'";
-$result = $conn->query("SELECT id FROM Users WHERE email='" . $_POST["email"] . "' AND password='" . $_POST["password"] . "'");
-$currentuser = $result->fetch_array(MYSQLI_ASSOC)["id"];
+require "../php/querytojson.php";
+require "../php/config.php";
+require "../php/mark_sql_post.php";
+
+$conn = open_connection();
+$sql = mark_sql_post("SELECT id FROM Users WHERE email=[email] AND password=[password]");
+$result = $conn->query($sql);
+$rs = $result->fetch_array(MYSQLI_ASSOC);
+$currentuser = $rs["id"];
 if($currentuser !== "")
     setcookie("currentuser", $currentuser);
 echo $currentuser;

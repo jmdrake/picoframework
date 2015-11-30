@@ -10,7 +10,8 @@ $(document).ready(function() {
     // executes when HTML-Document is loaded and DOM is ready
     var userpage = window.location.search.split("=")[1];
     var currentuser;
-    if(userpage=="")
+    console.log("Userpage:" + userpage + ";");
+    if(userpage==""||userpage==undefined)
         window.location.replace("welcome.html");
     
     getProfileData(userpage, function(data){

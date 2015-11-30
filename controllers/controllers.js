@@ -41,8 +41,8 @@ function isFan(fan, fanof, callback){
     });
 }
 
-function login(data, callback){    
-    $.post("./controllers/login.php", data, function(results){
+function login(data, callback){
+    $.post("./controllers/login.php", data, function (results) {        
         callback(results);
     })
 }
