@@ -11,10 +11,13 @@
 $(document).ready(function() {
 // executes when HTML-Document is loaded and DOM is ready
     getCurrentUser(function(user){
-        if(data==undefined)
+        if(user==undefined)
             window.location.replace("welcome.html");
         getProfileData(user, function(profileData){
-            
+            console.log(profileData);
+            $("#name").val(profileData['name']);
+            $("#dob").val(profileData['dob']);
+            $("#userid").val(user);
         })
     })
     
@@ -28,7 +31,14 @@ $(document).ready(function() {
     });
     
     $("#btnSubmit").click(function() {
-        
+        var fields = form2json($("#profile_form"));
+        var fileext = $("#imageupload").prop('files')[0]["type"].split("/")[1];
+        var filename = "user" + fields["userid"] + "pic." + fileext;
+        fields["image"] = filename;
+        updateProfile(fields, function(result){
+            console.log(result);
+        });
+        uploadFile($("#imageupload"), filename);
     });
 });
 

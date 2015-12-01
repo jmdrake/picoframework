@@ -18,6 +18,9 @@ $(document).ready(function() {
         if(data==undefined)
             window.location.replace("welcome.html");
         $(".name").html(data["name"]);
+        if(data["image"] != "")
+            $(".profileimg").attr("src", "uploads/" + data["image"]);
+        $("#dob").html(data["dob"]);
     });
 
     getCurrentUser(function(data){

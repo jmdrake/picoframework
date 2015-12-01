@@ -24,7 +24,7 @@ To change this template use Tools | Templates.
                 <label class="w3-label">Name</label>
             </div>
             <div class="w3-group">      
-                <input class="w3-input required" name="dob" id="dob" style="width:100%;" type="text">
+                <input class="w3-input required" name="dob" id="dob" style="width:100%;" type="date">
                 <label class="w3-label">DOB</label>
             </div>
             <div class="w3-group">
@@ -33,10 +33,11 @@ To change this template use Tools | Templates.
                     <img src="./images/profile-icon.png" alt="Prevew Image" id="preview-img" width="100px" height="100px"/>
                 </a>                
             </div>
-            <input type="hidden" name="userid" id="userid"/>
+            <input class="w3-input" type="hidden" name="userid" id="userid"/>
             <button type="button" id="btnSubmit" class="w3-btn w3-right w3-theme">Submit</button>
         </div>  
         <script type="text/javascript" src="./js/jquery.js"></script>
+        <script type="text/javascript" src="./js/form2json.js"></script>
         <script type="text/javascript" src="editprofile.js"></script>
         <script type="text/javascript" src="./js/fileupload.js"></script>
         <script type="text/javascript" src="./controllers/controllers.js"></script>        

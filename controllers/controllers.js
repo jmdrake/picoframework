@@ -30,6 +30,12 @@ function getProfileData(id, callback){
     })
 }
 
+function updateProfile(jsondata, callback){    
+    $.post("./controllers/updateprofile.php", jsondata, function(data){        
+        callback(data)
+    })
+}
+
 function isFan(fan, fanof, callback){    
     $.get("./controllers/isfan.php?fan=" + fan + "&fanof=" + fanof, function(data){                      
         if(JSON.parse(data).length==0) {

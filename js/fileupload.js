@@ -12,11 +12,11 @@ function readURL(input, previewimg) {
     }
 }
 
-function uploadFile(input) {
+function uploadFile(input, filename) {
     var file_data = $(input).prop('files')[0];
     var form_data = new FormData();                  
     form_data.append('file', file_data);
-    form_data.append('name', "images-" + newdoc["_id"]);    
+    form_data.append('name', filename);
     $.ajax({
         url: './php/upload.php', // point to server-side PHP script 
         dataType: 'text',  // what to expect back from the PHP script, if anything
