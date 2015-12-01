@@ -53,14 +53,32 @@ function login(data, callback){
     })
 }
 
+function logout(callback) {
+    $.get("./controllers/logout.php", function (results) {
+        callback(results);
+    })
+}
+
 function getCurrentUser(callback){
     $.get("./controllers/getcurrentuser.php", function(data){
         callback(data);
     })
 }
 
-function getFanOfList(fanof, callback){
-    $.get("./controllers/getfanoflist.php?user="+fanof, function(data){
+function getFanList(user, callback){
+    $.get("./controllers/getfanlist.php?user="+user, function(data){
         callback(data);
     })
+}
+
+function getFanOfList(user, callback){
+    $.get("./controllers/getfanoflist.php?user="+user, function(data){
+        callback(data);
+    })
+}
+
+function getPosts(user, callback) {
+    $.get("./controllers/getPosts.php?user="+user, function(data){
+        callback(data);
+    })    
 }

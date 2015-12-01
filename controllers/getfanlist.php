@@ -11,7 +11,7 @@ require "../php/config.php";
 require "../php/mark_sql_get.php";
 
 $conn = open_connection();
-$sql = mark_sql_get("SELECT name, image FROM FanMatrix INNER JOIN Users ON FanMatrix.fanof = Users.id WHERE FanMatrix.fan = [user]");
+$sql = mark_sql_get("SELECT name, image FROM FanMatrix INNER JOIN Users ON FanMatrix.fan = Users.id WHERE FanMatrix.fanof = [user]");
 echo querytojson($sql, $conn);
 $conn->close();
 ?>
