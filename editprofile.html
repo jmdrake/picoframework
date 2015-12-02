@@ -6,6 +6,14 @@ To change this template use Tools | Templates.
     <head>
         <title></title>
         <link rel="stylesheet" href="./css/w3.css"/>
+        <script type="text/javascript" src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
+        <!-- polyfiller file to detect and load polyfills -->
+        <script type="text/javascript" src="http://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js"></script>
+        <script type="text/javascript">
+            webshims.setOptions('waitReady', false);
+            webshims.setOptions('forms-ext', {types: 'date'});
+            webshims.polyfill('forms forms-ext');
+        </script>             
     </head>
     <body>
         <br/><br/>
@@ -26,6 +34,10 @@ To change this template use Tools | Templates.
             <div class="w3-group">      
                 <input class="w3-input required" name="dob" id="dob" style="width:100%;" type="date">
                 <label class="w3-label">DOB</label>
+            </div>
+            <div class="w3-group">      
+                <input class="w3-input required" name="location" id="location" style="width:100%;" type="text">
+                <label class="w3-label">Location</label>
             </div>
             <div class="w3-group">
                 <input type="file" id="imageupload" accept="image/*" style="display: none" class="upload"/>

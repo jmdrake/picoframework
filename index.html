@@ -2,7 +2,7 @@
     <head>
         <title></title>
         <link rel="stylesheet" href="./css/w3.css"/>
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">        
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">   
     </head>
     <body>        
         <br/><br/>
@@ -12,7 +12,8 @@
                 <a href="#">Post</a>
                 <span>Search <input style="color: #000000"/></span>
                 <a href="#" id="fantoggle" style="display:none"></a>
-            </nav>            
+                <span class="w3-right"><a href="#" id="login_out">Logout</a></span>
+            </nav>
         </header>
         <img src="./images/newgodigiologo.png" alt="Godigio logo" width="100px"/>
         <section class="w3-row-padding">
@@ -25,10 +26,10 @@
                         </div>
                         <div class="w3-half">
                             <div>DOB : <span id="dob"></span></div>
-                            <div>Gender : <span id="gender"></span></div>
-                            <div>Marital : <span id="marital"></span></div>
                             <div>Location : <span  id="location"></span></div>
-                            <a href="editprofile.html" class="w3-btn">Edit Profile</a>
+                            <div id="divEditProfile" style="display: none">
+                                <a href="editprofile.html" class="w3-btn">Edit Profile</a>
+                            </div>
                         </div>
                     </div>
                     <div>
@@ -38,62 +39,64 @@
                     </div>
                 </div>
                 <div id="fans" class="w3-card-4">
-                    <h1>Fans of <span class="name"></span></h1>
+                    <h3>Fans of <span class="name"></span></h3>
                     <div id="fanlist" class="w3-row-padding">
                         <div id="fantemplate" class="w3-col m3 s6" style="display:none">
                             <a href="">
                                 <img src="./images/100x100.jpg" alt="fan profile image" width="110" height="90"/>
                             </a>
-                            <div class="desc"></div>
+                            <div class="name"></div>
                         </div>                        
                     </div>
                 </div>
                 <div id="fanof" class="w3-card-4">
-                    <h1><span class="name"></span> Is A Fan Of <span class="fanofcount"></span> people</h1>
+                    <h3><span class="name"></span> Is A Fan Of </h3>
                     <div id="fanoflist" class="w3-row-padding">
                         <div id="fanoftemplate" class="w3-col m3 s6" style="display:none">
                             <a href="">
-                                <img src="./images/100x100.jpg" alt="post profile image" width="110" height="90"/>
+                                <img src="./images/100x100.jpg" alt="fanof profile image" width="110" height="90"/>
                             </a>
-                            <div class="desc"></div>
+                            <div class="name"></div>
                         </div>                        
                     </div>
                 </div>
             </div>
             <div class="w3-half"> 
-                <div id="postform" class="w3-card-4">  
+                <div id="postform" class="w3-card-4" style="display: none">  
                     <div class="w3-row-padding w3-light-grey">
                         <h4>What's New</h4>
-                        <textarea class="w3-input"></textarea>
+                        <textarea class="w3-input" id="text" name="text"></textarea>
                         <nav class="w3-topnav">
                             <a href="#">
-                                <i class="fa fa-image" onclick="imageselect();"></i>
+                                <i class="fa fa-image">Upload Image</i>
                             </a>
                             <a href="#">
-                                <i class="fa fa-camera"></i>
+                                <i class="fa fa-camera">Take Picture</i>
                             </a>
                         </nav>
-                        <input type="file" accept="image/*" style="display:none" onchange="handlefile();"/>
-                        <div id="imageupload">
-                            <img id="uploadimg" src="../images/100x100.jpg" alt="upload image" style="display:none" width="100px" height="100px"/>
+                        <input type="file" id="imageupload" accept="image/*" style="display: none" class="upload"/>                        
+                        <div>
+                            <img src="./images/profile-icon.png" alt="Prevew Image" id="preview-img" style="display:none" width="100px" height="100px"/>
                         </div>
-                        <button class="btn btn-primary pull-right" onclick="handlesubmit();">Post</button>
+                        <button class="btn btn-primary pull-right" id="btnPost">Post</button>
                     </div>
                 </div>
                 <div id="timeline" class="w3-card-4">                    
-                    <h1>Timeline</h1>                                      
-                    <div class="w3-card w3-row" id="post_template">                        
+                    <h1>Timeline</h1>
+                    <div class="w3-container" id="usersposts">
+                    </div>
+                    <div class="w3-card w3-row" id="post_template" style="display: none">
                         <div class="w3-third">
                             <img src="./images/100x100.jpg" alt="post profile image" class="w3-circle"/>
                         </div>
-                        <div>
+                        <div class="message">
                             This is my first message
                         </div>
                         <nav class="w3-topnav">
-                            <a href="#"><i class="fa fa-heart-o"></i></a><span id="likecount">0</span>
-                            <a href="#"><i class="fa fa-retweet"></i></a><span id="sharecount">0</span>
-                            <a href="#"><i class="fa fa-comment"></i></a><span id="commentcount">0</span>                                
-                            <a href="#"><i class="fa fa-trash"></i></a>
+                            <a href="#"><i class="fa fa-heart-o btnLike"></i></a><span id="likecount">0</span>
+                            <a href="#"><i class="fa fa-retweet btnShare"></i></a><span id="sharecount">0</span>
+                            <a href="#"><i class="fa fa-comment btnComment"></i></a><span id="commentcount">0</span>                         
+                            <a href="#"><i class="fa fa-trash btnDelete"></i></a>
                         </nav>                                    
                         <div class="w3-container">
                             <div class="w3-card w3-row">
@@ -106,7 +109,7 @@
                                 <nav class="w3-topnav">
                                     <a href="#"><i class="fa fa-heart"></i></a><span id="likecount">0</span>
                                     <a href="#"><i class="fa fa-retweet"></i></a><span id="sharecount">0</span>
-                                    <a href="#"><i class="fa fa-comment"></i></a><span id="commentcount">0</span>                                
+                                    <a href="#"><i class="fa fa-comment"></i></a><span id="commentcount">0</span>                            
                                 </nav>            
                             </div>
                             <div class="w3-card w3-row">
@@ -125,13 +128,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="w3-card" id="post_template">
+                    <div class="w3-card" id="posttemplate" style="display: none">
                         <div class="w3-row">
                             <div class="w3-third">
-                                <img src="./images/100x100.jpg" alt="post profile image" class="w3-circle"/>
+                                <img src="./images/100x100.jpg" alt="post profile image" class="w3-circle userimage"/>
                             </div>
-                            <div>
+                            <div class="message">
                                 This is my second message
+                                <div class="postimage"></div>
                             </div>
                             <nav class="w3-topnav">
                                 <a href="#"><i class="fa fa-heart"></i></a><span id="likecount">0</span>
@@ -145,8 +149,11 @@
         </section>
         <footer>
         </footer>
-        <script src="./js/jquery.js"></script>
-        <script src="./controllers/controllers.js"></script>
-        <script src="index.js"></script>
+        <script type="text/javascript" src="./js/jquery.js"></script>
+        <script type="text/javascript" src="./controllers/controllers.js"></script>
+        <script type="text/javascript" src="./js/form2json.js"></script>        
+        <script type="text/javascript" src="./js/findInJSON.js"></script> 
+        <script type="text/javascript" src="./js/fileupload.js"></script>
+        <script type="text/javascript" src="index.js"></script>
     </body>
 </html>

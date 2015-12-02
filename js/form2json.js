@@ -10,8 +10,10 @@ function form2json(form){
    // console.log($(formname));
     fields = form.find(".w3-input");    
     var numfields = fields.length;
+    var value;
     json = "{";
     for(var i=0; i<numfields; i++) {
+        value = fields[i].value;
         json += '"' + fields[i].name + '"' + ":" + '"' + fields[i].value + '"';
         if(i+1<numfields)
             json += ", ";

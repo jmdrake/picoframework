@@ -14,8 +14,12 @@ function mark_sql_post($sql) {
     $replacements = array();
     for($i=0; $i<count($params[0]); $i++) {
         $patterns[$i] = "/\\" . $params[0][$i] . "/";
-        $replacements[$i] = "'" . $_POST[$params[1][$i]] . "'";
-    }
+        $postval = $_POST[$params[1][$i]];
+        if($postval=="")
+            $replacements[$i] = "'" . $postval . "'";
+        else
+            $replacements[$i] = "NULL";
+    }    
     return preg_replace($patterns, $replacements, $sql);;
 }
 ?>

@@ -77,8 +77,38 @@ function getFanOfList(user, callback){
     })
 }
 
-function getPosts(user, callback) {
-    $.get("./controllers/getPosts.php?user="+user, function(data){
+function getUsersPosts(user, callback) {
+    $.get("./controllers/getUsersPosts.php?user="+user, function(data){
         callback(data);
     })    
+}
+
+function getUsersTimeline(user, callback) {
+    $.get("./controllers/getUsersTimeline.php?user="+user, function(data){
+        callback(data);
+    })    
+}
+
+function getLikes(post, callback) {
+    $.get("./controllers/getLikes.php?post="+post, function(data){
+        callback(data);
+    })    
+}
+
+function putPost(data, callback){
+    $.post("./controllers/putPost.php", data, function (results) {
+        callback(results);
+    })
+}
+
+function putPostWithImage(data, callback){
+    $.post("./controllers/putPostWithImage.php", data, function (results) {
+        callback(results);
+    })
+}
+
+function generateFileName(prefix, callback) {
+    $.get("./controllers/generateFileName.php?prefix=" + prefix, function(filename){
+        callback(filename)
+    })
 }
