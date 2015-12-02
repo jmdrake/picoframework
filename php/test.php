@@ -1,18 +1,23 @@
 <?php
-require "utils.php";
-$sql = "SELECT Posts.id, Users.id AS userid, Users.image AS userimage, Users.name AS username, text, post_shared, Posts.image FROM Posts INNER JOIN USERS ON Posts.user = Users.id WHERE user = '3'";
+/*
+ * File : getprofiledata.php
+ * Input type: GET
+ * Inputs: user
+ * Outputs: Returns name and image fields from user profile
+ */
 
-echo $sql . "<br/>";
+require "../php/querytojson.php";
+require "../php/config.php";
+require "../php/mark_sql_get.php";
 
-$fields = splitstr(before(after($sql, "SELECT"), "FROM"), ",");
-
-for($i=0; $i<count($fields);$i++){
-    if(strpos($fields[$i], " AS ")>0) {
-        $asfield = after($fields[$i], " AS ");  
-        $fields[$i] = $asfield;
-        echo $fields[$i] . "<br/>";
-    }            
-}
-
+$conn = open_connection();
+$sql = mark_sql_get("SELECT id FROM Users WHERE email=[email] AND password=[password]");
+echo $sql;
+/* $result = $conn->query($sql);
+$rs = $result->fetch_array(MYSQLI_ASSOC);
+$currentuser = $rs["id"];
+if($currentuser !== "")
+    setcookie("currentuser", $currentuser);
+echo $currentuser; */
+$conn->close();
 ?>
-

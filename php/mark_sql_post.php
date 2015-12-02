@@ -15,7 +15,7 @@ function mark_sql_post($sql) {
     for($i=0; $i<count($params[0]); $i++) {
         $patterns[$i] = "/\\" . $params[0][$i] . "/";
         $postval = $_POST[$params[1][$i]];
-        if($postval=="")
+        if($postval!="")
             $replacements[$i] = "'" . $postval . "'";
         else
             $replacements[$i] = "NULL";
