@@ -4,7 +4,7 @@ $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["file"]["name"]);
 $filename = $_REQUEST["name"];
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-if ($_FILES["file"]["size"] > 500000) {
+if ($_FILES["file"]["size"] > 5000000) {
     echo "Error: Sorry, your file is too large.";
     $upLoadOk = 0;
 }

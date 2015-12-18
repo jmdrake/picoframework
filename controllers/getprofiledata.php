@@ -12,6 +12,7 @@ require "../php/mark_sql_get.php";
 
 $conn = open_connection();
 $sql = mark_sql_get("SELECT name, image, dob, gender, zip, marital, location FROM Users WHERE id = [user]");
+// echo $sql;
 echo querytojson($sql, $conn);
 $conn->close();
 ?>

@@ -78,10 +78,13 @@ $(document).ready(function () {
             newPost = $("#posttemplate").clone();
             $("#usersposts").append(newPost);
             newPost.find(".postid").val(postlist[i]["postid"]);
-            if (postlist[i]["Users.image"] != "")
+            if (postlist[i]["Users.image"] != "") {
                 newPost.find(".userimage").attr("src", "uploads/" + postlist[i]["userimage"]);
+                newPost.find(".userimage").attr("width", "100px");
+            }
             if (postlist[i]["postimage"] != "")
-                newPost.find(".image").attr("src", "uploads/" + postlist[i]["postimage"]);
+                newPost.find(".postimage").attr("src", "uploads/" + postlist[i]["postimage"]);
+            console.log("Post Image : " + postlist[i]["postimage"]);
             newPost.find(".message").html(postlist[i]["text"]);
             console.log(postlist[i]);
             getLikes(postlist[i]["postid"], function (likesdata) {
@@ -130,6 +133,10 @@ $(document).ready(function () {
     $(".fa-image").click(function () {
         $('#imageupload').click()
     });
+    
+    $(".fa-camera").click(function () {
+        alert("Taking a picture");
+    });    
 
     $("#btnPost").click(function () {
         var fields = form2json($("#postform"));
