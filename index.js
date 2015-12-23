@@ -20,13 +20,15 @@ $(document).ready(function () {
             window.location.replace("welcome.html");
         $(".name").html(data["name"]);
         if (data["image"] != "")
-            $(".profileimg").attr("src", "uploads/" + data["image"]);
+            $("#profileimg").attr("src", "uploads/" + data["image"]);
         $("#dob").html(data["dob"]);
         $("#location").html(data["location"]);
     });
 
     getCurrentUser(function (data) {
         currentuser = data;
+        console.log("Current User : " + currentuser);
+        console.log("User Page : " + userpage);
         if ((currentuser !== userpage) && (currentuser != ""))
             $("#fantoggle").show();
         if ((currentuser == userpage) && (currentuser != "")) {
@@ -78,13 +80,10 @@ $(document).ready(function () {
             newPost = $("#posttemplate").clone();
             $("#usersposts").append(newPost);
             newPost.find(".postid").val(postlist[i]["postid"]);
-            if (postlist[i]["Users.image"] != "") {
+            if (postlist[i]["Users.image"] != "")
                 newPost.find(".userimage").attr("src", "uploads/" + postlist[i]["userimage"]);
-                newPost.find(".userimage").attr("width", "100px");
-            }
             if (postlist[i]["postimage"] != "")
-                newPost.find(".postimage").attr("src", "uploads/" + postlist[i]["postimage"]);
-            console.log("Post Image : " + postlist[i]["postimage"]);
+                newPost.find(".image").attr("src", "uploads/" + postlist[i]["postimage"]);
             newPost.find(".message").html(postlist[i]["text"]);
             console.log(postlist[i]);
             getLikes(postlist[i]["postid"], function (likesdata) {
@@ -133,10 +132,6 @@ $(document).ready(function () {
     $(".fa-image").click(function () {
         $('#imageupload').click()
     });
-    
-    $(".fa-camera").click(function () {
-        alert("Taking a picture");
-    });    
 
     $("#btnPost").click(function () {
         var fields = form2json($("#postform"));
@@ -148,9 +143,14 @@ $(document).ready(function () {
                 uploadFile($("#imageupload"), file);
                 fields["image"] = file;
                 fields["user"] = currentuser;
-                console.log(fields);
                 putPostWithImage(fields, function (results) {
                     console.log(results);
+                    var newRecord = JSON.parse(results);
+                    var newPost = $("#posttemplate").clone();
+                    newPost.find(".postid").val(newRecord["id"]);
+                    newPost.find(".userimage").attr($("#profileimg").attr("src"));
+                    newPost.find(".image").attr("src", "uploads/" + newRecord["image"]);
+                    newPost.find(".message").html(newRecord["text"]);
                 })
             })
         } else {
@@ -158,6 +158,11 @@ $(document).ready(function () {
             console.log(fields);
             putPost(fields, function (results) {
                 console.log(results);
+                var newRecord = JSON.parse(results);
+                var newPost = $("#posttemplate").clone();
+                newPost.find(".postid").val(newRecord["id"]);
+                newPost.find(".userimage").attr($("#profileimg").attr("src"));
+                newPost.find(".message").html(newRecord["text"]);
             })
         }
     });

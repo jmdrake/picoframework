@@ -11,7 +11,13 @@ require "../php/insertfrompost.php";
 $conn = open_connection();
 
 $sql = "INSERT INTO Posts(text, user)";
-echo insertfrompost($sql, $conn);
+$results = insertfrompost($sql, $conn);
+
+if($results == "Ok") {
+    return "{'text' : '" . text . "', 'id' : '" . mysqli_insert_id($conn) . "'}"
+} else {
+    return $results;
+}
 
 $conn->close();
 ?>

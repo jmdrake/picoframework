@@ -22,7 +22,7 @@
                     <h3>Profile for <span class="name"></span></h3>
                     <div class="w3-row">
                         <div class="w3-img w3-half">
-                            <img class="profileimg" src="./images/profile-icon.png" alt="user profile image" width="180px"/>
+                            <img id="profileimg" src="./images/profile-icon.png" alt="user profile image" width="180px"/>
                         </div>
                         <div class="w3-half">
                             <div>DOB : <span id="dob"></span></div>
@@ -54,7 +54,7 @@
                     <div id="fanoflist" class="w3-row-padding">
                         <div id="fanoftemplate" class="w3-col m3 s6" style="display:none">
                             <a href="">
-                                <img src="./images/100x100.jpg" alt="fanof profile image" width="110px" height="90px"/>
+                                <img src="./images/100x100.jpg" alt="fanof profile image" width="110" height="90"/>
                             </a>
                             <div class="name"></div>
                         </div>                        
@@ -76,7 +76,7 @@
                         </nav>
                         <input type="file" id="imageupload" accept="image/*" style="display: none" class="upload"/>                        
                         <div>
-                            <img src="./images/profile-icon.png" alt="Prevew Image" id="preview-img" style="display:none" width="100px" height="100px"/>
+                            <img src="./images/100x100.png" alt="Prevew Image" id="preview-img" style="display:none" width="100px" height="100px"/>
                         </div>
                         <button class="btn btn-primary pull-right" id="btnPost">Post</button>
                     </div>
@@ -85,7 +85,7 @@
                     <h1>Timeline</h1>
                     <div class="w3-container" id="usersposts">
                     </div>
-                    <div class="w3-card w3-row" id="post_template" style="display: none">
+                    <div class="w3-card w3-row" id="tmplPost" style="display: none">
                         <div class="w3-third">
                             <img src="./images/100x100.jpg" alt="post profile image" class="w3-circle"/>
                         </div>
@@ -135,9 +135,7 @@
                             </div>
                             <div class="message">
                                 This is my second message
-                            </div>
-                            <div>
-                                <img src="./images/100x100.jpg" alt="post image" class="postimage"/>
+                                <div class="postimage"></div>
                             </div>
                             <nav class="w3-topnav">
                                 <a href="#"><i class="fa fa-heart"></i></a><span id="likecount">0</span>
