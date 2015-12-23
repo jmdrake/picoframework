@@ -25,7 +25,7 @@ function deleteFan(jsondata, callback){
 }
 
 function getProfileData(id, callback){    
-    $.get("./controllers/getprofiledata.php?user=" + id, function(data){        
+    $.get("./controllers/getProfileData.php?user=" + id, function(data){        
         callback(JSON.parse(data)[0])
     })
 }
@@ -77,13 +77,13 @@ function getFanOfList(user, callback){
     })
 }
 
-function getPosts(user, callback) {
+function getUsersPosts(user, callback) {
     $.get("./controllers/getPosts.php?user="+user, function(data){
         callback(data);
     })    
 }
 
-function getTimeline(user, callback) {
+function getAllPosts(user, callback) {
     $.get("./controllers/getTimeline.php?user="+user, function(data){
         callback(data);
     })    

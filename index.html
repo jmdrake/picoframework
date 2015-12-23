@@ -11,41 +11,41 @@
                 <a href="#">Home</a>
                 <a href="#">Post</a>
                 <span>Search <input style="color: #000000"/></span>
-                <a href="#" id="fantoggle" style="display:none"></a>
-                <span class="w3-right"><a href="#" id="login_out">Logout</a></span>
+                <a href="#" id="btnFanToggle" style="display:none"></a>
+                <span class="w3-right"><a href="#" id="divLoginLogout">Logout</a></span>
             </nav>
         </header>
         <img src="./images/newgodigiologo.png" alt="Godigio logo" width="100px"/>
         <section class="w3-row-padding">
             <div class="w3-third">
-                <div id="profile" class="w3-card-4">
-                    <h3>Profile for <span class="name"></span></h3>
+                <div id="divProfile" class="w3-card-4">
+                    <h3>Profile for <span class="lblName"></span></h3>
                     <div class="w3-row">
                         <div class="w3-img w3-half">
-                            <img id="profileimg" src="./images/profile-icon.png" alt="user profile image" width="180px"/>
+                            <img id="imgProfileImage" src="./images/profile-icon.png" alt="user profile image" width="180px"/>
                         </div>
                         <div class="w3-half">
-                            <div>DOB : <span id="dob"></span></div>
-                            <div>Location : <span  id="location"></span></div>
-                            <div id="divEditProfile" style="display: none">
+                            <div>DOB : <span id="lblDOB"></span></div>
+                            <div>Location : <span  id="lblLocation"></span></div>
+                            <div id="btnEditProfile" style="display: none">
                                 <a href="editprofile.html" class="w3-btn">Edit Profile</a>
                             </div>
                         </div>
                     </div>
                     <div>
-                        Fans: <span class="fancount"></span>  
-                        Fan of: <span class="fanofcount"></span>  
-                        Posts: <span class="postcount"></span>                        
+                        Fans: <span class="lblFanCount"></span>  
+                        Fan of: <span class="lblFanOfCount"></span>  
+                        Posts: <span class="lblPostCount"></span>                        
                     </div>
                 </div>
-                <div id="fans" class="w3-card-4">
+                <div id="divFans" class="w3-card-4">
                     <h3>Fans of <span class="name"></span></h3>
-                    <div id="fanlist" class="w3-row-padding">
-                        <div id="fantemplate" class="w3-col m3 s6" style="display:none">
-                            <a href="">
+                    <div id="lstFanList" class="w3-row-padding">
+                        <div id="tmplUserIcon" class="w3-col m3 s6" style="display:none">
+                            <a id="lnkUser" href="">
                                 <img src="./images/100x100.jpg" alt="fan profile image" width="110" height="90"/>
                             </a>
-                            <div class="name"></div>
+                            <div id="lblName"></div>
                         </div>                        
                     </div>
                 </div>
@@ -150,10 +150,11 @@
         <footer>
         </footer>
         <script type="text/javascript" src="./js/jquery.js"></script>
-        <script type="text/javascript" src="./controllers/controllers.js"></script>
+        <script type="text/javascript" src="./js/formcontrols.js"></script>
+        <script type="text/javascript" src="./controllers/controllersnew.js"></script>
         <script type="text/javascript" src="./js/form2json.js"></script>        
         <script type="text/javascript" src="./js/findInJSON.js"></script> 
         <script type="text/javascript" src="./js/fileupload.js"></script>
-        <script type="text/javascript" src="index.js"></script>
+        <script type="text/javascript" src="indexnew.js"></script>
     </body>
 </html>
