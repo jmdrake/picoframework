@@ -11,7 +11,7 @@ require "../php/config.php";
 require "../php/mark_sql_get.php";
 
 $conn = open_connection();
-$sql = mark_sql_get("SELECT COUNT(*) AS likescount FROM Likes WHERE post = [post]");
+$sql = mark_sql_get("SELECT COUNT(*) AS sharecount FROM Posts WHERE post_shared = [post]");
 echo querytojson($sql, $conn);
 $conn->close();
 ?>

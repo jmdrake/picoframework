@@ -1,127 +1,137 @@
-/**
-* Created with fanhubphp.
-* User: jmdrake
-* Date: 2015-11-19
-* Time: 05:44 PM
-* To change this template use Tools | Templates.
-*/
+var currentUser=0;
+var pageUser;
+var test;
+
+if (!String.prototype.startsWith) {
+  String.prototype.startsWith = function(searchString, position) {
+    position = position || 0;
+    return this.indexOf(searchString, position) === position;
+  };
+}
 
 $(document).ready(function () {
-    // executes when HTML-Document is loaded and DOM is ready
-    var userpage = window.location.search.split("=")[1];
-    var currentuser;
-    console.log("Userpage:" + userpage + ";");
-    if (userpage == "" || userpage == undefined)
+    pageUser = window.location.search.split("=")[1];
+    if (pageUser == "")
         window.location.replace("welcome.html");
 
-    getProfileData(userpage, function (data) {
-        console.log(data);
-        if (data == undefined)
-            window.location.replace("welcome.html");
-        $(".name").html(data["name"]);
-        if (data["image"] != "")
-            $("#profileimg").attr("src", "uploads/" + data["image"]);
-        $("#dob").html(data["dob"]);
-        $("#location").html(data["location"]);
-    });
-
-    getCurrentUser(function (data) {
-        currentuser = data;
-        console.log("Current User : " + currentuser);
-        console.log("User Page : " + userpage);
-        if ((currentuser !== userpage) && (currentuser != ""))
-            $("#fantoggle").show();
-        if ((currentuser == userpage) && (currentuser != "")) {
-            $("#divEditProfile").show();
-            $("#postform").show();
+    getCurrentUser(function (user) {
+        currentUser = user;
+        if (currentUser != "") {
+            if (currentUser == pageUser) {
+                $("#btnEditProfile").show();
+                $("#frmPost").show();
+            }
+            else {
+                $("#btnFanToggle").show()
+            }
+        } else {
+            $("#btnLoginLogout").html("Log In");
         }
-
-        isFan(currentuser, userpage, function (data) {
-            $("#fantoggle").html(data);
+        getAllPosts(pageUser, currentUser, function (postData) {
+            populatePostList($("#lstAllPosts"), JSON.parse(postData), currentUser);
         });
-        if (currentuser == "") {
-            $("#login_out").html("Login");
-        } else {
-            $("#login_out").html("Logout");
-        }
+
+        getUsersPosts(pageUser, currentUser, function (postData) {
+            var postList = JSON.parse(postData);
+            $("#lblPostCount").html(postList.length)
+            populatePostList($("#lstUsersPosts"), postList, currentUser);
+        });
     });
 
-    getFanOfList(userpage, function (fandata) {
-        fanlist = JSON.parse(fandata);
-        $(".fanofcount").html(fanlist.length);
-        for (var i = 0; i < fanlist.length; i++) {
-            newUserIcon = $("#fanoftemplate").clone();
-            $("#fanoflist").append(newUserIcon);
-            newUserIcon.find(".name").html(fanlist[i]["name"]);
-            if (fanlist[i]["image"] != "")
-                newUserIcon.find("img").attr("src", "uploads/" + fanlist[i]["image"]);
-            newUserIcon.show();
+    getProfileData(pageUser, function (profileData) {
+        if (profileData == undefined) {
+            window.location.replace("welcome.html")
         }
+        populateDiv($("#divProfile"), profileData);
     });
 
-    getFanList(userpage, function (fandata) {
-        fanlist = JSON.parse(fandata);
-        $(".fancount").html(fanlist.length)
-        for (var i = 0; i < fanlist.length; i++) {
-            newUserIcon = $("#fantemplate").clone();
-            $("#fanlist").append(newUserIcon);
-            newUserIcon.find(".name").html(fanlist[i]["name"]);
-            if (fanlist[i]["image"] != "")
-                newUserIcon.find("img").attr("src", "uploads/" + fanlist[i]["image"]);
-            newUserIcon.show();
-        }
+    getFanList(pageUser, function (fanData) {
+        var fanList = JSON.parse(fanData);
+        $("#lblFanCount").html(fanList.length);
+        populateList($("#lstFans"), fanList, $("#tmplFan"), undefined, "?user=");
     });
 
-    getUsersPosts(userpage, function (postdata) {
-        postlist = JSON.parse(postdata);
-        $(".postcount").html(postlist.length);
-        var newPost;
-        for (var i = 0; i < postlist.length; i++) {
-            newPost = $("#posttemplate").clone();
-            $("#usersposts").append(newPost);
-            newPost.find(".postid").val(postlist[i]["postid"]);
-            if (postlist[i]["Users.image"] != "")
-                newPost.find(".userimage").attr("src", "uploads/" + postlist[i]["userimage"]);
-            if (postlist[i]["postimage"] != "")
-                newPost.find(".image").attr("src", "uploads/" + postlist[i]["postimage"]);
-            newPost.find(".message").html(postlist[i]["text"]);
-            console.log(postlist[i]);
-            getLikes(postlist[i]["postid"], function (likesdata) {
-                likeslist = JSON.parse(likesdata);
-                newPost.find(".likescount").html(likeslist.length);
-                if ((likeslist.length > 0) && (findInJSON(likeslist, "user", currentuser))) {
-                    newPost.find(".btnLike").removeClass("fa-heart-o");
-                    newPost.find(".btnLike").addClass("fa-heart");
+    getFanOfList(pageUser, function (fanData) {
+        var fanOfList = JSON.parse(fanData);
+        $("#lblFanOfCount").html(fanOfList.length);
+        populateList($("#lstFanOf"), fanOfList, $("#tmplFanOf"), undefined, "?user=");
+    });
+
+    $("#btnSubmitPost").click(function () {
+        fields = form2json($("#frmPost"));
+        fields["user"] = currentUser;
+        console.log(fields);
+        putPost(fields, function (newRecord) {
+            console.log("New record : " + JSON.stringify(newRecord));
+            uploadImageFile($("#imgUpload"), "posts" + newRecord["valPostID"], function (filename) {
+                if (!filename.startsWith("Error:")) {
+                    newRecord["imgPostImage"] = filename;
+                    updatePost(newRecord, function (res) { console.log(res) });
                 }
-            });
-            // if (currentuser == postslist[i]["userid"])
-            newPost.find(".btnShare").hide();
-            newPost.show();
-        }
+                var newPost = cloneDiv($("#tmplPost"), newRecord);
+                console.log(newPost);
+                setPostControls(newPost);
+                newPost.find("#share").hide();
+                newPost.show();
+                newPost.attr('id', "tmplPostlstAllPosts" + newRecord["valPostID"]);
+                $("#lstAllPosts").prepend(newPost);
+                console.log(newPost.find("#lblText").html());
+                newPost2 = newPost.clone();
+                newPost2.attr('id', "tmplPostlstUsersPosts" + newRecord["valPostID"]);
+                $("#lstUsersPosts").prepend(newPost2);
+            })
+            clearForm($("#frmPost"))
+        })
     });
 
-    $("#fantoggle").click(function () {
-        if ($("#fantoggle").html() == "Fan")
-            addFan({ "fan": currentuser, "fanof": userpage }, function (data) {
-                console.log(data);
-                $("#fantoggle").html("Unfan");
-            })
-        else
-            deleteFan({ "fan": currentuser, "fanof": userpage }, function (data) {
-                console.log(data);
-                $("#fantoggle").html("Fan");
-            })
+    $("#btnSubmitComment").click(function () {
+        var fields = form2json($("#mdlComment"));
+        fields["user"] = currentUser;
+        putComment(fields, function (newCommentData) {
+            var newComment = cloneDiv($("#tmplComment"), newCommentData);
+            newComment.show();
+            newComment.attr("id", "#tmplPostlstAllPostsComment" + newCommentData["valCommentID"]);
+            $("#tmplPostlstAllPosts" + newCommentData["valCommentPostID"]).find("#lstComments").append(newComment);
+            newComment2 = newComment.clone();
+            newComment.attr("id", "#tmplPostlstUserPostsComment" + newCommentData["valCommentID"]);
+            $("#tmplPostlstUsersPosts" + newCommentData["valCommentPostID"]).find("#lstComments").append(newComment2);
+            clearForm($("#mdlComment"));
+            $("#mdlComment").hide();
+            increment($("#tmplPostlstAllPosts" + newCommentData["valCommentPostID"]).find("#lblCommentCount"));
+            increment($("#tmplPostlstUsersPosts" + newCommentData["valCommentPostID"]).find("#lblCommentCount"));
+        })
     });
 
-    $("#login_out").click(function () {
-        if ($("login_out").html() == "Login") {
-            window.location.replace("login.html");
-        } else {
-            logout(function (results) {
-                console.log(results);
-                window.location.replace("welcome.html");
-            });
-        }
+    $("#btnSubmitShare").click(function () {
+        var fields = form2json($("#mdlShare"));
+        var postid = fields["post_shared"];
+        fields["user"] = currentUser;
+        console.log(fields);
+        putSharedPost(fields, function (res) {
+            clearForm($("#mdlShare"));
+            increment($("#post" + postid).find(".lblShareCount"));
+            $("#mdlShare").hide()
+        })
+    });
+
+    $("#btnShowAllPosts").click(function () {
+        $("#lstAllPosts").show();
+        $("#lstUsersPosts").hide()
+    });
+
+    $("#btnShowUsersPosts").click(function () {
+        $("#lstAllPosts").hide();
+        $("#lstUsersPosts").show();
+        return false;
+    });
+
+    $(".btnDeletePost").click(function () {
+        currentPost = findParent(this, "#tmplPost");
+        postid = currentPost.find(".postid").val;
+        deletePost(postid, function () {
+            deleteDiv(currentPost)
+        })
+        return false;
     });
 
     $(".upload").change(function () {
@@ -130,42 +140,121 @@ $(document).ready(function () {
     });
 
     $(".fa-image").click(function () {
-        $('#imageupload').click()
+        $('#imgUpload').click();
+        return false;
     });
 
-    $("#btnPost").click(function () {
-        var fields = form2json($("#postform"));
-        if ($("#imageupload").prop('files').length > 0) {
-            var fileext = $("#imageupload").prop('files')[0]["type"].split("/")[1];
-            generateFileName("user" + currentuser + "poststamp", function (filename) {
-                var file = filename.trim() + "." + fileext;
-                console.log("Filename : " + file);
-                uploadFile($("#imageupload"), file);
-                fields["image"] = file;
-                fields["user"] = currentuser;
-                putPostWithImage(fields, function (results) {
-                    console.log(results);
-                    var newRecord = JSON.parse(results);
-                    var newPost = $("#posttemplate").clone();
-                    newPost.find(".postid").val(newRecord["id"]);
-                    newPost.find(".userimage").attr($("#profileimg").attr("src"));
-                    newPost.find(".image").attr("src", "uploads/" + newRecord["image"]);
-                    newPost.find(".message").html(newRecord["text"]);
-                })
+    $(".fa-camera").click(function () {
+        console.log("Take a picture");
+        return false;
+    });
+
+    $("#btnLoginLogout").click(function () {
+        console.log($("#btnLoginLogout").html());
+        if ($("#btnLoginLogout").html() == "Logout") {
+            logout(function (res) {
+                window.location.replace("./welcome.html");
             })
         } else {
-            fields["user"] = currentuser;
-            console.log(fields);
-            putPost(fields, function (results) {
-                console.log(results);
-                var newRecord = JSON.parse(results);
-                var newPost = $("#posttemplate").clone();
-                newPost.find(".postid").val(newRecord["id"]);
-                newPost.find(".userimage").attr($("#profileimg").attr("src"));
-                newPost.find(".message").html(newRecord["text"]);
-            })
+            window.location.replace("./login.html");
         }
     });
-
 });
+
+function updateCommentList(prefix, postid, newComment) {
+    var post = $(prefix + postid);
+    post.find("#lstComments").prepend(newComment);
+    increment(post.find("#lblCommentCount"));
+}
+
+function populatePostList(list, data, currentUser){
+    populateList(list, data, $("#tmplPost"), function (newPost) {
+        var postid = newPost.find("#valPostID").val();
+        newPost.attr("id", "tmplPost" + list.attr("id") + postid);
+        if (newPost.find("#valLiked").val() == "1") {
+            newPost.find(".btnLikePost").addClass("fa-heart");
+            newPost.find(".btnLikePost").removeClass("fa-heart-o");
+        }
+        setPostControls(newPost);
+        if (parseInt(newPost.find("#lblCommentCount").html()) > 0) {
+            getComments(postid, function (comments) {
+                populateList(newPost.find("#lstComments"), comments, $("#tmplComment"), function (newComment) { })
+            })
+        }
+        if (newPost.find("#valPostShared").val() != "")
+            newPost.find("#divShare").show();
+    })
+}
+
+function setPostControls(newPost){
+    newPost.find(".btnLikePost").click(function () {
+        var post = findParent($(this), "tmplPost");
+        var postid = post.find("#valPostID").val();
+        toggleLikeRecord(currentUser, postid, function (likecount) {
+            post.find("#lblLikeCount").html(likecount);
+        });
+        $(this).toggleClass("fa-heart-o");
+        $(this).toggleClass("fa-heart");
+        return false;
+    });
+    if(!(currentUser == newPost.find("#valUserID").val())){
+        newPost.find(".btnSharePost").click(function () {
+            var post = findParent($(this), "tmplPost");
+            var postid = post.find("#valPostID").val();
+            $("#valSharePostID").val(postid);
+            $("#lblShareText").html(post.find("#lblText").html());
+            $("#imgShareImage").attr("src", post.find("#imgPostImage").attr("src"));           
+            if (!($("#imgShareImage").attr("src") == "./images/100x100.jpg"))
+                $("#imgShareImage").show();
+            $("#mdlShare").show();
+            return false;
+        });
+    } else {
+        var btnShare = newPost.find(".btnSharePost");
+        btnShare.parent().attr("href", "");
+        btnShare.click(function(){return false});        
+    }
+    newPost.find(".btnCommentPost").click(function () {
+        var post = findParent($(this), "tmplPost");
+        var postid = post.find("#valPostID").val();
+        $("#valCommentPostID").val(postid);
+        $("#mdlComment").show();
+        return false;
+    });    
+}
+
+function setLike(post){
+    var likeIcon = post.find(".btnLike");
+    likeIcon.removeClass("fa-heart-o");
+    likeIcon.addClass("fa-heart");
+}
+
+function findParent(node, id){
+    var parentFound = false;    
+    while(node != null && ! parentFound) {
+        if (node.attr("id") != undefined)
+            parentFound = node.attr("id").startsWith(id);
+        if(! parentFound)
+            node = node.parent();
+    }        
+    return node
+}
+
+function likepost(){
+    alert("Like this post");
+    console.log($(this));
+}
+
+function sharepost(){
+    alert("Share this post");
+}
+
+function replypost(){
+    alert("Reply to this post");
+}
+
+function deletepost(){
+    alert("Delete this post");
+}
+
 

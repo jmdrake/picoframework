@@ -25,7 +25,7 @@ function deleteFan(jsondata, callback){
 }
 
 function getProfileData(id, callback){    
-    $.get("./controllers/getprofiledata.php?user=" + id, function(data){        
+    $.get("./controllers/getProfileData.php?user=" + id, function(data){        
         callback(JSON.parse(data)[0])
     })
 }
@@ -42,8 +42,7 @@ function isFan(fan, fanof, callback){
             callback("Fan");            
         } else {            
             callback("Unfan");   
-        } 
-        console.log(data);
+        }         
     });
 }
 
@@ -77,32 +76,50 @@ function getFanOfList(user, callback){
     })
 }
 
-function getPosts(user, callback) {
-    $.get("./controllers/getPosts.php?user="+user, function(data){
+function getUsersPosts(pageuser, currentuser, callback) {
+    $.get("./controllers/getUsersPosts.php?pageuser="+pageuser+"&currentuser=" + currentuser, function(data){
         callback(data);
     })    
 }
 
-function getTimeline(user, callback) {
-    $.get("./controllers/getTimeline.php?user="+user, function(data){
+function getAllPosts(pageuser, currentuser, callback) {
+    $.get("./controllers/getAllPosts.php?pageuser="+pageuser+"&currentuser=" + currentuser, function(data){
         callback(data);
     })    
 }
 
 function getLikes(post, callback) {
     $.get("./controllers/getLikes.php?post="+post, function(data){
-        callback(data);
+        callback(JSON.parse(data)[0]["likescount"]);
+    })    
+}
+
+function getShares(post, callback) {
+    $.get("./controllers/getShares.php?post="+post, function(data){
+        callback(JSON.parse(data)[0]["sharecount"]);
+    })    
+}
+
+function getComments(post, callback) {
+    $.get("./controllers/getComments.php?post="+post, function(data){
+        callback(JSON.parse(data));
     })    
 }
 
 function putPost(data, callback){
     $.post("./controllers/putPost.php", data, function (results) {
-        callback(results);
+        callback(JSON.parse(results)[0]);
     })
 }
 
-function putPostWithImage(data, callback){
-    $.post("./controllers/putPostWithImage.php", data, function (results) {
+function putComment(data, callback){
+    $.post("./controllers/putComment.php", data, function (results) {
+        callback(JSON.parse(results)[0]);
+    })
+}
+
+function putSharedPost(data, callback){
+    $.post("./controllers/putSharedPost.php", data, function (results) {
         callback(results);
     })
 }
@@ -112,3 +129,22 @@ function generateFileName(prefix, callback) {
         callback(filename)
     })
 }
+
+function likesPost(user, post, callback){
+    $.get("./controllers/likesPost.php?postid=" + post + "&userid=" + user, function (data) {        
+        callback(JSON.parse(data)[0]["likecount"])
+    })    
+}
+
+function toggleLikeRecord(user, post, callback){
+    $.post("./controllers/toggleLikeRecord.php", { "userid": user, "postid": post }, function (likecount) {              
+        callback(likecount);
+    })
+}
+
+function updatePost(record, callback){
+    $.post("./controllers/updatePost.php", record, function (res) {
+        callback(res);
+    })
+}
+

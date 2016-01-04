@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <script type="text/javascript" src="./js/jquery.js"></script>
+    </head>
+    <body>
+        Server Call : <input id="servercall"/><br/>
+        JSON : <input id="json"/><br/>
+        <button>Execute</button>
+        <script>
+            $(document).ready(function () {
+                $("button").click(function () {
+                    var data = JSON.parse($("#json").val());
+                    console.log(data);
+                    $.post($("#servercall").val(), data, function (res) {
+                        console.log(res)
+                    })
+                })
+            })
+        </script>
+    </body>
+</html>

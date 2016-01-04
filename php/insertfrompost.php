@@ -29,9 +29,9 @@ function insertfrompost($sql, $conn){
     }
     $sql .= ")";    
     if ($conn->query($sql) === TRUE) {
-        echo "Ok";
+        return "Ok";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        return "Error: " . $sql . "<br>" . $conn->error;
     }
 }
 ?>

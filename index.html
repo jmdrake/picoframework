@@ -12,14 +12,22 @@
                 <a href="#">Post</a>
                 <span>Search <input style="color: #000000"/></span>
                 <a href="#" id="btnFanToggle" style="display:none"></a>
-                <span class="w3-right"><a href="#" id="divLoginLogout">Logout</a></span>
-            </nav>
+                <span class="w3-right"><a href="#" id="btnLoginLogout">Logout</a></span>
+            </nav>            
         </header>
-        <img src="./images/newgodigiologo.png" alt="Godigio logo" width="100px"/>
+        <section>
+            <div style="margin: 10px"><img src="./images/newgodigiologo.png" alt="Godigio logo" width="100px"/></div>
+            <button id="btnArtistDashboard" class="w3-input">Artist Dashboard</button>
+            <div id="dashboard" class="w3-row-padding">
+                <div class="w3-third">
+                    <h1>Video Conferencing</h1>
+                </div>
+            </div>
+        </section>
         <section class="w3-row-padding">
             <div class="w3-third">
                 <div id="divProfile" class="w3-card-4">
-                    <h3>Profile for <span class="lblName"></span></h3>
+                    <h3>Profile for <span class="classLabelName"></span></h3>
                     <div class="w3-row">
                         <div class="w3-img w3-half">
                             <img id="imgProfileImage" src="./images/profile-icon.png" alt="user profile image" width="180px"/>
@@ -33,36 +41,36 @@
                         </div>
                     </div>
                     <div>
-                        Fans: <span class="lblFanCount"></span>  
-                        Fan of: <span class="lblFanOfCount"></span>  
-                        Posts: <span class="lblPostCount"></span>                        
+                        Fans: <span id="lblFanCount"></span>  
+                        Fan of: <span id="lblFanOfCount"></span>  
+                        Posts: <span id="lblPostCount"></span>                        
                     </div>
                 </div>
-                <div id="divFans" class="w3-card-4">
+                <div id="divFanList" class="w3-card-4">
                     <h3>Fans of <span class="name"></span></h3>
-                    <div id="lstFanList" class="w3-row-padding">
-                        <div id="tmplUserIcon" class="w3-col m3 s6" style="display:none">
+                    <div id="lstFans" class="w3-row-padding">
+                        <div id="tmplFan" class="w3-col m3 s6" style="display:none; margin:  10px">
                             <a id="lnkUser" href="">
-                                <img src="./images/100x100.jpg" alt="fan profile image" width="110" height="90"/>
+                                <img id="imgProfileImage" src="./images/100x100.jpg" alt="fanof profile image" width="110" height="90"/>
                             </a>
                             <div id="lblName"></div>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
-                <div id="fanof" class="w3-card-4">
-                    <h3><span class="name"></span> Is A Fan Of </h3>
-                    <div id="fanoflist" class="w3-row-padding">
-                        <div id="fanoftemplate" class="w3-col m3 s6" style="display:none">
-                            <a href="">
-                                <img src="./images/100x100.jpg" alt="fanof profile image" width="110" height="90"/>
+                <div id="divFanOf" class="w3-card-4">
+                    <h3><span class="classLabelName"></span> Is A Fan Of </h3>
+                    <div id="lstFanOf" class="w3-row-padding">       
+                        <div id="tmplFanOf" class="w3-col m3 s6" style="display:none; margin:  10px">
+                            <a id="lnkUser" href="">
+                                <img id="imgProfileImage" src="./images/100x100.jpg" alt="fanof profile image" width="110" height="90"/>
                             </a>
-                            <div class="name"></div>
-                        </div>                        
+                            <div id="lblName"></div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="w3-half"> 
-                <div id="postform" class="w3-card-4" style="display: none">  
+                <div id="frmPost" class="w3-card-4" style="display: none">  
                     <div class="w3-row-padding w3-light-grey">
                         <h4>What's New</h4>
                         <textarea class="w3-input" id="text" name="text"></textarea>
@@ -74,75 +82,101 @@
                                 <i class="fa fa-camera">Take Picture</i>
                             </a>
                         </nav>
-                        <input type="file" id="imageupload" accept="image/*" style="display: none" class="upload"/>                        
+                        <input type="file" id="imgUpload" name="imgUpload" accept ="image/*" style="display: none" class="upload"/>
                         <div>
-                            <img src="./images/100x100.png" alt="Prevew Image" id="preview-img" style="display:none" width="100px" height="100px"/>
+                            <img src="./images/100x100.jpg" alt="Prevew Image" id="preview-img" style="display:none" width="100px" height="100px"/>
                         </div>
-                        <button class="btn btn-primary pull-right" id="btnPost">Post</button>
+                        <button class="btn btn-primary pull-right" id="btnSubmitPost">Post</button>
                     </div>
                 </div>
                 <div id="timeline" class="w3-card-4">                    
                     <h1>Timeline</h1>
-                    <div class="w3-container" id="usersposts">
+                    <nav class="w3-topnav">
+                        <a href="#"><i class="fa fa-users" id="btnShowAllPosts">Show All Posts</i></a>
+                        <a href="#"><i class="fa fa-user" id="btnShowUsersPosts">Show Posts For <span class="classLabelName"></span></i></a>
+                    </nav>
+                    <div class="w3-container" id="lstAllPosts">
+                    </div>
+                    <div class="w3-container" id="lstUsersPosts" style="display: none">
                     </div>
                     <div class="w3-card w3-row" id="tmplPost" style="display: none">
                         <div class="w3-third">
-                            <img src="./images/100x100.jpg" alt="post profile image" class="w3-circle"/>
+                            <img id="imgUserImage" src="./images/100x100.jpg" alt="post profile image" class="w3-circle" width="100px"/>
                         </div>
-                        <div class="message">
-                            This is my first message
+                        <div class="w3-two-thirds">
+                            <div id="lblText">
+                                This is my first message
+                            </div>
+                            <div>
+                                <img id="imgPostImage" src="./images/100x100.jpg" alt="post image" style="max-width:400px; display: none"/>
+                            </div>
+                            <div class="w3-container w3-row w3-card-2" style="display: none" id="divShare">
+                                <div class="w3-quarter">
+                                    <img id="imgShareUserImage" src="./images/100x100.jpg" alt="post profile image" class="w3-circle" width="100px"/>
+                                </div>
+                                <div class="w3-quarter">
+                                    <div>Shared Post</div>
+                                    <div id="lblShareText">
+                                    </div>
+                                    <div>
+                                        <img id="imgShareImage" src="./images/100x100.jpg" alt="post image" style="max-width:400px; display: none">
+                                    </div>
+                                </div>                                
+                            </div>
                         </div>
                         <nav class="w3-topnav">
-                            <a href="#"><i class="fa fa-heart-o btnLike"></i></a><span id="likecount">0</span>
-                            <a href="#"><i class="fa fa-retweet btnShare"></i></a><span id="sharecount">0</span>
-                            <a href="#"><i class="fa fa-comment btnComment"></i></a><span id="commentcount">0</span>                         
-                            <a href="#"><i class="fa fa-trash btnDelete"></i></a>
-                        </nav>                                    
-                        <div class="w3-container">
-                            <div class="w3-card w3-row">
-                                <div class="w3-third">
-                                    <img src="./images/100x100.jpg" alt="post profile image" class="w3-circle"/>
-                                </div>
-                                <div>
-                                    First Comment
-                                </div>
-                                <nav class="w3-topnav">
-                                    <a href="#"><i class="fa fa-heart"></i></a><span id="likecount">0</span>
-                                    <a href="#"><i class="fa fa-retweet"></i></a><span id="sharecount">0</span>
-                                    <a href="#"><i class="fa fa-comment"></i></a><span id="commentcount">0</span>                            
-                                </nav>            
-                            </div>
-                            <div class="w3-card w3-row">
-                                <div class="w3-third">
-                                    <img src="./images/100x100.jpg" alt="post profile image" class="w3-circle"/>
-                                    <p>Test User 1</p>
-                                </div>
-                                <div>
-                                    Second Comment
-                                </div>
-                                <nav class="w3-topnav">
-                                    <a href="#"><i class="fa fa-heart"></i></a><span id="likecount">0</span>
-                                    <a href="#"><i class="fa fa-retweet"></i></a><span id="sharecount">0</span>
-                                    <a href="#"><i class="fa fa-comment"></i></a><span id="commentcount">0</span>                                
-                                </nav>            
-                            </div>
+                            <a href="#"><i class="fa fa-heart-o btnLikePost"></i></a><span id="lblLikeCount">0</span>
+                            <span id="share"><a href="#"><i class="fa fa-retweet btnSharePost"></i></a><span id="lblShareCount">0</span></span>
+                            <a href="#"><i class="fa fa-comment btnCommentPost"></i></a><span id="lblCommentCount">0</span>
+                            <a href="#"><i class="fa fa-trash btnDeletePost"></i></a>
+                        </nav>
+                        <input type="hidden" id="valPostID"/>                               
+                        <input type="hidden" id="valUserID"/>
+                        <input type="hidden" id="valPostShared"/>
+                        <input type="hidden" id="valLiked"/>
+                        <div class="w3-container" id="lstComments">
                         </div>
-                    </div>
-                    <div class="w3-card" id="posttemplate" style="display: none">
-                        <div class="w3-row">
+                        <div class="w3-card w3-row" id="tmplComment" style="display: none">
                             <div class="w3-third">
-                                <img src="./images/100x100.jpg" alt="post profile image" class="w3-circle userimage"/>
+                                <img id="imgUser" src="./images/100x100.jpg" alt="post profile image" class="w3-circle" width="100px"/>
                             </div>
-                            <div class="message">
-                                This is my second message
-                                <div class="postimage"></div>
+                            <div id="lblCommentText">
+                                First Comment
                             </div>
+                            <input type="hidden" id="valCommentID"/>
                             <nav class="w3-topnav">
-                                <a href="#"><i class="fa fa-heart"></i></a><span id="likecount">0</span>
-                                <a href="#"><i class="fa fa-retweet"></i></a><span id="sharecount">0</span>
-                                <a href="#"><i class="fa fa-comment"></i></a><span id="commentcount">0</span>                                
+                                <a href="#"><i class="fa fa-heart btnLikeComment"></i></a><span id="likecount"></span>
+                                <a href="#"><i class="fa fa-retweet btnShareComment"></i></a><span id="sharecount"></span>
+                                <a href="#"><i class="fa fa-comment btnReplyComment"></i></a><span id="commentcount"></span>                                                       <a href="#"><i class="fa fa-trash btnDeleteComment"></i></a>
                             </nav>            
                         </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="mdlShare" class="w3-modal">
+                <div class="w3-modal-content" style="width: 500px">
+                    <div class="w3-container">
+                        <span onclick="$('#mdlShare').hide();" class="w3-closebtn">&times</span>
+                        <p>Post New Share</p>
+                        <textarea cols="50" class="w3-input" id="valShareText" name="text"></textarea><br/>
+                        <input type="hidden" class="w3-input" id="valSharePostID" name="post_shared"/>
+                        <button id="btnSubmitShare">Submit</button>
+                    </div>
+                    <div id="lblShareText"></div>
+                    <div>
+                        <img id="imgShareImage" alt="share image" src="./images/100x100.jpg" style="display: none" style="max-width: 400px"/>
+                    </div>
+                </div>
+            </div>
+            <div id="mdlComment" class="w3-modal">
+                <div class="w3-modal-content" style="width: 500px">
+                    <div class="w3-container">
+                        <span onclick="$('#mdlComment').hide();" class="w3-closebtn">&times</span>
+                        <p>Post New Comment</p>
+                        <input type="hidden" class="w3-input" id="valCommentPostID" name="post"/>
+                        <textarea cols="50" class="w3-input" id="comment" name="text"></textarea>
+                        <button id="btnSubmitComment">Submit</button>
                     </div>
                 </div>
             </div>
@@ -151,10 +185,10 @@
         </footer>
         <script type="text/javascript" src="./js/jquery.js"></script>
         <script type="text/javascript" src="./js/formcontrols.js"></script>
-        <script type="text/javascript" src="./controllers/controllersnew.js"></script>
+        <script type="text/javascript" src="./controllers/controllers.js"></script>
         <script type="text/javascript" src="./js/form2json.js"></script>        
         <script type="text/javascript" src="./js/findInJSON.js"></script> 
         <script type="text/javascript" src="./js/fileupload.js"></script>
-        <script type="text/javascript" src="indexnew.js"></script>
+        <script type="text/javascript" src="index.js"></script>
     </body>
 </html>

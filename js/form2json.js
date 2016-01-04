@@ -14,10 +14,11 @@ function form2json(form){
     json = "{";
     for(var i=0; i<numfields; i++) {
         value = fields[i].value;
-        json += '"' + fields[i].name + '"' + ":" + '"' + fields[i].value + '"';
+        json += '"' + fields[i].name + '"' + ":" + '"' + escape(fields[i].value) + '"';
         if(i+1<numfields)
             json += ", ";
     }
     json += "}";
+    console.log("JSON : " + json);
     return JSON.parse(json);
 }

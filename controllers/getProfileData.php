@@ -11,7 +11,7 @@ require "../php/config.php";
 require "../php/mark_sql_get.php";
 
 $conn = open_connection();
-$sql = mark_sql_get("SELECT name as lblName, image as imgProfileImage, dob as lblDOB, gender as lblGender, zip as lblZIP, marital as lblMarital, location as lblLocation FROM Users WHERE id = [user]");
+$sql = mark_sql_get("SELECT name AS classLabelName, image AS imgProfileImage, dob AS lblDOB, gender AS lblGender, zip AS lblZIP, marital AS lblMarital, location AS lblLocation FROM Users WHERE id = [user]");
 // echo $sql;
 echo querytojson($sql, $conn);
 $conn->close();
