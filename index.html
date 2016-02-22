@@ -8,6 +8,7 @@
         <br/><br/>
         <header class="w3-top">
             <nav class="w3-topnav w3-black">
+                <img src="./images/godigio_transparent.png" alt="logo" height="40px"/>
                 <a href="#">Home</a>
                 <a href="#">Post</a>
                 <span>Search <input style="color: #000000"/></span>
@@ -16,36 +17,29 @@
             </nav>            
         </header>
         <section>
-            <div style="margin: 10px"><img src="./images/newgodigiologo.png" alt="Godigio logo" width="100px"/></div>
-            <button id="btnArtistDashboard" class="w3-input">Artist Dashboard</button>
-            <div id="dashboard" class="w3-row-padding">
-                <div class="w3-third">
-                    <h1>Video Conferencing</h1>
+            <div id="divProfile" class="w3-card-4" style="background-image: url('./images/placeholder-banner-image.png')">
+                <h3>Profile for <span id="name"></span></h3>
+                <div class="w3-row">
+                    <div class="w3-img w3-half">
+                        <img id="userimage" src="./images/profile-icon.png" alt="user profile image" width="180px"/>
+                    </div>
+                    <div class="w3-half">
+                        <div>DOB : <span id="dob"></span></div>
+                        <div>Location : <span  id="location"></span></div>
+                        <div id="btnEditProfile" style="display: none">
+                            <a href="editprofile.html" class="w3-btn">Edit Profile</a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    Fans: <span id="fancount"></span>  
+                    Fan of: <span id="fanofcount"></span>  
+                    Posts: <span id="postcount"></span>                        
                 </div>
             </div>
         </section>
         <section class="w3-row-padding">
             <div class="w3-third">
-                <div id="divProfile" class="w3-card-4">
-                    <h3>Profile for <span class="classLabelName"></span></h3>
-                    <div class="w3-row">
-                        <div class="w3-img w3-half">
-                            <img id="imgProfileImage" src="./images/profile-icon.png" alt="user profile image" width="180px"/>
-                        </div>
-                        <div class="w3-half">
-                            <div>DOB : <span id="lblDOB"></span></div>
-                            <div>Location : <span  id="lblLocation"></span></div>
-                            <div id="btnEditProfile" style="display: none">
-                                <a href="editprofile.html" class="w3-btn">Edit Profile</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        Fans: <span id="lblFanCount"></span>  
-                        Fan of: <span id="lblFanOfCount"></span>  
-                        Posts: <span id="lblPostCount"></span>                        
-                    </div>
-                </div>
                 <div id="divFanList" class="w3-card-4">
                     <h3>Fans of <span class="name"></span></h3>
                     <div id="lstFans" class="w3-row-padding">
@@ -187,6 +181,7 @@
         <script type="text/javascript" src="./js/formcontrols.js"></script>
         <script type="text/javascript" src="./controllers/controllers.js"></script>
         <script type="text/javascript" src="./js/form2json.js"></script>        
+        <script type="text/javascript" src="./js/json2form.js"></script>        
         <script type="text/javascript" src="./js/findInJSON.js"></script> 
         <script type="text/javascript" src="./js/fileupload.js"></script>
         <script type="text/javascript" src="index.js"></script>

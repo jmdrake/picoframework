@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `Inbox` (
   `to` int(11) NOT NULL,
   `from` int(11) NOT NULL,
   `text` varchar(1000) NOT NULL,
-  `image` int(11) NOT NULL,
+  `image` varchar(40) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `Posts` (
   `text` varchar(1000) NOT NULL,
   `user` int(11) NOT NULL,
   `post_shared` int(11) NOT NULL,
-  `image` int(40) NOT NULL,
+  `image` varchar(40) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -107,6 +107,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
   `gender` tinyint(4),
   `zip` varchar(15),
   `marital` tinyint(4),
+  'location' varchar(40),
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

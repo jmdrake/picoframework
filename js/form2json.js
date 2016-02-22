@@ -13,8 +13,12 @@ function form2json(form){
     var value;
     json = "{";
     for(var i=0; i<numfields; i++) {
-        value = fields[i].value;
-        json += '"' + fields[i].name + '"' + ":" + '"' + escape(fields[i].value) + '"';
+        if (fields[i].tagName == "IMG") {
+            var imgref = fields[i].src.split("/");
+            value = imgref[imgref.length-1];
+        } else
+            value = escape(fields[i].value);
+        json += '"' + fields[i].id + '"' + ":" + '"' + value + '"';
         if(i+1<numfields)
             json += ", ";
     }

@@ -25,7 +25,8 @@ function populateDiv(div, record, href) {
             div.find("#" + key).attr("href", href + record[key]);
         if (key.startsWith("val"))
             div.find("#" + key).val(unescape(record[key]));
-    }}
+    }
+}
 
 function cloneDiv(template, record, href){
     var newDiv = template.clone();

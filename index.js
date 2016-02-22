@@ -22,7 +22,10 @@ $(document).ready(function () {
                 $("#frmPost").show();
             }
             else {
-                $("#btnFanToggle").show()
+                $("#btnFanToggle").show();
+                isFan(currentUser, pageUser, function (fanstatus) {
+                    $("#btnFanToggle").html(fanstatus)
+                })
             }
         } else {
             $("#btnLoginLogout").html("Log In");
@@ -42,7 +45,9 @@ $(document).ready(function () {
         if (profileData == undefined) {
             window.location.replace("welcome.html")
         }
-        populateDiv($("#divProfile"), profileData);
+        // populateDiv($("#divProfile"), profileData);
+        json2form($("#divProfile"), profileData, "./uploads/");
+        console.log(profileData);
     });
 
     getFanList(pageUser, function (fanData) {

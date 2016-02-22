@@ -16,7 +16,7 @@ $sql = mark_sql_get(
 "SELECT 
     Posts.id AS valPostID, 
     Users.id AS valUserID, 
-    Users.image AS imgUserImage, 
+    Users.userimage AS imgUserImage, 
     Users.name AS lblUserName, 
     text AS lblText, post_shared AS valPostShared, 
     Posts.image AS imgPostImage, 
@@ -24,7 +24,7 @@ $sql = mark_sql_get(
     (SELECT COUNT(*) FROM Posts WHERE post_shared = valPostID) AS lblShareCount, 
     (SELECT COUNT(*) FROM Comments WHERE post = Posts.id) AS lblCommentCount, 
     Posts.id IN (SELECT post FROM likes WHERE likes.user = [currentuser]) AS valLiked,
-    (SELECT Users.image FROM Posts INNER JOIN Users ON Posts.user = Users.id WHERE Posts.id =valPostShared) AS shareUserImage,
+    (SELECT Users.userimage FROM Posts INNER JOIN Users ON Posts.user = Users.id WHERE Posts.id =valPostShared) AS shareUserImage,
     (SELECT Posts.text FROM Posts INNER JOIN Users ON Posts.user = Users.id WHERE Posts.id =valPostShared) AS shareText,
     (SELECT Posts.image FROM Posts INNER JOIN Users ON Posts.user = Users.id WHERE Posts.id =valPostShared) AS shareImage
 FROM Posts INNER JOIN USERS ON Posts.user = Users.id 

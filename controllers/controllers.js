@@ -5,6 +5,7 @@
 * Time: 11:12 PM
 * To change this template use Tools | Templates.
 */
+$.ajaxSetup({ cache: false });
 
 function addUser(data, callback){    
     $.post("./controllers/adduser.php", data, function(results){

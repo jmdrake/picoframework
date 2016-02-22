@@ -40,26 +40,19 @@ To change this template use Tools | Templates.
                 <label class="w3-label">Location</label>
             </div>
             <div class="w3-group">
-                <input type="file" id="userimageupload" accept="image/*" style="display: none" class="upload"/>
+                <input type="file" id="imageupload" accept="image/*" style="display: none" class="upload"/>
                 <a href="#">
-                    <img src="./images/profile-icon.png" alt="Prevew Image" id="userimage" class="w3-input preview" style="width: 50%"/>
+                    <img src="./images/profile-icon.png" alt="Prevew Image" id="preview-img" width="100px" height="100px"/>
                 </a>                
             </div>
-            <div class="w3-group">
-                <input type="file" id="bannerimageupload" accept="image/*" style="display: none" class="upload"/>
-                <a href="#">
-                    <img src="./images/placeholder-banner-image.png" alt="Prevew Image" id="bannerimage" class="w3-input preview" style="width: 50%"/>
-                </a>                
-            </div>
-            <input class="w3-input" type="hidden" name="id" id="id"/>
+            <input class="w3-input" type="hidden" name="userid" id="userid"/>
             <button type="button" id="btnSubmit" class="w3-btn w3-right w3-theme">Submit</button>
         </div>  
         <script type="text/javascript" src="./js/jquery.js"></script>
         <script type="text/javascript" src="./js/form2json.js"></script>
-        <script type="text/javascript" src="./js/json2form.js"></script>
         <script type="text/javascript" src="editprofile.js"></script>
         <script type="text/javascript" src="./js/fileupload.js"></script>
-        <script type="text/javascript" src="./js/uploadfilefromform.js"></script>
+        <script type="text/javascript" src="./js/uploadfiles.js"></script>
         <script type="text/javascript" src="./controllers/controllers.js"></script>        
     </body>
 </html>

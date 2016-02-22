@@ -14,7 +14,14 @@ function mark_sql_get($sql) {
     $replacements = array();
     for($i=0; $i<count($params[0]); $i++) {
         $patterns[$i] = "/\\" . $params[0][$i] . "/";
-        $replacements[$i] = "'" . $_GET[$params[1][$i]] . "'";
+        $getval = $_GET[$params[1][$i]];
+        if($getval!="")
+            if($getval[0] == "(")
+                $replacements[$i] = $getval;
+            else
+                $replacements[$i] = "'" . $getval . "'";
+        else
+            $replacements[$i] = "NULL";
     }
     return preg_replace($patterns, $replacements, $sql);
 }

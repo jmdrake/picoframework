@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Cabin Condensed'), local('CabinCondensed'), url(http://fonts.gstatic.com/s/cabincondensed/v7/B0txb0blf2N29WdYPJjMStWMqZ82NGJlZbN8XLKSRYo.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Cabin Condensed Bold'), local('CabinCondensed-Bold'), url(http://fonts.gstatic.com/s/cabincondensed/v7/Ez4zJbsGr2BgXcNUWBVgEBZQ88-B6efqEZdRzbHKsrc.woff2) format('woff2');
+}
