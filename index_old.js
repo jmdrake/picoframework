@@ -19,7 +19,7 @@ $(document).ready(function () {
         if (currentUser != "") {
             if (currentUser == pageUser) {
                 $("#btnEditProfile").show();
-                $("#btnBlog").show();
+                $("#frmPost").show();
             }
             else {
                 $("#btnFanToggle").show();
@@ -30,11 +30,14 @@ $(document).ready(function () {
         } else {
             $("#btnLoginLogout").html("Log In");
         }
+        getAllPosts(pageUser, currentUser, function (postData) {
+            populatePostList($("#lstAllPosts"), JSON.parse(postData), currentUser);
+        });
 
         getUsersPosts(pageUser, currentUser, function (postData) {
             var postList = JSON.parse(postData);
             $("#lblPostCount").html(postList.length)
-            populatePostList($("#lstBlogs"), postList, currentUser);
+            populatePostList($("#lstUsersPosts"), postList, currentUser);
         });
     });
 
@@ -58,12 +61,6 @@ $(document).ready(function () {
         var fanOfList = JSON.parse(fanData);
         $("#lblFanOfCount").html(fanOfList.length);
         populateList($("#lstFanOf"), fanOfList, $("#tmplFanOf"), undefined, "?user=");
-    });
-
-    getPhotos(pageUser, function (photos) {
-        var photoList = JSON.parse(photos);
-        $("#lblFanOfCount").html(photoList.length);
-        populateList($("#lstPhotos"), photoList, $("#tmplPhoto"), undefined, "");
     });
 
     $("#btnSubmitPost").click(function () {
@@ -185,6 +182,13 @@ function populatePostList(list, data, currentUser){
             newPost.find(".btnLikePost").removeClass("fa-heart-o");
         }
         setPostControls(newPost);
+        if (parseInt(newPost.find("#lblCommentCount").html()) > 0) {
+            getComments(postid, function (comments) {
+                populateList(newPost.find("#lstComments"), comments, $("#tmplComment"), function (newComment) { })
+            })
+        }
+        if (newPost.find("#valPostShared").val() != "")
+            newPost.find("#divShare").show();
     })
 }
 

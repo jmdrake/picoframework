@@ -71,6 +71,12 @@ function getFanList(user, callback){
     })
 }
 
+function getPhotos(user, callback){
+    $.get("./controllers/getPhotos.php?user="+user, function(data){
+        callback(data);
+    })
+}
+
 function getFanOfList(user, callback){
     $.get("./controllers/getfanoflist.php?user="+user, function(data){
         callback(data);

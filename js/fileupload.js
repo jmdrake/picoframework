@@ -46,3 +46,23 @@ function uploadImageFile(input, filename, callback){
         callback("Error: No file selected");
     }
 }
+
+function uploadValidFile(input, filename, extension, callback) {
+    if (input.prop('files').length > 0) { 
+        var fileext = input.prop('files')[0]["type"].split("/")[1];
+        if(extension.indexOf(fileext.toUpperCase()) >= 0) {
+            uploadFile(input, filename + "." + fileext, function (res) {
+                if (res.startsWith("Successful:")) {
+                    callback(filename + "." + fileext)
+                } else {
+                    callback(res);
+                }
+            })
+        } else {
+            callback("Error: Wrong extension.")
+        }
+    } else {
+        callback("Error: No file selected");
+    }    
+}
+
