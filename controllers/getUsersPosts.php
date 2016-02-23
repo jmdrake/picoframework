@@ -23,11 +23,11 @@ $sql = mark_sql_get(
     (SELECT COUNT(*) FROM Likes WHERE post = Posts.id) AS lblLikeCount, 
     (SELECT COUNT(*) FROM Posts WHERE post_shared = valPostID) AS lblShareCount, 
     (SELECT COUNT(*) FROM Comments WHERE post = Posts.id) AS lblCommentCount, 
-    Posts.id IN (SELECT post FROM likes WHERE likes.user = [currentuser]) AS valLiked,
+    Posts.id IN (SELECT post FROM Likes WHERE Likes.user = [currentuser]) AS valLiked,
     (SELECT Users.userimage FROM Posts INNER JOIN Users ON Posts.user = Users.id WHERE Posts.id =valPostShared) AS shareUserImage,
     (SELECT Posts.text FROM Posts INNER JOIN Users ON Posts.user = Users.id WHERE Posts.id =valPostShared) AS shareText,
     (SELECT Posts.image FROM Posts INNER JOIN Users ON Posts.user = Users.id WHERE Posts.id =valPostShared) AS shareImage
-FROM Posts INNER JOIN USERS ON Posts.user = Users.id 
+FROM Posts INNER JOIN Users ON Posts.user = Users.id 
 WHERE Posts.user = [pageuser] 
 ORDER BY valPostID DESC");
 

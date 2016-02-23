@@ -10,12 +10,12 @@ if (!String.prototype.startsWith) {
 }
 
 $(document).ready(function () {
-    pageUser = window.location.search.split("=")[1];
-    if (pageUser == "")
-        window.location.replace("welcome.html");
-
+    var pageUser = window.location.search.split("=")[1];
+    if (pageUser == ""|| pageUser==undefined)
+         window.location.replace("welcome.html");    
     getCurrentUser(function (user) {
-        currentUser = user;
+        currentUser = user;	
+        
         if (currentUser != "") {
             if (currentUser == pageUser) {
                 $("#btnEditProfile").show();

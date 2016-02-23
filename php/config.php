@@ -1,5 +1,5 @@
 <?php
-require "config_local.php";
+require "config_x10hosting.php";
 /* $servername = "localhost";
 $username = "root";
 $password = "";
