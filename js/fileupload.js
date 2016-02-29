@@ -93,7 +93,7 @@ function getFileType(s) {
 
 var fileextentions = {"image":"|PNG|JPG|JPEG|GIF|","audio":"|MP3|OGG|WAV|","video":"|MP4|MPEG|OGG|"};
 function uploadAttachment(input, callback) {
-    var files = $("#" + input.id).prop('files');
+    var files = $(input).prop('files');
     if(files.length > 0){
         var fileext = files[0]["type"].split("/")[1];
         filetype = getFileType(input.id);
