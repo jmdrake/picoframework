@@ -30,6 +30,7 @@ $(document).ready(function () {
     });
 
     $("#btnSubmit").click(function () {
+        $("#mdlWaiting").show();
         var fields = form2json($("#frmProfile"), "./uploads/");
 
         uploadImages(fields).then(

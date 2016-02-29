@@ -1,47 +1,31 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 
-    <html lang="en">
-        <head>
-            <meta charset="utf-8" />
-            <title></title>
-        <style>
-
-            .center {
-              margin: 0 auto;              
-              background-size: 100% 100%;
-              width: 94%;
-              padding: 20px;
-            }        
-            body {
-                background-color: #ecdfdf
-            }
-            #divProfile {
-                color: white;              
-                text-shadow: 2px 2px black;
-            }
-            section {background-color: white}
-            .section-header {border-bottom: 2px solid grey;}
-
-            img {opacity:  1}
-        </style>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Godigio Fanhub</title>
         <link rel="stylesheet" href="./css/w3.css"/>
+        <link rel="stylesheet" href="./css/fanhub.css"/>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">   
-        </head>
-        <body>
-                    <br/><br/>
+        <style>
+            audio {width: 100%}
+        </style>
+    </head>
+    <body>
         <header class="w3-top">
             <nav class="w3-topnav w3-black">
                 <img src="./images/godigio_transparent.png" alt="logo" height="40px"/>
                 <a href="#">Home</a>
                 <a href="#">Post</a>
                 <span>Search <input style="color: #000000"/></span>
-                <a href="#" id="btnFanToggle" style="display:none"></a>
+                <button id="btnFanToggle" class="w3-btn w3-black" style="display: none"></button>
                 <span class="w3-right"><a href="#" id="btnLoginLogout">Logout</a></span>
                 <span class="w3-right" id="btnEditProfile" style="display: none">
                     <a href="editprofile.html" class="w3-btn">Edit Profile</a>
                 </span>
             </nav>            
         </header>
+        <br/><br/>
         <div id="divProfile" class="w3-container center" 
             style="background-image: url('./images/banner-icon.png'); background-repeat: no-repeat">           
             <div class="w3-row w3-container" id="icon">
@@ -63,25 +47,41 @@
                     <div class="section-header">
                         <h1>Photos</h1>
                     </div>
-                    <div id="lstPhotos" class="content">
-                        <div id="tmplPhoto" class="w3-col m3 s6" style="display: none">
-                            <a id="lnkPhoto" href="">
-                                <img id="imgPhoto" src="./images/100x100.jpg" alt="photo" width="110" height="90"/>
-                            </a>
-                        </div>
+                    <div id="lstPhotos" class="content">                        
+                    </div>
+                    <div id="tmplPhoto" class="w3-col m3 s6" style="display: none">
+                        <img id="image" src="./images/100x100.jpg" alt="photo" width="110" height="90"/>
                     </div>
                     <button style="width: 100%">All Photos</button>
                 </div>
-                <div id="about" class="w3-container">
+                <div id="songs" class="w3-container">
                     <div class="section-header">
-                        <h1>Members</h1>
+                        <h1>Songs</h1>
                     </div>
+                    <div id="lstSongs" class="content">                        
+                    </div>
+                    <div id="tmplAudio">
+                        <audio controls style="display:none" id="audio">
+                            <source src="">
+                        </audio>
+                    </div>
+                    <button style="width: 100%">All Songs</button>
                 </div>
-                <div id="status" class="w3-container">
+                <div id="videos" class="w3-container">
                     <div class="section-header">
-                        <h1>Status</h1>
+                        <h1>Videos</h1>
                     </div>
+                    <div id="lstVideos" class="content">                        
+                    </div>
+                    <div id="tmplVideo">
+                        <video width="128" height="96" controls style="display:none" id="video">
+                            <source src="">
+                        </video>
+                    </div>
+                    <button style="width: 100%">All Videos</button>
                 </div>
+            </div>
+            <div class="w3-third">
                 <div id="blogs" class="w3-container">
                     <div class="section-header">
                         <h1>Recent Blogs</h1>
@@ -93,16 +93,33 @@
                             <textarea class="w3-input" id="text" name="text"></textarea>
                             <nav class="w3-topnav">
                                 <a href="#">
-                                    <i class="fa fa-image">Upload Image</i>
+                                    <i class="fa fa-file-image-o fileselect">Image
+                                    </i>
+                                    <input type="file" id="image" name="image" accept ="image/*" class="upload" style="display: none"/> 
                                 </a>
                                 <a href="#">
-                                    <i class="fa fa-camera">Take Picture</i>
+                                    <i class="fa fa-file-video-o fileselect">Video
+                                    </i>
+                                    <input type="file" id="video" name="video" accept ="video/*" style="display: none" class="video upload"/>                                     </a>
+                                <a href="#">
+                                    <i class="fa fa-file-audio-o fileselect">Audio
+                                    </i>
+                                    <input type="file" id="audio" name="audio" accept ="audio/*" style="display: none" class="audio upload"/>     
                                 </a>
-                            </nav>
-                            <input type="file" id="imgUpload" name="imgUpload" accept ="image/*" style="display: none" class="upload"/>
+                            </nav>                            
                             <div>
-                                <img src="./images/100x100.jpg" alt="Prevew Image" id="preview-img" 
+                                <img src="./images/100x100.jpg" alt="Prevew Image" id="preview-image" 
                                     style="display:none" width="100px" height="100px"/>
+                            </div>
+                            <div>
+                                <video width="128" height="96" controls style="display:none" id="preview-video">
+                                    <source src="">
+                                </video>
+                            </div>
+                            <div>
+                                <audio controls style="display:none" id="preview-audio">
+                                    <source src="">
+                                </audio>
                             </div>
                             <button class="btn btn-primary pull-right" id="btnSubmitPost">Post</button>
                         </div>
@@ -111,36 +128,35 @@
                     </div>
                     <div class="w3-card w3-row" id="tmplPost" style="display: none">
                         <div class="w3-two-thirds">
-                            <div id="lblText">
+                            <div id="text">
                                 This is my first message
                             </div>
                             <div>
-                                <img id="imgPostImage" src="./images/100x100.jpg" alt="post image" style="max-width:400px; display: none"/>
+                                <img id="image" src="./images/100x100.jpg" alt="post image" style="max-width:90%; display: none"/>
                             </div>
-                        </div>
-                        <nav class="w3-topnav">
-                            <a href="#"><i class="fa fa-heart-o btnLikePost"></i></a><span id="lblLikeCount">0</span>
+                            <div>
+                                <video width="128" height="96" controls style="display:none" id="video">
+                                    <source src="">
+                                </video>
+                            </div>
+                            <div>
+                                <audio controls style="display:none" id="audio">
+                                    <source src="">
+                                </audio>                        
+                            </div>
+                            <nav class="w3-topnav">
+                            <a href="#"><i class="fa fa-heart-o btnLikePost"></i></a><span id="likecount">0</span>
                             <span id="share"><a href="#"><i class="fa fa-retweet btnSharePost"></i></a>
-                                <span id="lblShareCount">0</span>
+                                <span id="likecount">0</span>
                             </span>
-                            <a href="#"><i class="fa fa-comment btnCommentPost"></i></a><span id="lblCommentCount">0</span>
+                            <a href="#"><i class="fa fa-comment btnCommentPost"></i></a><span id="commentcount">0</span>
                             <a href="#"><i class="fa fa-trash btnDeletePost"></i></a>
-                        </nav>
+                            </nav>
+                        </div>
                     </div>
                     <button style="width: 100%">All Blogs</button>
                 </div>
-            </div>
-            <div class="w3-third">
-                <div id="songs" class="w3-container">
-                    <div class="section-header">
-                        <h1>Songs</h1>
-                    </div>
-                </div>
-                <div id="videos" class="w3-container">
-                    <div class="section-header">
-                        <h1>Videos</h1>
-                    </div>
-                </div>
+
                 <div id="comments" class="w3-container">
                     <div class="section-header">
                         <h1>Comments</h1>
@@ -148,24 +164,33 @@
                 </div>
             </div>
             <div class="w3-third">
-                <div id="actions" class="w3-container">
-                    <div class="section-header">
-                        <h1>Quick Actions</h1>
-                    </div>
-                </div>
                 <div id="stats" class="w3-container">
                     <div class="section-header">
                         <h1>Stats</h1>
                     </div>
-                </div>
+                    <div>Fans: <span id="fancount"></span></div>
+                    <div>Favs: <span id="favcount"></span></div>
+                    <div>Posts: <span id="postcount"></span></div>                    
+                </div>                                    
                 <div id="Fans" class="w3-container">
                     <div class="section-header">
                         <h1>Fans</h1>
                     </div>
+                    <div id="lstFans" class="w3-row-padding">                        
+                    </div>
+                    <div id="tmplFan" class="w3-col m3 s6" style="display:none; margin:  10px">
+                        <a href="">
+                            <img id="userimage" src="./images/100x100.jpg" 
+                                alt="fanof profile image" width="110" height="90"/>
+                        </a>
+                        <div id="name"></div>
+                    </div>
                 </div>
-                <div id="favorites" class="w3-container">
+                <div id="Favs" class="w3-container">
                     <div class="section-header">
-                        <h1>Favorite Artists</h1>
+                        <h1>Favs</h1>
+                    </div>
+                    <div id="lstFavs" class="w3-row-padding">                        
                     </div>
                 </div>
             </div>

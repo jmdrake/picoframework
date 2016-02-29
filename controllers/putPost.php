@@ -7,16 +7,17 @@
  */
 
 require "../php/config.php";
+require "../php/mark_sql_post.php";
 require "../php/insertfrompost.php";
 require "../php/querytojson.php";
 
 $conn = open_connection();
-$sql = "INSERT INTO Posts(text, user)";
+$sql = "INSERT INTO Posts(text, user, image, audio, video)";
 $results = insertfrompost($sql, $conn);    
 
-$selquery = "SELECT text AS lblText, Posts.id AS valPostID, Users.id AS valUserID, Users.userimage AS imgUserImage FROM Posts INNER JOIN Users ON Posts.user = Users.id WHERE Posts.id = " . mysqli_insert_id($conn);
+$selquery = "SELECT text, Posts.id AS postid, Users.id AS userid, userimage, Posts.image AS image, audio, video 
+FROM Posts INNER JOIN Users ON Posts.user = Users.id WHERE Posts.id = " . mysqli_insert_id($conn);
 
-// echo $selquery;
 echo querytojson($selquery, $conn);
 $conn->close();
 ?>

@@ -1,9 +1,9 @@
 <?php
 /*
- * File : getPhotos.php
+ * File : getAudio.php
  * Input type: GET
  * Inputs: user
- * Outputs: user's photos
+ * Outputs: user's audio tracks
  */
 
 require "../php/querytojson.php";
@@ -13,9 +13,9 @@ require "../php/mark_sql_get.php";
 $conn = open_connection();
 
 $sql = mark_sql_get(
-"SELECT image FROM Posts
+"SELECT audio FROM Posts
 WHERE user = [user]
-AND image <> ''");
+AND audio <> ''");
 
 // echo $sql;
 echo querytojson($sql, $conn);

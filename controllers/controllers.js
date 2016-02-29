@@ -65,8 +65,8 @@ function getCurrentUser(callback){
     })
 }
 
-function getFanList(user, callback){
-    $.get("./controllers/getfanlist.php?user="+user, function(data){
+function getFans(user, callback){
+    $.get("./controllers/getFans.php?user="+user, function(data){
         callback(data);
     })
 }
@@ -77,8 +77,20 @@ function getPhotos(user, callback){
     })
 }
 
-function getFanOfList(user, callback){
-    $.get("./controllers/getfanoflist.php?user="+user, function(data){
+function getVideos(user, callback){
+    $.get("./controllers/getVideos.php?user="+user, function(data){
+        callback(data);
+    })
+}
+
+function getAudio(user, callback){
+    $.get("./controllers/getAudio.php?user="+user, function(data){
+        callback(data);
+    })
+}
+
+function getFavs(user, callback){
+    $.get("./controllers/getFavs.php?user="+user, function(data){
         callback(data);
     })
 }

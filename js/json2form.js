@@ -14,8 +14,22 @@ function json2form(div, record, href) {
                     element.html(value);
                     break;
                 case "IMG":
-                    if(value != "")
+                    if(value != "") {
                         element.attr("src", href + record[key]);
+                        element.show();                        
+                    }                        
+                    break;
+                case "AUDIO":
+                    if (value != "") {
+                        element.find("source").attr("src", href + record[key])
+                        element.attr("style", "");                        
+                    }                        
+                    break;
+                case "VIDEO":
+                    if (value != "") {
+                        element.find("source").attr("src", href + record[key])
+                        element.attr("style", "");                        
+                    }                  
                     break;
             }
     }    

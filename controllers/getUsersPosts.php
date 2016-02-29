@@ -14,22 +14,27 @@ $conn = open_connection();
 
 $sql = mark_sql_get(
 "SELECT 
-    Posts.id AS valPostID, 
-    Users.id AS valUserID, 
-    Users.userimage AS imgUserImage, 
-    Users.name AS lblUserName, 
-    text AS lblText, post_shared AS valPostShared, 
-    Posts.image AS imgPostImage, 
-    (SELECT COUNT(*) FROM Likes WHERE post = Posts.id) AS lblLikeCount, 
-    (SELECT COUNT(*) FROM Posts WHERE post_shared = valPostID) AS lblShareCount, 
-    (SELECT COUNT(*) FROM Comments WHERE post = Posts.id) AS lblCommentCount, 
-    Posts.id IN (SELECT post FROM Likes WHERE Likes.user = [currentuser]) AS valLiked,
-    (SELECT Users.userimage FROM Posts INNER JOIN Users ON Posts.user = Users.id WHERE Posts.id =valPostShared) AS shareUserImage,
-    (SELECT Posts.text FROM Posts INNER JOIN Users ON Posts.user = Users.id WHERE Posts.id =valPostShared) AS shareText,
-    (SELECT Posts.image FROM Posts INNER JOIN Users ON Posts.user = Users.id WHERE Posts.id =valPostShared) AS shareImage
+    Posts.id AS postid, 
+    Users.id AS userid, 
+    userimage, 
+    Users.name AS username, 
+    text, 
+    post_shared, 
+    Posts.image AS image, 
+    video,
+    audio,
+    (SELECT COUNT(*) FROM Likes WHERE post = Posts.id) AS likecount, 
+    (SELECT COUNT(*) FROM Posts WHERE post_shared = Posts.id) AS sharecount, 
+    (SELECT COUNT(*) FROM Comments WHERE post = Posts.id) AS commentcount, 
+    Posts.id IN (SELECT post FROM Likes WHERE Likes.user = [currentuser]) AS liked,
+    (SELECT Users.userimage FROM Posts INNER JOIN Users ON Posts.user = Users.id WHERE Posts.id = post_shared) AS shareuserimage,
+    (SELECT Posts.text FROM Posts INNER JOIN Users ON Posts.user = Users.id WHERE Posts.id =post_shared) AS sharetext,
+    (SELECT Posts.image FROM Posts INNER JOIN Users ON Posts.user = Users.id WHERE Posts.id =post_shared) AS shareimage, 
+    (SELECT Posts.video FROM Posts INNER JOIN Users ON Posts.user = Users.id WHERE Posts.id =post_shared) AS sharevideo, 
+    (SELECT Posts.audio FROM Posts INNER JOIN Users ON Posts.user = Users.id WHERE Posts.id =post_shared) AS shareaudio
 FROM Posts INNER JOIN Users ON Posts.user = Users.id 
 WHERE Posts.user = [pageuser] 
-ORDER BY valPostID DESC");
+ORDER BY Posts.id DESC");
 
 // echo $sql;
 echo querytojson($sql, $conn);

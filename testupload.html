@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <link rel="stylesheet" href="./css/w3.css"/>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">   
+        <script type="text/javascript" src="./js/jquery.js"></script>
+        <script>
+
+            $(document).ready(function () {
+                $(".upload").change(function () {
+                    readURL(this, "#preview-img");
+                    $("#preview-img").show();
+                });
+
+                $(".fileselect").click(function () {
+                    $(this).parent().find("input").click();
+                    return false;
+                });
+            })
+        </script>
+    </head>
+    <body>
+                <div id="frmPost" class="w3-card-4" >  
+                    <div class="w3-row-padding w3-light-grey">
+                        <h4>What's New</h4>
+                        <textarea class="w3-input" id="text" name="text"></textarea>
+                        <nav class="w3-topnav">
+                            <a href="#">
+                                <i class="fa fa-image fileselect">Upload Image                                    
+                                </i>
+                                <input type="file" id="imgUpload" name="imgUpload" accept ="image/*" style="display: none" class="upload"/>
+                            </a>
+                        </nav>
+                        <div>
+                            <img src="./images/100x100.jpg" alt="Prevew Image" id="preview-img" style="display:none" 
+                                width="100px" height="100px"/>
+                        </div>
+                        <button class="btn btn-primary pull-right" id="btnSubmitPost">Post</button>
+                    </div>
+                </div>        
+    </body>
+</html>
