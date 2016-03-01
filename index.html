@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">   
         <style>
             audio {width: 100%}
+            video {width: 100%}
         </style>
     </head>
     <body>
@@ -60,10 +61,13 @@
                     </div>
                     <div id="lstSongs" class="content">                        
                     </div>
-                    <div id="tmplAudio">
-                        <audio controls style="display:none" id="audio">
-                            <source src="">
-                        </audio>
+                    <div id="tmplAudio" class="w3-row">
+                        <div class="w3-half"><span id="text"></span></div>                        
+                        <div class="w3-half">
+                            <audio controls style="display:none" id="audio">
+                                <source src="">
+                            </audio>
+                        </div>
                     </div>
                     <button style="width: 100%">All Songs</button>
                 </div>
@@ -73,10 +77,11 @@
                     </div>
                     <div id="lstVideos" class="content">                        
                     </div>
-                    <div id="tmplVideo">
-                        <video width="128" height="96" controls style="display:none" id="video">
+                    <div id="tmplVideo">                        
+                        <video controls style="display:none" id="video">
                             <source src="">
                         </video>
+                        <div id="text"></div>
                     </div>
                     <button style="width: 100%">All Videos</button>
                 </div>
@@ -150,7 +155,7 @@
                                 <span id="likecount">0</span>
                             </span>
                             <a href="#"><i class="fa fa-comment btnCommentPost"></i></a><span id="commentcount">0</span>
-                            <a href="#"><i class="fa fa-trash btnDeletePost"></i></a>
+                            <button><i class="fa fa-trash btnDeletePost"></i></button>
                             </nav>
                         </div>
                     </div>
@@ -201,6 +206,7 @@
         <script type="text/javascript" src="./js/form2json.js"></script>        
         <script type="text/javascript" src="./js/json2form.js"></script>                
         <script type="text/javascript" src="./js/fileupload.js"></script>
+        <script type="text/javascript" src="./js/es6-promise.min.js"></script>
         <script type="text/javascript" src="index.js"></script>                  
     </body>
 </html>

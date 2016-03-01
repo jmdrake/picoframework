@@ -52,7 +52,7 @@ function uploadImageFile(input, filename, callback){
         var fileext = input.prop('files')[0]["type"].split("/")[1];
         if("PNGJPGJPEGGIF".indexOf(fileext.toUpperCase()) >= 0) {
             uploadFile(input, filename + "." + fileext, function (res) {
-                if (res.startsWith("Successful:")) {
+                if (res.indexOf("Successful:")==0) {
                     callback(filename + "." + fileext)
                 } else {
                     callback(res);
@@ -71,7 +71,7 @@ function uploadValidFile(input, filename, extension, callback) {
         var fileext = input.prop('files')[0]["type"].split("/")[1];
         if(extension.indexOf(fileext.toUpperCase()) >= 0) {
             uploadFile(input, filename + "." + fileext, function (res) {
-                if (res.startsWith("Successful:")) {
+                if (res.indexOf("Successful:")==0) {
                     callback(filename + "." + fileext)
                 } else {
                     callback(res);

@@ -13,7 +13,7 @@ require "../php/mark_sql_get.php";
 $conn = open_connection();
 
 $sql = mark_sql_get(
-"SELECT audio FROM Posts
+"SELECT audio, text FROM Posts
 WHERE user = [user]
 AND audio <> ''");
 

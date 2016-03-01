@@ -44,14 +44,19 @@ $(document).ready(function () {
         }
         // populateDiv($("#divProfile"), profileData);
         json2form($("#divProfile"), profileData, "./uploads/");
-        $("#divProfile").attr("style", "background-image: url('./uploads/" + profileData["bannerimage"] + "'); background-repeat: no-repeat");
+        var imgsrc = $("#divProfile").find("img").attr("src") + "?timestamp=" + profileData["timestamp"];
+        $("#divProfile").find("img").attr("src", imgsrc);
+        $("#divProfile").attr("style", "background-image: url('./uploads/" + profileData["bannerimage"] +
+        "?timestamp=" + profileData["timestamp"] + "'); background-repeat: no-repeat");
         console.log(profileData);
     });
 
     getFans(pageUser, function (fanData) {
         var fanList = JSON.parse(fanData);
         $("#fancount").html(fanList.length);
-        populateList($("#lstFans"), fanList, $("#tmplFan"), undefined, "./uploads/");
+        populateList($("#lstFans"), fanList, $("#tmplFan"), function (div, record) {
+            div.find("a").attr("href", "?user=" + record["userid"]);
+        }, "./uploads/");
     });
 
     getFavs(pageUser, function (fanData) {

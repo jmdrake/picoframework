@@ -13,7 +13,7 @@ require "../php/mark_sql_get.php";
 $conn = open_connection();
 
 $sql = mark_sql_get(
-"SELECT video FROM Posts
+"SELECT video, text FROM Posts
 WHERE user = [user]
 AND video <> ''");
 
