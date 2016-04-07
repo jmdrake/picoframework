@@ -119,3 +119,11 @@ CREATE TABLE IF NOT EXISTS `Users` (
 insert into Users(name, email, password) values('Test User1', 'testuser1@mail.com', 'pass');
 insert into Users(name, email, password) values('Test User2', 'testuser2@mail.com', 'pass');
 insert into Users(name, email, password) values('Test User3', 'testuser3@mail.com', 'pass');
+
+CREATE TABLE IF NOT EXISTS `Recovery` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` int(11) NOT NULL,
+  `token` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user` (`user`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;

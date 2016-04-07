@@ -1,0 +1,50 @@
+<?php
+/*
+ * File : sendResetRequest.php
+ * Input type: POST
+ * Inputs: username, email
+ * Outputs: Returns status of reset request
+ */
+
+require "../../php/config.php";
+require "../../php/mark_sql_post.php";
+
+$conn = open_connection();
+
+$selectsql = mark_sql_post("SELECT id, email FROM Users WHERE email = [email]");
+
+$result = $conn->query($selectsql);
+
+function GUID()
+{
+    if (function_exists('com_create_guid') === true)
+    {
+        return trim(com_create_guid(), '{}');
+    }
+
+    return sprintf('%04X%04X-%04X-%04X-%04X-%04X%04X%04X', mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(16384, 20479), mt_rand(32768, 49151), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535));
+}
+
+if($rs = $result->fetch_array(MYSQLI_ASSOC)) {    
+    $guid = GUID();
+    $insertsql = "INSERT INTO Recovery(user, token) VALUES('" . $rs["id"] . "', '" . $guid . "')";    
+    if ($conn->query($insertsql) === TRUE) {
+        $name = $rs["first_name"] . " " . $rs["last_name"] . "(" . $rs["username"] . ")";
+        $subject = "Password Recovery from Ratchetlove.com";
+        $message = "Please follow this link to recover your password.  " . $baseurl . "views/resetpassword.html?guid=" . $guid;
+        if(mail($rs["email"], $subject, $message)) {
+	        echo "0: Okay";
+        } else {
+	        echo "1: Unable to send email";
+            $deletesql = "DELETE FROM Recovery WHERE email = '" . $rs["email"] . "' AND token = '" . $guid . "'";
+            $conn->query($deletesql);
+        }
+    } else {
+        echo "2: Unknown sql error - " . $sql . "<br>" . $conn->error;
+    }
+} else {
+    echo "3: Unknown email address";
+}
+
+$conn->close();
+?>
