@@ -1,9 +1,9 @@
 <?php
 /*
- * File : getprofiledata.php
+ * File : getVideos.php
  * Input type: GET
  * Inputs: user
- * Outputs: Returns name and image fields from user profile
+ * Outputs: user's videos
  */
 
 require "../php/querytojson.php";
@@ -11,7 +11,12 @@ require "../php/config.php";
 require "../php/mark_sql_get.php";
 
 $conn = open_connection();
-$sql = mark_sql_get("SELECT id, name, userimage, bannerimage, timestamp, dob, gender, zip, marital, location FROM Users WHERE id = [user]");
+
+$sql = mark_sql_get(
+"SELECT video, text FROM Posts
+WHERE user = [user]
+AND video <> ''");
+
 // echo $sql;
 echo querytojson($sql, $conn);
 $conn->close();

@@ -65,14 +65,32 @@ function getCurrentUser(callback){
     })
 }
 
-function getFanList(user, callback){
-    $.get("./controllers/getfanlist.php?user="+user, function(data){
+function getFans(user, callback){
+    $.get("./controllers/getFans.php?user="+user, function(data){
         callback(data);
     })
 }
 
-function getFanOfList(user, callback){
-    $.get("./controllers/getfanoflist.php?user="+user, function(data){
+function getPhotos(user, callback){
+    $.get("./controllers/getPhotos.php?user="+user, function(data){
+        callback(data);
+    })
+}
+
+function getVideos(user, callback){
+    $.get("./controllers/getVideos.php?user="+user, function(data){
+        callback(data);
+    })
+}
+
+function getAudio(user, callback){
+    $.get("./controllers/getAudio.php?user="+user, function(data){
+        callback(data);
+    })
+}
+
+function getFavs(user, callback){
+    $.get("./controllers/getFavs.php?user="+user, function(data){
         callback(data);
     })
 }
@@ -149,3 +167,25 @@ function updatePost(record, callback){
     })
 }
 
+function sendResetRequest(data, callback){
+    console.log(data);postMessage   
+    $.post("../controllers/passwordreset/sendResetRequest.php", data, function (results) {
+        callback(results);
+    })
+}
+
+function verifyResetToken(token, callback) {
+    $.get("../controllers/passwordreset/verifyResetToken.php?token=" + token, function (data) {
+        results = JSON.parse(data);
+        if (results.length > 0)
+            callback("Ok");
+        else
+            callback("Empty")        
+    })
+}
+
+function resetPassword(data, callback) {
+    $.post("../controllers/passwordreset/resetPassword.php", data, function(results){        
+        callback(results)
+    })
+}

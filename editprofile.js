@@ -30,15 +30,55 @@ $(document).ready(function () {
     });
 
     $("#btnSubmit").click(function () {
+        $("#mdlWaiting").show();
         var fields = form2json($("#frmProfile"), "./uploads/");
-        var newfile = uploadFileFromForm($("#frmProfile"), fields["id"]);
-        if (newfile != null) 
-            fields["image"] = newfile;
-        console.log(fields);
-        updateProfile(fields, function (result) {
-            console.log(result);
-            window.location.replace("./index.html?user=" + fields["id"]);
-        })
+
+        uploadImages(fields).then(
+            function (response) {
+                updateProfile(fields, function (res) {
+                    console.log(res);
+                    window.location.replace("./index.html?user=" + fields["id"]);
+                })
+            }, function (error) {
+                console.log(error)
+            }
+        );
     });
 });
 
+function uploadImages(profileData){
+    var id = $("#id").val();
+    return new Promise(function (resolve, reject) {
+        var filecount = 2;
+        var semaphore = filecount;
+        $("progress").attr("max", semaphore);
+        var filename = "userimage" + id;
+        uploadImageFile($("#userimageupload"), filename, function (res) {
+            if (res.indexOf("Error:") >= 0)
+                if (res.indexOf("No file selected") >= 0)
+                    profileData["userimage"] = $("#userimage").attr("src").split("/")[2];
+                else
+                    reject(res);
+            else
+                profileData["userimage"] = res;
+            semaphore--;
+            $("progress").attr("value", filecount - semaphore);
+            if (semaphore == 0)
+                resolve(profileData);
+        });
+        var filename = "bannerimage" + id;
+        uploadImageFile($("#bannerimageupload"), filename, function (res) {
+            if (res.indexOf("Error:") >= 0)
+                if (res.indexOf("No file selected") >= 0)
+                    profileData["bannerimage"] = $("#bannerimage").attr("src").split("/")[2];
+                else
+                    reject(res);                
+            else
+                profileData["bannerimage"] = res;
+            semaphore--;
+            $("progress").attr("value", filecount - semaphore);
+            if (semaphore == 0)
+                resolve(profileData);
+        });
+    })
+}

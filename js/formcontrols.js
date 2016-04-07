@@ -30,11 +30,15 @@ function populateDiv(div, record, href) {
 
 function cloneDiv(template, record, href){
     var newDiv = template.clone();
-    populateDiv(newDiv, record, href);
-    return newDiv}
+    // populateDiv(newDiv, record, href);
+    json2form(newDiv, record, href);
+    return newDiv
+}
+
 
 function increment(e){
-    e.html(e.html++);}
+    e.html(e.html++);
+}
 
 function populateList(div, data, template, callback, href){    
     var newDiv;
@@ -43,5 +47,5 @@ function populateList(div, data, template, callback, href){
         div.append(newDiv);
         newDiv.show();
         if(callback != undefined){
-            callback(newDiv)}}
+            callback(newDiv, data[i])}}
 }

@@ -10,16 +10,16 @@ if (!String.prototype.startsWith) {
 }
 
 $(document).ready(function () {
-    var pageUser = window.location.search.split("=")[1];
-    if (pageUser == "" || pageUser == undefined)
+    pageUser = window.location.search.split("=")[1];
+    if (pageUser == "")
         window.location.replace("welcome.html");
+
     getCurrentUser(function (user) {
         currentUser = user;
-
         if (currentUser != "") {
             if (currentUser == pageUser) {
                 $("#btnEditProfile").show();
-                $("#btnBlog").show();
+                $("#frmPost").show();
             }
             else {
                 $("#btnFanToggle").show();
@@ -30,11 +30,14 @@ $(document).ready(function () {
         } else {
             $("#btnLoginLogout").html("Log In");
         }
+        getAllPosts(pageUser, currentUser, function (postData) {
+            populatePostList($("#lstAllPosts"), JSON.parse(postData), currentUser);
+        });
 
         getUsersPosts(pageUser, currentUser, function (postData) {
             var postList = JSON.parse(postData);
-            $("#postcount").html(postList.length)
-            populatePostList($("#lstBlogs"), postList, currentUser, "./uploads/");
+            $("#lblPostCount").html(postList.length)
+            populatePostList($("#lstUsersPosts"), postList, currentUser);
         });
     });
 
@@ -44,71 +47,47 @@ $(document).ready(function () {
         }
         // populateDiv($("#divProfile"), profileData);
         json2form($("#divProfile"), profileData, "./uploads/");
-        var imgsrc = $("#divProfile").find("img").attr("src") + "?timestamp=" + profileData["timestamp"];
-        $("#divProfile").find("img").attr("src", imgsrc);
-        $("#divProfile").attr("style", "background-image: url('./uploads/" + profileData["bannerimage"] +
-        "?timestamp=" + profileData["timestamp"] + "'); background-repeat: no-repeat");
+        $("#divProfile").attr("style", "background-image: url('./uploads/" + profileData["bannerimage"] + "'); background-repeat: no-repeat");
         console.log(profileData);
     });
 
-    getFans(pageUser, function (fanData) {
+    getFanList(pageUser, function (fanData) {
         var fanList = JSON.parse(fanData);
-        $("#fancount").html(fanList.length);
-        populateList($("#lstFans"), fanList, $("#tmplFan"), function (div, record) {
-            div.find("a").attr("href", "?user=" + record["userid"]);
-        }, "./uploads/");
+        $("#lblFanCount").html(fanList.length);
+        populateList($("#lstFans"), fanList, $("#tmplFan"), undefined, "?user=");
     });
 
-    getFavs(pageUser, function (fanData) {
-        var favList = JSON.parse(fanData);
-        $("#favcount").html(favList.length);
-        populateList($("#lstFavs"), favList, $("#tmplFan"), function (div, record) {
-            div.find("a").attr("href", "?user=" + record["userid"]);
-        }, "./uploads/");
-    });
-
-    getPhotos(pageUser, function (photos) {
-        var photoList = JSON.parse(photos);
-        populateList($("#lstPhotos"), photoList, $("#tmplPhoto"), undefined, "./uploads/");
-    });
-
-    getVideos(pageUser, function (videos) {
-        var videoList = JSON.parse(videos);
-        populateList($("#lstVideos"), videoList, $("#tmplVideo"), undefined, "./uploads/");
-    });
-
-    getAudio(pageUser, function (tracks) {
-        var audioList = JSON.parse(tracks);
-        populateList($("#lstSongs"), audioList, $("#tmplAudio"), undefined, "./uploads/");
-    });
-
-    $(".upload").change(function () {
-        var previewdiv = "#preview-" + this.id;
-        readURL(this, previewdiv);
-        $(previewdiv).show();
-    });
-
-    $(".fileselect").click(function () {
-        $(this).parent().find("input").click();
-        return false;
+    getFanOfList(pageUser, function (fanData) {
+        var fanOfList = JSON.parse(fanData);
+        $("#lblFanOfCount").html(fanOfList.length);
+        populateList($("#lstFanOf"), fanOfList, $("#tmplFanOf"), undefined, "?user=");
     });
 
     $("#btnSubmitPost").click(function () {
-        uploadAttachments($("#frmPost")).then(function (fields) {
-            fields["text"] = $("#frmPost").find("#text").val();
-            fields["user"] = currentUser;
-            console.log(fields);
-            console.log(JSON.stringify(fields));
-            putPost(fields, function (newRecord) {
-                var newPost = cloneDiv($("#tmplPost"), newRecord, "./uploads/");
+        fields = form2json($("#frmPost"));
+        fields["user"] = currentUser;
+        console.log(fields);
+        putPost(fields, function (newRecord) {
+            console.log("New record : " + JSON.stringify(newRecord));
+            uploadImageFile($("#imgUpload"), "posts" + newRecord["valPostID"], function (filename) {
+                if (!filename.startsWith("Error:")) {
+                    newRecord["imgPostImage"] = filename;
+                    updatePost(newRecord, function (res) { console.log(res) });
+                }
+                var newPost = cloneDiv($("#tmplPost"), newRecord);
                 console.log(newPost);
                 setPostControls(newPost);
                 newPost.find("#share").hide();
                 newPost.show();
                 newPost.attr('id', "tmplPostlstAllPosts" + newRecord["valPostID"]);
                 $("#lstAllPosts").prepend(newPost);
+                console.log(newPost.find("#lblText").html());
+                newPost2 = newPost.clone();
+                newPost2.attr('id', "tmplPostlstUsersPosts" + newRecord["valPostID"]);
+                $("#lstUsersPosts").prepend(newPost2);
             })
-        });
+            clearForm($("#frmPost"))
+        })
     });
 
     $("#btnSubmitComment").click(function () {
@@ -141,6 +120,16 @@ $(document).ready(function () {
         })
     });
 
+    $("#btnShowAllPosts").click(function () {
+        $("#lstAllPosts").show();
+        $("#lstUsersPosts").hide()
+    });
+
+    $("#btnShowUsersPosts").click(function () {
+        $("#lstAllPosts").hide();
+        $("#lstUsersPosts").show();
+        return false;
+    });
 
     $(".btnDeletePost").click(function () {
         currentPost = findParent(this, "#tmplPost");
@@ -148,6 +137,16 @@ $(document).ready(function () {
         deletePost(postid, function () {
             deleteDiv(currentPost)
         })
+        return false;
+    });
+
+    $(".upload").change(function () {
+        readURL(this, "#preview-img");
+        $("#preview-img").show();
+    });
+
+    $(".fa-image").click(function () {
+        $('#imgUpload').click();
         return false;
     });
 
@@ -166,61 +165,7 @@ $(document).ready(function () {
             window.location.replace("./login.html");
         }
     });
-
-    $("#btnFanToggle").click(function () {
-        if ($("#btnFanToggle").html() == "Fan")
-            addFan({ "fan": currentUser, "fanof": pageUser }, function (data) {
-                console.log(data);
-                $("#btnFanToggle").html("Unfan");
-            })
-        else
-            deleteFan({ "fan": currentUser, "fanof": pageUser }, function (data) {
-                console.log(data);
-                $("#btnFanToggle").html("Fan");
-            })
-    })
 });
-
-function getSource(input) {
-    var defaultimg = "./images/100x100.jpg";
-    var src;
-    switch(input.id) {
-        case "image" :
-            src = $("#preview-image").attr("src");
-            if(src == defaultimg) src = "";
-            break;
-        case "video":
-            src = $("#preview-video").find("source").attr("src");
-            break;
-        case "audio":
-            src = $("#preview-audio").find("source").attr("src");
-            break;
-        default:
-            src = "";
-    }       
-}
-
-function uploadAttachments(form){
-    return new Promise(function (resolve, reject) {
-        attachments = form.find(".upload");
-        var fields = {};
-        var filecount = attachments.length;
-        var semaphore = filecount;
-        $("progress").attr("max", semaphore);
-        for (i = 0; i < filecount; i++) {
-            var input = attachments[i];
-            fields[input.id] = getSource(input);
-            uploadAttachment(input, function (res) {
-                if (res.indexOf("Error:") != 0)
-                    fields[res.split(":")[0]] = res.split(":")[1];                    
-                semaphore--;
-                $("progress").attr("value", filecount - semaphore);
-                if (semaphore == 0)
-                    resolve(fields);
-            })
-        }
-    })
-}
 
 function updateCommentList(prefix, postid, newComment) {
     var post = $(prefix + postid);
@@ -237,7 +182,14 @@ function populatePostList(list, data, currentUser){
             newPost.find(".btnLikePost").removeClass("fa-heart-o");
         }
         setPostControls(newPost);
-    }, "./uploads/")
+        if (parseInt(newPost.find("#lblCommentCount").html()) > 0) {
+            getComments(postid, function (comments) {
+                populateList(newPost.find("#lstComments"), comments, $("#tmplComment"), function (newComment) { })
+            })
+        }
+        if (newPost.find("#valPostShared").val() != "")
+            newPost.find("#divShare").show();
+    })
 }
 
 function setPostControls(newPost){
