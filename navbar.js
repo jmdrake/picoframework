@@ -14,8 +14,7 @@ $(document).ready(function () {
 function btnLoginLogout(){
     console.log($("#btnLoginLogout").html());
     if ($("#btnLoginLogout").html() == "Logout") {
-        logout(function (res) {
-            alert(res);
+        logout(function (res) {            
             window.location.replace("./welcome.html");
         })
     } else {
