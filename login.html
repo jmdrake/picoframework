@@ -9,19 +9,7 @@ To change this template use Tools | Templates.
     </head>
     <body>
         <br/><br/>
-        <header class="w3-top">
-            <nav class="w3-topnav w3-black">
-                <img src="./images/godigio_transparent.png" alt="logo" height="40px"/>
-                <a href="#">Home</a>
-                <a href="#">Post</a>
-                <span>Search <input style="color: #000000"/></span>
-                <button id="btnFanToggle" class="w3-btn w3-black" style="display: none"></button>
-                <span class="w3-right"><a href="#" id="btnLoginLogout">Logout</a></span>
-                <span class="w3-right" id="btnEditProfile" style="display: none">
-                    <a href="editprofile.html" class="w3-btn">Edit Profile</a>
-                </span>
-            </nav>            
-        </header>        
+        <div id="navbar"></div>
         <div class="w3-form w3-third" id="login_form">
             <div class="w3-group">      
                 <input class="w3-input" name="email" id="email" style="width:100%;" type="text" required="true">
@@ -57,5 +45,6 @@ To change this template use Tools | Templates.
         <script src="./js/clearForm.js"></script>
         <script src="./controllers/controllers.js"></script>
         <script src="login.js"></script>
+        <script src="navbar.js"></script>
     </body>
 </html>

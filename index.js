@@ -156,17 +156,6 @@ $(document).ready(function () {
         return false;
     });
 
-    $("#btnLoginLogout").click(function () {
-        console.log($("#btnLoginLogout").html());
-        if ($("#btnLoginLogout").html() == "Logout") {
-            logout(function (res) {
-                window.location.replace("./welcome.html");
-            })
-        } else {
-            window.location.replace("./login.html");
-        }
-    });
-
     $("#btnFanToggle").click(function () {
         if ($("#btnFanToggle").html() == "Fan")
             addFan({ "fan": currentUser, "fanof": pageUser }, function (data) {

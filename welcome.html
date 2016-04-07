@@ -9,18 +9,24 @@ To change this template use Tools | Templates.
     </head>
     <body>
         <br/><br/>
-        <header class="w3-top">
-            <nav class="w3-topnav w3-black">
-                <img src="./images/godigio_transparent.png" alt="logo" height="40px"/>
-                <a href="#">Home</a>
-                <span>Search <input style="color: #000000"/></span>                
-                <span class="w3-right" id="btnEditProfile" style="display: none">
-                    <a href="editprofile.html" class="w3-btn">Edit Profile</a>
-                </span>
-            </nav>            
-        </header>        
+        <div id="navbar"></div>
         <h1>Welcome To Godigio Fanhub</h1>
+        <div id="lstSearch" class="w3-row-padding">                        
+        </div>
+        <div id="tmplFan" class="w3-col m3 s6" style="display:none; margin:  10px">
+            <a href="">
+                <img id="userimage" src="./images/100x100.jpg" 
+                    alt="fanof profile image" width="110" height="90"/>
+            </a>
+            <div id="name"></div>
+        </div>
         <h1><a href="login.html">Login</a></h1>
         <h1><a href="register.html">Register</a></h1>
+        <script type="text/javascript" src="./js/jquery.js"></script>
+        <script type="text/javascript" src="./js/formcontrols.js"></script>
+        <script type="text/javascript" src="./js/json2form.js"></script>   
+        <script type="text/javascript" src="./controllers/controllers.js"></script>
+        <script type="text/javascript" src="search.js"></script>   
+        <script src="navbar.js"></script>
     </body>
 </html>
