@@ -189,3 +189,10 @@ function resetPassword(data, callback) {
         callback(results)
     })
 }
+
+function search(searchstr, callback) {
+    $.get("../controllers/search.php?searchstr=" + encodeURIComponent(searchstr), function (data) {
+        results = JSON.parse(data);
+        callback(results);
+    })
+}

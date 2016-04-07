@@ -18,7 +18,7 @@
                 <img src="./images/godigio_transparent.png" alt="logo" height="40px"/>
                 <a href="#">Home</a>
                 <a href="#">Post</a>
-                <span>Search <input style="color: #000000"/></span>
+                <span><a href="#" onclick="btnSearch();">Search </a><input id="search" style="color: #000000"/></span>
                 <button id="btnFanToggle" class="w3-btn w3-black" style="display: none"></button>
                 <span class="w3-right"><a href="#" id="btnLoginLogout">Logout</a></span>
                 <span class="w3-right" id="btnEditProfile" style="display: none">
@@ -27,6 +27,8 @@
             </nav>            
         </header>
         <br/><br/>
+        <div id="lstSearch" class="w3-row-padding">                        
+        </div>
         <div id="divProfile" class="w3-container center" 
             style="background-image: url('./images/banner-icon.png'); background-repeat: no-repeat">           
             <div class="w3-row w3-container" id="icon">
@@ -208,5 +210,6 @@
         <script type="text/javascript" src="./js/fileupload.js"></script>
         <script type="text/javascript" src="./js/es6-promise.min.js"></script>
         <script type="text/javascript" src="index.js"></script>                  
+        <script type="text/javascript" src="search.js"></script>                  
     </body>
 </html>
