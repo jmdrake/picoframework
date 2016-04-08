@@ -18,8 +18,8 @@ $(document).ready(function () {
 
         if (currentUser != "") {
             if (currentUser == pageUser) {
-                $("#btnEditProfile").show();
-                $("#btnBlog").show();
+                $("#btnEditProfile").show();                
+                $("#frmPost").show();
             }
             else {
                 $("#btnFanToggle").show();
