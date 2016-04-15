@@ -87,6 +87,7 @@ CREATE TABLE IF NOT EXISTS `Posts` (
   `user` int(11) NOT NULL,
   `post_shared` int(11) NOT NULL,
   `image` varchar(40) NOT NULL,
+  'tags' varchar(80),
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -107,6 +108,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
   `zip` varchar(15),
   `marital` tinyint(4),
   'location' varchar(40),
+  'genres' varchar(80),
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

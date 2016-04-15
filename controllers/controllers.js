@@ -49,7 +49,11 @@ function isFan(fan, fanof, callback){
 
 function login(data, callback){
     $.post("./controllers/login.php", data, function (results) {        
-        callback(results);
+        var r = results.split("\n");
+        if(r.length > 0)
+      	    callback(r[r.length - 1])
+      	else
+     	    callback("");
     })
 }
 

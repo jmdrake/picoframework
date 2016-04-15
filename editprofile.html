@@ -32,16 +32,26 @@ To change this template use Tools | Templates.
                 <label class="w3-label">Location</label>
             </div>
             <div class="w3-group">
-                <input type="file" id="userimageupload" accept="image/*" style="display: none" class="upload"/>
+                <label class="w3-label">Profile Image</label>
+                <input type="file" id="userimageupload" name="userimageupload" accept="image/*" style="display: none" class="upload"/>
                 <a href="#">
                     <img src="./images/profile-icon.png" alt="Prevew Image" id="userimage" class="w3-input preview" style="width: 50%"/>
                 </a>                
             </div>
             <div class="w3-group">
-                <input type="file" id="bannerimageupload" accept="image/*" style="display: none" class="upload"/>
+                <label class="w3-label">Banner Image</label>
+                <input type="file" id="bannerimageupload" name="bannerimageupload" accept="image/*" style="display: none" class="upload"/>
                 <a href="#">
                     <img src="./images/banner-icon.png" alt="Prevew Image" id="bannerimage" class="w3-input preview" style="width: 50%"/>
                 </a>                
+            </div>
+            <div class="w3-group">      
+                <input class="w3-input requried" name="genres" id="genres" style="width:100%;" type="text">
+                <label class="w3-label">Genres - separate with ';'</label>
+            </div>
+            <div class="w3-group">      
+                <input class="w3-input requried" name="interests" id="interests" style="width:100%;" type="text">
+                <label class="w3-label">Interests - separate with ';'</label>
             </div>
             <input class="w3-input" type="hidden" name="id" id="id"/>
             <button type="button" id="btnSubmit" class="w3-btn w3-right w3-theme">Submit</button>

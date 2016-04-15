@@ -1,6 +1,7 @@
 var currentUser=0;
 var pageUser;
 var test;
+var genres = ["jazz", "r&b", "gospel"];
 
 if (!String.prototype.startsWith) {
   String.prototype.startsWith = function(searchString, position) {
@@ -18,7 +19,7 @@ $(document).ready(function () {
 
         if (currentUser != "") {
             if (currentUser == pageUser) {
-                $("#btnEditProfile").show();                
+                $("#btnEditProfile").show();
                 $("#frmPost").show();
             }
             else {
@@ -48,6 +49,14 @@ $(document).ready(function () {
         $("#divProfile").find("img").attr("src", imgsrc);
         $("#divProfile").attr("style", "background-image: url('./uploads/" + profileData["bannerimage"] +
         "?timestamp=" + profileData["timestamp"] + "'); background-repeat: no-repeat");
+        var tags = (profileData["genres"] + profileData["interests"]).split(";")        
+        for (i = 0; i < tags.length; i++) {
+            var newDiv = $("#tmplTag").clone();
+            newDiv.find("input").val(tags[i]);
+            newDiv.find("label").html(tags[i]);
+            $("#lstTags").append(newDiv);
+            newDiv.show();
+        }
         console.log(profileData);
     });
 

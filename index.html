@@ -18,7 +18,7 @@
             style="background-image: url('./images/banner-icon.png'); background-repeat: no-repeat">           
             <div class="w3-row w3-container" id="icon">
                 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                <div class="w3-col m2 w3-card-2" style="border: 10px">
+                <div class="w3-col m3 s2 w3-card-2" style="border: 10px">
                     <img id="userimage" src="./images/profile-icon.png" alt="user profile image" 
                         width="180px" style="    border: 2px solid white;"/>
                 </div>
@@ -26,6 +26,8 @@
                     <br/>
                     <h3><span id="name"></span></h3>
                     <div id="location"></div>
+                    <div id="genres"></div>
+                    <div id="interests"></div>
                 </div>
             </div>
         </div>
@@ -112,7 +114,13 @@
                                     <source src="">
                                 </audio>
                             </div>
-                            <button class="btn btn-primary pull-right" id="btnSubmitPost">Post</button>
+                            <div id="lstTags">                                                                
+                            </div>
+                            <span id="tmplTag" style="display: none">
+                                <input type="checkbox" name="tags"class="w3-check" id="tmplTag">&nbsp;
+                                <label>Tag</label>&nbsp;
+                            </span>    
+                            <button class="btn btn-primary pull-right w3-grey" id="btnSubmitPost">Post</button>
                         </div>
                     </div>                   
                     <div id="lstBlogs" class="w3-container">
