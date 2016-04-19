@@ -13,7 +13,7 @@ require "../php/mark_sql_get.php";
 $conn = open_connection();
 
 $sql = mark_sql_get(
-"SELECT video, text FROM Posts
+"SELECT user, video, text FROM Posts
 WHERE video <> ''
 ORDER BY id DESC
 LIMIT 0,5");
