@@ -12,10 +12,10 @@ require "../php/insertfrompost.php";
 require "../php/querytojson.php";
 
 $conn = open_connection();
-$sql = "INSERT INTO Posts(text, user, image, audio, video)";
+$sql = "INSERT INTO Posts(text, user, image, audio, video, tags)";
 $results = insertfrompost($sql, $conn);    
 
-$selquery = "SELECT text, Posts.id AS postid, Users.id AS userid, userimage, Posts.image AS image, audio, video 
+$selquery = "SELECT text, Posts.id AS postid, Users.id AS userid, userimage, Posts.image AS image, audio, video, tags 
 FROM Posts INNER JOIN Users ON Posts.user = Users.id WHERE Posts.id = " . mysqli_insert_id($conn);
 
 echo querytojson($selquery, $conn);

@@ -19,6 +19,7 @@ $sql = mark_sql_get(
     userimage, 
     Users.name AS username, 
     text, 
+    tags,
     post_shared, 
     Posts.image AS image, 
     video,

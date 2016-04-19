@@ -1,7 +1,6 @@
 var currentUser=0;
 var pageUser;
 var test;
-var genres = ["jazz", "r&b", "gospel"];
 
 if (!String.prototype.startsWith) {
   String.prototype.startsWith = function(searchString, position) {
@@ -49,7 +48,7 @@ $(document).ready(function () {
         $("#divProfile").find("img").attr("src", imgsrc);
         $("#divProfile").attr("style", "background-image: url('./uploads/" + profileData["bannerimage"] +
         "?timestamp=" + profileData["timestamp"] + "'); background-repeat: no-repeat");
-        var tags = (profileData["genres"] + profileData["interests"]).split(";")        
+        var tags = (profileData["genres"] + " " + profileData["interests"]).split(" ")
         for (i = 0; i < tags.length; i++) {
             var newDiv = $("#tmplTag").clone();
             newDiv.find("input").val(tags[i]);
@@ -104,18 +103,21 @@ $(document).ready(function () {
 
     $("#btnSubmitPost").click(function () {
         uploadAttachments($("#frmPost")).then(function (fields) {
-            fields["text"] = $("#frmPost").find("#text").val();
+            inputs = inputs2json($("#frmPost"));
+            fields["text"] = inputs["text"];
             fields["user"] = currentUser;
+            fields["tags"] = inputs["tags"].join(" ");
             console.log(fields);
             console.log(JSON.stringify(fields));
-            putPost(fields, function (newRecord) {
+            putPost(fields, function (newRecord) {                
                 var newPost = cloneDiv($("#tmplPost"), newRecord, "./uploads/");
                 console.log(newPost);
                 setPostControls(newPost);
                 newPost.find("#share").hide();
                 newPost.show();
                 newPost.attr('id', "tmplPostlstAllPosts" + newRecord["valPostID"]);
-                $("#lstAllPosts").prepend(newPost);
+                $("#lstBlogs").prepend(newPost);
+                clearForm($("#frmPost"));
             })
         });
     });

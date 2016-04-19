@@ -20,6 +20,7 @@ $sql = mark_sql_get(
     Users.name AS lblUserName, 
     text AS lblText, post_shared AS valPostShared, 
     Posts.image AS imgPostImage, 
+    tags,
     (SELECT COUNT(*) FROM Likes WHERE post = Posts.id) AS lblLikeCount, 
     (SELECT COUNT(*) FROM Posts WHERE post_shared = valPostID) AS lblShareCount, 
     (SELECT COUNT(*) FROM Comments WHERE post = Posts.id) AS lblCommentCount, 

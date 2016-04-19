@@ -24,10 +24,10 @@
                 </div>
                 <div class="w3-col m4 l4 w3-container w3-padding-32">
                     <br/>
-                    <h3><span id="name"></span></h3>
-                    <div id="location"></div>
-                    <div id="genres"></div>
-                    <div id="interests"></div>
+                    <h3><span id="name"></span></h3>                    
+                    <div><label>Location : </label><span id="location"></span></div>
+                    <div><label>Genres :</label><span id="genres"></span></div>
+                    <div><label>Interest :</label><span id="interests"></span></div>
                 </div>
             </div>
         </div>
@@ -116,10 +116,10 @@
                             </div>
                             <div id="lstTags">                                                                
                             </div>
-                            <span id="tmplTag" style="display: none">
+                            <div id="tmplTag" style="display: none">
                                 <input type="checkbox" name="tags"class="w3-check" id="tmplTag">&nbsp;
                                 <label>Tag</label>&nbsp;
-                            </span>    
+                            </div>    
                             <button class="btn btn-primary pull-right w3-grey" id="btnSubmitPost">Post</button>
                         </div>
                     </div>                   
@@ -143,6 +143,7 @@
                                     <source src="">
                                 </audio>                        
                             </div>
+                            <div id="tags"></div>
                             <nav class="w3-topnav">
                             <a href="#"><i class="fa fa-heart-o btnLikePost"></i></a><span id="likecount">0</span>
                             <span id="share"><a href="#"><i class="fa fa-retweet btnSharePost"></i></a>

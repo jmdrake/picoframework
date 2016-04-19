@@ -93,6 +93,30 @@ function getAudio(user, callback){
     })
 }
 
+function getSampleVideos(callback){
+    $.get("./controllers/getSampleVideos.php", function(data){
+        callback(data);
+    })
+}
+
+function getSampleAudio(callback){
+    $.get("./controllers/getSampleAudio.php", function(data){
+        callback(data);
+    })
+}
+
+function getSamplePhotos(callback){
+    $.get("./controllers/getSamplePhotos.php", function(data){
+        callback(data);
+    })
+}
+
+function getNews(tag, callback){
+    $.get("./controllers/getNews.php?tag=" + encodeURIComponent(tag), function (data) {
+        callback(data);
+    })
+}
+
 function getFavs(user, callback){
     $.get("./controllers/getFavs.php?user="+user, function(data){
         callback(data);
