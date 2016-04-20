@@ -36,7 +36,7 @@ $(document).ready(function () {
         populatePostList($("#gospelNews"), gospelNews);
     });
 
-    getNews("hip hop", function (posts) {
+    getNews("hip_hop", function (posts) {
         var hiphopNews = JSON.parse(posts);
         populatePostList($("#hip_hopNews"), hiphopNews);
     });
