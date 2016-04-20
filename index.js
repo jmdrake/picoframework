@@ -104,7 +104,7 @@ $(document).ready(function () {
     $("#btnSubmitPost").click(function () {
         uploadAttachments($("#frmPost")).then(function (fields) {
             inputs = inputs2json($("#frmPost"));
-            fields["text"] = inputs["text"];
+            fields["text"] = encodeURIComponent(inputs["text"]);
             fields["user"] = currentUser;
             fields["tags"] = inputs["tags"].join(" ");
             console.log(fields);
@@ -228,10 +228,14 @@ function updateCommentList(prefix, postid, newComment) {
     increment(post.find("#lblCommentCount"));
 }
 
+var rxurl = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:\/~\+#]*[\w\-\@?^=%&amp;\/~\+#])?/g;
+
 function populatePostList(list, data, currentUser){
-    populateList(list, data, $("#tmplPost"), function (newPost) {
+    populateList(list, data, $("#tmplPost"), function (newPost, record) {
         var postid = newPost.find("#valPostID").val();
         newPost.attr("id", "tmplPost" + list.attr("id") + postid);
+        var blogtext = decodeURIComponent(record["text"]);
+        newPost.find("#text").html(blogtext.replace(rxurl, function foo(x) { return '<a href="' + x + '">Link</a>' }));
         if (newPost.find("#valLiked").val() == "1") {
             newPost.find(".btnLikePost").addClass("fa-heart");
             newPost.find(".btnLikePost").removeClass("fa-heart-o");

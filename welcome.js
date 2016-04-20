@@ -1,3 +1,5 @@
+var rxurl = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:\/~\+#]*[\w\-\@?^=%&amp;\/~\+#])?/g;
+
 $(document).ready(function () {
     getCurrentUser(function (user) {
         if (user != "") {
@@ -24,33 +26,46 @@ $(document).ready(function () {
         populateList($("#lstSongs"), audioList, $("#tmplAudio"), undefined, "./uploads/");
     });
 
-    getNews("r&b", function (posts) {
-        var postList = JSON.parse(posts);
-        populateList($("#r_and_bNews"), postList, $("#tmplPost"), undefined, "./uploads/");
+    getNews("r_&_b", function (posts) {
+        var rnbNews = JSON.parse(posts);
+        populatePostList($("#r_and_bNews"), rnbNews);
     });
 
     getNews("gospel", function (posts) {
-        var postList = JSON.parse(posts);
-        populateList($("#gospelNews"), postList, $("#tmplPost"), undefined, "./uploads/");
+        var gospelNews = JSON.parse(posts);
+        populatePostList($("#gospelNews"), gospelNews);
     });
 
     getNews("hip hop", function (posts) {
-        var postList = JSON.parse(posts);
-        populateList($("#hip_hopNews"), postList, $("#tmplPost"), undefined, "./uploads/");
+        var hiphopNews = JSON.parse(posts);
+        populatePostList($("#hip_hopNews"), hiphopNews);
     });
 
     getNews("jazz", function (posts) {
-        var postList = JSON.parse(posts);
-        populateList($("#jazzNews"), postList, $("#tmplPost"), undefined, "./uploads/");
+        var jazzNews = JSON.parse(posts);
+        populatePostList($("#jazzNews"), jazzNews);
     });
 
     getNews("country", function (posts) {
-        var postList = JSON.parse(posts);
-        populateList($("#countryNews"), postList, $("#tmplPost"), undefined, "./uploads/");
+        var countryNews = JSON.parse(posts);
+        populatePostList($("#countryNews"), countryNews);
     });
 
     getNews("rock", function (posts) {
-        var postList = JSON.parse(posts);
-        populateList($("#rockNews"), postList, $("#tmplPost"), undefined, "./uploads/");
+        var rockNews = JSON.parse(posts);
+        populatePostList($("#rockNews"), rockNews);
     });
 });
+
+function populatePostList(list, data){
+    populateList(list, data, $("#tmplPost"), function (newPost, record) {
+        var postid = newPost.find("#valPostID").val();
+        newPost.attr("id", "tmplPost" + list.attr("id") + postid);
+        var blogtext = decodeURIComponent(record["text"]);
+        newPost.find("#text").html(blogtext.replace(rxurl, function foo(x) { return '<a href="' + x + '">Link</a>' }));
+        if (newPost.find("#valLiked").val() == "1") {
+            newPost.find(".btnLikePost").addClass("fa-heart");
+            newPost.find(".btnLikePost").removeClass("fa-heart-o");
+        }
+    }, "./uploads/")
+}
