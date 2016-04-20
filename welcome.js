@@ -26,7 +26,7 @@ $(document).ready(function () {
         populateList($("#lstSongs"), audioList, $("#tmplAudio"), undefined, "./uploads/");
     });
 
-    getNews("r_&_b", function (posts) {
+    getNews("r_and_b", function (posts) {
         var rnbNews = JSON.parse(posts);
         populatePostList($("#r_and_bNews"), rnbNews);
     });
