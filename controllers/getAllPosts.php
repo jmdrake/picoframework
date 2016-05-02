@@ -14,8 +14,8 @@ $conn = open_connection();
 
 $sql = mark_sql_get(
 "SELECT 
-    Posts.id AS valPostID, 
-    Users.id AS valUserID, 
+    Posts.id AS postid, 
+    Users.id AS userid, 
     Users.userimage AS imgUserImage, 
     Users.name AS lblUserName, 
     text AS lblText, post_shared AS valPostShared, 

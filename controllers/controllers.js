@@ -25,6 +25,12 @@ function deleteFan(jsondata, callback){
     })
 }
 
+function deletePost(postid, callback){
+    $.post("./controllers/deletepost.php", {"postid" : postid}, function(results){
+        callback(results);
+    })
+}
+
 function getProfileData(id, callback){    
     $.get("./controllers/getProfileData.php?user=" + id, function(data){        
         callback(JSON.parse(data)[0])

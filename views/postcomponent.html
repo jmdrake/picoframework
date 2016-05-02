@@ -1,0 +1,39 @@
+<div class="w3-card w3-row" id="tmplPost">
+    <div class="w3-two-thirds">
+        <input name="postid" id="postid" type="hidden"/>
+        <div id="text" style="word-wrap: break-word">
+            This is my first message
+        </div>
+        <div>
+            <img id="image" src="./images/100x100.jpg" alt="post image" style="max-width:90%; display: none"/>
+        </div>
+        <div>
+            <video width="128" height="96" controls style="display:none" id="video">
+                <source src="">
+            </video>
+        </div>
+        <div>
+            <audio controls style="display:none" id="audio">
+                <source src="">
+            </audio>                        
+        </div>
+        <div id="tags"></div>
+        <nav class="w3-topnav">
+        <button onclick="btnLikePost();">
+            <i class="fa fa-heart-o btnLikePost"></i>
+        </button>
+        <span id="likecount">0</span>
+        <span id="share">
+            <button onclick="btnSharePost();">
+                <i class="fa fa-retweet btnSharePost"></i></a>
+                <span id="sharecount">0</span>
+            </button>
+        </span>
+        <button onclick="btnCommentPost();">
+            <i class="fa fa-comment btnCommentPost"></i>
+        </button>
+        <span id="commentcount">0</span>
+        <button onclick="btnDeletePost(this);"><i class="fa fa-trash btnDeletePost"></i></button>
+        </nav>
+    </div>
+</div>        

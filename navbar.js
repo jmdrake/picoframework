@@ -32,3 +32,16 @@ function btnSearch() {
         }, "./uploads/");
     })
 }
+
+function btnFanToggle() {
+    if ($("#btnFanToggle").html() == "Fan")
+        addFan({ "fanof": pageUser }, function (data) {
+            console.log(data);
+            $("#btnFanToggle").html("Unfan");
+        })
+    else
+        deleteFan({ "fanof": pageUser }, function (data) {
+            console.log(data);
+            $("#btnFanToggle").html("Fan");
+        })    
+}

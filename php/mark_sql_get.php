@@ -14,7 +14,12 @@ function mark_sql_get($sql) {
     $replacements = array();
     for($i=0; $i<count($params[0]); $i++) {
         $patterns[$i] = "/\\" . $params[0][$i] . "/";
-        $getval = $_GET[$params[1][$i]];
+
+        if($params[1][$i] == "currentuser")
+            $getval = $_COOKIE["currentuser"];
+        else
+            $getval = $_GET[$params[1][$i]];
+                
         if($getval!="")
             if($getval[0] == "(")
                 $replacements[$i] = $getval;

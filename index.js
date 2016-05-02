@@ -115,7 +115,7 @@ $(document).ready(function () {
                 setPostControls(newPost);
                 newPost.find("#share").hide();
                 newPost.show();
-                newPost.attr('id', "tmplPostlstAllPosts" + newRecord["valPostID"]);
+                newPost.attr('id', "tmplPostlstAllPosts" + newRecord["postid"]);
                 $("#lstBlogs").prepend(newPost);
                 clearForm($("#frmPost"));
             })
@@ -167,18 +167,6 @@ $(document).ready(function () {
         return false;
     });
 
-    $("#btnFanToggle").click(function () {
-        if ($("#btnFanToggle").html() == "Fan")
-            addFan({ "fan": currentUser, "fanof": pageUser }, function (data) {
-                console.log(data);
-                $("#btnFanToggle").html("Unfan");
-            })
-        else
-            deleteFan({ "fan": currentUser, "fanof": pageUser }, function (data) {
-                console.log(data);
-                $("#btnFanToggle").html("Fan");
-            })
-    })
 });
 
 function getSource(input) {
@@ -232,7 +220,7 @@ var rxurl = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:\/~\+
 
 function populatePostList(list, data, currentUser){
     populateList(list, data, $("#tmplPost"), function (newPost, record) {
-        var postid = newPost.find("#valPostID").val();
+        var postid = record["postid"];
         newPost.attr("id", "tmplPost" + list.attr("id") + postid);
         var blogtext = decodeURIComponent(record["text"]);
         newPost.find("#text").html(blogtext.replace(rxurl, function foo(x) { return '<a href="' + x + '">Link</a>' }));
@@ -247,9 +235,9 @@ function populatePostList(list, data, currentUser){
 function setPostControls(newPost){
     newPost.find(".btnLikePost").click(function () {
         var post = findParent($(this), "tmplPost");
-        var postid = post.find("#valPostID").val();
+        var postid = post.find("#postid").val();
         toggleLikeRecord(currentUser, postid, function (likecount) {
-            post.find("#lblLikeCount").html(likecount);
+            post.find("#likecount").html(likecount);
         });
         $(this).toggleClass("fa-heart-o");
         $(this).toggleClass("fa-heart");
@@ -258,7 +246,7 @@ function setPostControls(newPost){
     if(!(currentUser == newPost.find("#valUserID").val())){
         newPost.find(".btnSharePost").click(function () {
             var post = findParent($(this), "tmplPost");
-            var postid = post.find("#valPostID").val();
+            var postid = post.find("#postid").val();
             $("#valSharePostID").val(postid);
             $("#lblShareText").html(post.find("#lblText").html());
             $("#imgShareImage").attr("src", post.find("#imgPostImage").attr("src"));           
@@ -274,11 +262,19 @@ function setPostControls(newPost){
     }
     newPost.find(".btnCommentPost").click(function () {
         var post = findParent($(this), "tmplPost");
-        var postid = post.find("#valPostID").val();
+        var postid = post.find("#postid").val();
         $("#valCommentPostID").val(postid);
         $("#mdlComment").show();
         return false;
     });    
+    newPost.find(".btnDeletePost").click(function () {
+        currentPost = findParent($(this), "#tmplPost");
+        postid = currentPost.find(".postid").val;
+        deletePost(postid, function () {
+            deleteDiv(currentPost)
+        })
+        return false;
+    })
 }
 
 function setLike(post){
