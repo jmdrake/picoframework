@@ -165,6 +165,11 @@ function putPost(data, callback){
     })
 }
 
+/*
+Function : putComment
+Input: data - JSON doc of form {text : "text", postid : "postid"}
+Output: results - JSON doc of form {text: "text", postid: "postid", commentid: "commentid", image: "imageurl", username: "username"}
+*/
 function putComment(data, callback){
     $.post("./controllers/putComment.php", data, function (results) {
         callback(JSON.parse(results)[0]);

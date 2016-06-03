@@ -1,4 +1,4 @@
-<div class="w3-card w3-row" id="tmplPost">
+<div class="w3-card w3-row" id="tmplPost" style="display: none">
     <div class="w3-two-thirds">
         <input name="postid" id="postid" type="hidden"/>
         <div id="text" style="word-wrap: break-word">
@@ -19,21 +19,42 @@
         </div>
         <div id="tags"></div>
         <nav class="w3-topnav">
-        <button onclick="btnLikePost();">
-            <i class="fa fa-heart-o btnLikePost"></i>
-        </button>
-        <span id="likecount">0</span>
-        <span id="share">
-            <button onclick="btnSharePost();">
-                <i class="fa fa-retweet btnSharePost"></i></a>
-                <span id="sharecount">0</span>
+            <button onclick="btnLikePost();">
+                <i class="fa fa-heart-o btnLikePost"></i>
             </button>
-        </span>
-        <button onclick="btnCommentPost();">
-            <i class="fa fa-comment btnCommentPost"></i>
-        </button>
-        <span id="commentcount">0</span>
-        <button onclick="btnDeletePost(this);"><i class="fa fa-trash btnDeletePost"></i></button>
+            <span id="likecount">0</span>
+            <span id="share">
+                <button onclick="btnSharePost();">
+                    <i class="fa fa-retweet btnSharePost"></i></a>
+                    <span id="sharecount">0</span>
+                </button>
+            </span>
+            <button onclick="btnCommentPost(this);">
+                <i class="fa fa-comment btnCommentPost"></i>
+            </button>
+            <span id="commentcount">0</span>
+            <button onclick="btnDeletePost(this);"><i class="fa fa-trash btnDeletePost"></i></button>
         </nav>
+        <div id="comments"></div>
     </div>
 </div>        
+<div id="mdlComment" class="w3-modal">
+    <input type="hidden" id="postid" name="postid" class="w3-input"/>
+    <div class="w3-modal-content">
+        <div class="w3-container">
+            <span onclick="document.getElementById('mdlComment').style.display='none'" class="w3-closebtn">&times;</span>
+            <textarea id="text" name="text" class="w3-input w3-border"></textarea><br/>
+            <button class="w3-btn" onclick="btnSubmitComment()">Submit</button>
+        </div>
+    </div>
+</div>
+<div id="tmplComment">
+    <input name="commentid" id="commentid" type="hidden"/>
+    <div class="w3-row">
+        <div class="w3-quarter">
+            <img id="image" src="./images/100x100.jpg" alt="post image" style="max-width:90%; display: none"/>
+            <div id="name"></div>
+        </div>
+        <div class="w3-threequarter" id="text"></div>
+    </div>
+</div>

@@ -7,133 +7,137 @@ To change this template use Tools | Templates.
         <title></title>
         <link rel="stylesheet" href="./css/w3.css"/>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">   
+        
     </head>
     <body>
         <br/><br/><br/>
         <div id="navbar"></div>
-        <span class="w3-xlarge" id="msgWelcome" style="display: none">Welcome To Godigio H.U.B. (Helping Users Brand)</span>
-        <a href="login.html" id="btnLogin" style="display: none"><button class="w3-btn w3-round-xlarge w3-teal w3-border-blue">Login</button></a>
-        <a href="register.html" id="btnRegister2" style="display: none">
-            <button class="w3-btn w3-round-xlarge w3-teal w3-border-blue">Register</button>
-        </a>
-        <div id="lstSearch" class="w3-row-padding">                        
-        </div>
-        <div id="tmplFan" class="w3-col m3 s6" style="display:none; margin:  10px">
-            <a href="">
-                <img id="userimage" src="./images/100x100.jpg" 
-                    alt="fanof profile image" width="110" height="90"/>
+        <div class="w3-container">
+            <span class="w3-xlarge" id="msgWelcome" style="display: none">Welcome To Godigio H.U.B. (Helping Users Brand)</span>
+            <a href="login.html" id="btnLogin" style="display: none"><button class="w3-btn w3-round-xlarge w3-teal w3-border-blue">Login</button></a>
+            <a href="register.html" id="btnRegister2" style="display: none">
+                <button class="w3-btn w3-round-xlarge w3-teal w3-border-blue">Register</button>
             </a>
-            <div id="name"></div>
-        </div>
-        <div class="w3-row">
-            <div class="w3-third w3-container w3-card-2">
-                <div class="section-header">
-                    <h1>R & B News</h1>
-                </div>
-                <div id="r_and_bNews"></div>
+            <div id="lstSearch" class="w3-row-padding">                        
             </div>
-            <div class="w3-third w3-container w3-card-2">
-                <div class="section-header">
-                    <h1>Gospel News</h1>
-                </div>
-                <div id="gospelNews"></div>
+            <div id="tmplFan" class="w3-col m3 s6" style="display:none; margin:  10px">
+                <a href="">
+                    <img id="userimage" src="./images/100x100.jpg" 
+                        alt="fanof profile image" width="110" height="90"/>
+                </a>
+                <div id="name"></div>
             </div>
-            <div class="w3-third w3-container w3-card-2">
-                <div class="section-header">
-                    <h1>Hip Hop News</h1>
-                </div>
-                <div id="hip_hopNews"></div>
-            </div>
-        </div>
-        <div class="w3-row">
-            <div class="w3-third w3-container w3-card-2">
-                <div class="section-header">
-                    <h1>Jazz News</h1>
-                </div>
-                <div id="jazzNews"></div>
-            </div>
-            <div class="w3-third w3-container w3-card-2">
-                <div class="section-header">
-                    <h1>Country News</h1>
-                </div>
-                <div id="countryNews"></div>
-            </div>
-            <div class="w3-third w3-container w3-card-2">
-                <div class="section-header">
-                    <h1>Rock News</h1>
-                </div>
-                <div id="rockNews"></div>
-            </div>
-        </div>
-        <div class="w3-row">
-            <div class="w3-third w3-container w3-card-2">
-                <div class="section-header">
-                    <h1>Recent Music</h1>
-                    <div id="lstSongs" class="content">                        
+            <div class="w3-row">
+                <div class="w3-third w3-container w3-card-2 w3-blue">
+                    <div class="section-header">
+                        <h1>R & B News</h1>
                     </div>
-                    <div id="tmplAudio" class="w3-row">                        
-                        <div>
-                            <audio controls style="display:none" id="audio">
-                                <source src="">
-                            </audio>
+                    <div id="r_and_bNews"></div>
+                </div>
+                <div class="w3-third w3-container w3-card-2 w3-red">
+                    <div class="section-header">
+                        <h1>Gospel News</h1>
+                    </div>
+                    <div id="gospelNews"></div>
+                </div>
+                <div class="w3-third w3-container w3-card-2 w3-purple">
+                    <div class="section-header">
+                        <h1>Hip Hop News</h1>
+                    </div>
+                    <div id="hip_hopNews"></div>
+                </div>
+            </div>
+            <div class="w3-row">
+                <div class="w3-third w3-container w3-card-2">
+                    <div class="section-header">
+                        <h1>Jazz News</h1>
+                    </div>
+                    <div id="jazzNews"></div>
+                </div>
+                <div class="w3-third w3-container w3-card-2">
+                    <div class="section-header">
+                        <h1>Country News</h1>
+                    </div>
+                    <div id="countryNews"></div>
+                </div>
+                <div class="w3-third w3-container w3-card-2">
+                    <div class="section-header">
+                        <h1>Rock News</h1>
+                    </div>
+                    <div id="rockNews"></div>
+                </div>
+            </div>
+            <div class="w3-row">
+                <div class="w3-third w3-container w3-card-2">
+                    <div class="section-header">
+                        <h1>Recent Music</h1>
+                        <div id="lstSongs" class="content">                        
                         </div>
+                        <div id="tmplAudio" class="w3-row">                        
+                            <div>
+                                <audio controls style="display:none" id="audio">
+                                    <source src="">
+                                </audio>
+                            </div>
+                            <div id="text"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w3-third w3-container w3-card-2">
+                    <div class="section-header">
+                        <h1>Recent Photos</h1>
+                    </div>
+                    <div id="lstPhotos" class="content">                        
+                    </div>
+                    <div id="tmplPhoto" style="display: none">
+                        <img id="image" src="./images/100x100.jpg" alt="photo" width="100%"/>
+                        <div id="text" style="height:  1.5em; width: 100%; overflow: hidden"></div>
+                    </div>
+                </div>
+                <div class="w3-third w3-container w3-card-2">
+                    <div class="section-header">
+                        <h1>Recent Videos</h1>
+                    </div>
+                    <div id="lstVideos" class="content">                        
+                    </div>
+                    <div id="tmplVideo">                        
+                        <video controls style="display:none" id="video">
+                            <source src="">
+                        </video>
                         <div id="text"></div>
                     </div>
                 </div>
             </div>
-            <div class="w3-third w3-container w3-card-2">
-                <div class="section-header">
-                    <h1>Recent Photos</h1>
+            <div class="w3-card w3-row" id="tmplPost" style="display: none">
+                <div class="w3-two-thirds">
+                    <div id="text" style="word-wrap: break-word">
+                        This is my first message
+                    </div>
+                    <div>
+                        <img id="image" src="./images/100x100.jpg" alt="post image" style="max-width:90%; display: none"/>
+                    </div>
+                    <div>
+                        <video width="128" height="96" controls style="display:none" id="video">
+                            <source src="">
+                        </video>
+                    </div>
+                    <div>
+                        <audio controls style="display:none" id="audio">
+                            <source src="">
+                        </audio>                        
+                    </div>
+                    <div id="tags"></div>
+                    <nav class="w3-topnav">
+                        <a href="#"><i class="fa fa-heart-o btnLikePost"></i></a><span id="likecount">0</span>
+                        <span id="share"><a href="#"><i class="fa fa-retweet btnSharePost"></i></a>
+                            <span id="likecount">0</span>
+                        </span>
+                        <a href="#"><i class="fa fa-comment btnCommentPost"></i></a><span id="commentcount">0</span>                
+                    </nav>
                 </div>
-                <div id="lstPhotos" class="content">                        
-                </div>
-                <div id="tmplPhoto" style="display: none">
-                    <img id="image" src="./images/100x100.jpg" alt="photo" width="100%"/>
-                    <div id="text" style="height:  1.5em; width: 100%; overflow: hidden"></div>
-                </div>
-            </div>
-            <div class="w3-third w3-container w3-card-2">
-                <div class="section-header">
-                    <h1>Recent Videos</h1>
-                </div>
-                <div id="lstVideos" class="content">                        
-                </div>
-                <div id="tmplVideo">                        
-                    <video controls style="display:none" id="video">
-                        <source src="">
-                    </video>
-                    <div id="text"></div>
-                </div>
-            </div>
-        </div>
-        <div class="w3-card w3-row" id="tmplPost" style="display: none">
-            <div class="w3-two-thirds">
-                <div id="text" style="word-wrap: break-word">
-                    This is my first message
-                </div>
-                <div>
-                    <img id="image" src="./images/100x100.jpg" alt="post image" style="max-width:90%; display: none"/>
-                </div>
-                <div>
-                    <video width="128" height="96" controls style="display:none" id="video">
-                        <source src="">
-                    </video>
-                </div>
-                <div>
-                    <audio controls style="display:none" id="audio">
-                        <source src="">
-                    </audio>                        
-                </div>
-                <div id="tags"></div>
-                <nav class="w3-topnav">
-                    <a href="#"><i class="fa fa-heart-o btnLikePost"></i></a><span id="likecount">0</span>
-                    <span id="share"><a href="#"><i class="fa fa-retweet btnSharePost"></i></a>
-                        <span id="likecount">0</span>
-                    </span>
-                    <a href="#"><i class="fa fa-comment btnCommentPost"></i></a><span id="commentcount">0</span>                
-                </nav>
             </div>
         </div>
+        
         <script type="text/javascript" src="./js/jquery.js"></script>
         <script type="text/javascript" src="./js/formcontrols.js"></script>
         <script type="text/javascript" src="./js/json2form.js"></script>   
