@@ -1,4 +1,4 @@
-var rxurl = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:\/~\+#]*[\w\-\@?^=%&amp;\/~\+#])?/g;
+$("#postcomponent").load("./views/postcomponent.html");
 
 $(document).ready(function () {
     getCurrentUser(function (user) {
@@ -57,15 +57,3 @@ $(document).ready(function () {
     });
 });
 
-function populatePostList(list, data){
-    populateList(list, data, $("#tmplPost"), function (newPost, record) {
-        var postid = newPost.find("#valPostID").val();
-        newPost.attr("id", "tmplPost" + list.attr("id") + postid);
-        var blogtext = decodeURIComponent(record["text"]);
-        newPost.find("#text").html(blogtext.replace(rxurl, function foo(x) { return '<a href="' + x + '">Link</a>' }));
-        if (newPost.find("#valLiked").val() == "1") {
-            newPost.find(".btnLikePost").addClass("fa-heart");
-            newPost.find(".btnLikePost").removeClass("fa-heart-o");
-        }
-    }, "./uploads/")
-}

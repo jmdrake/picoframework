@@ -11,7 +11,12 @@ function populatePostList(list, data, currentUser){
         if (record["liked"] == "1") {
             newPost.find(".btnLikePost").addClass("fa-heart");
             newPost.find(".btnLikePost").removeClass("fa-heart-o");
-        }        
+        }
+        alert("Fubar");
+        getComments(postid, function (comments) {
+            populateList(newPost.find("#comments"), comments, $("#tmplComment"));
+            console.log(comments);
+        });
     }, "./uploads/")
 }
 

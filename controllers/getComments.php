@@ -11,7 +11,7 @@ require "../php/config.php";
 require "../php/mark_sql_get.php";
 
 $conn = open_connection();
-$sql = mark_sql_get("SELECT Comments.id AS valCommentID, text AS lblCommentText, Users.name AS lblUserName, Users.userimage AS imgUser FROM Comments INNER JOIN Users ON Users.id = user WHERE post = [post];");
+$sql = mark_sql_get("SELECT Comments.id AS commentid, text, Users.name AS name, Users.userimage AS image FROM Comments INNER JOIN Users ON Users.id = user WHERE post = [post];");
 echo querytojson($sql, $conn);
 $conn->close();
 ?>
