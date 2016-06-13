@@ -1,0 +1,141 @@
+-- phpMyAdmin SQL Dump
+-- version 4.0.10.7
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost:3306
+-- Generation Time: Jun 13, 2016 at 02:50 PM
+-- Server version: 10.0.20-MariaDB-cll-lve
+-- PHP Version: 5.4.31
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `visionpa_godigio`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Comments`
+--
+
+CREATE TABLE IF NOT EXISTS `Comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `text` varchar(1000) NOT NULL,
+  `user` int(11) NOT NULL,
+  `post` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `FanMatrix`
+--
+
+CREATE TABLE IF NOT EXISTS `FanMatrix` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fan` int(50) NOT NULL,
+  `fanof` int(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Inbox`
+--
+
+CREATE TABLE IF NOT EXISTS `Inbox` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `to` int(11) NOT NULL,
+  `from` int(11) NOT NULL,
+  `text` varchar(1000) NOT NULL,
+  `image` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Likes`
+--
+
+CREATE TABLE IF NOT EXISTS `Likes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `post` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `like_dislike` tinyint(4) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Posts`
+--
+
+CREATE TABLE IF NOT EXISTS `Posts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `text` varchar(1000) NOT NULL,
+  `user` int(11) NOT NULL,
+  `post_shared` int(11) NOT NULL,
+  `image` varchar(40) NOT NULL,
+  `video` varchar(60) NOT NULL,
+  `audio` varchar(60) NOT NULL,
+  `tags` varchar(80) NOT NULL,
+  PRIMARY KEY (`id`),
+  FULLTEXT KEY `tags` (`tags`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Recovery`
+--
+
+CREATE TABLE IF NOT EXISTS `Recovery` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` int(11) NOT NULL,
+  `token` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user` (`user`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Users`
+--
+
+CREATE TABLE IF NOT EXISTS `Users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(80) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(40) NOT NULL,
+  `image` varchar(40) DEFAULT NULL,
+  `userimage` varchar(40) NOT NULL,
+  `bannerimage` varchar(40) NOT NULL,
+  `dob` date DEFAULT NULL,
+  `gender` tinyint(4) DEFAULT NULL,
+  `zip` varchar(15) DEFAULT NULL,
+  `marital` tinyint(4) DEFAULT NULL,
+  `location` varchar(40) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `genres` varchar(50) NOT NULL,
+  `interests` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`),
+  FULLTEXT KEY `name` (`name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
