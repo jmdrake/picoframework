@@ -8,12 +8,14 @@
 
 require "../php/config.php";
 require "../php/mark_sql_post.php";
-require "../php/insertfrompost.php";
+// require "../php/insertfrompost.php";
 require "../php/querytojson.php";
 
 $conn = open_connection();
-$sql = "INSERT INTO Posts(text, user, image, audio, video, tags)";
-$results = insertfrompost($sql, $conn);    
+$sql = mark_sql_post("INSERT INTO Posts(text, user, image, audio, video, tags) 
+VALUES ([text], [currentuser], [image], [audio], [video], [tags])");
+
+$results = $conn->query($sql);    
 
 $selquery = "SELECT text, Posts.id AS postid, Users.id AS userid, userimage, Posts.image AS image, audio, video, tags 
 FROM Posts INNER JOIN Users ON Posts.user = Users.id WHERE Posts.id = " . mysqli_insert_id($conn);

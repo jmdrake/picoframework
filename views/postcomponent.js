@@ -1,4 +1,74 @@
-$("#postcomponent").load("./views/postcomponent.html");
+$("#postcomponent").load("./views/postcomponent.html", function(){
+    $(".upload").change(function () {
+        var previewdiv = "#preview-" + this.id;
+        readURL(this, previewdiv);
+        $(previewdiv).show();
+    });
+
+    $(".fileselect").click(function () {
+        $(this).parent().find("input").click();
+        return false;
+    });
+
+    $("#btnSubmitPost").click(function () {
+        uploadAttachments($("#frmPost")).then(function (fields) {
+            inputs = inputs2json($("#frmPost"));
+            fields["text"] = encodeURIComponent(inputs["text"]);
+            fields["user"] = currentUser;
+            fields["tags"] = inputs["tags"].join(" ");
+            console.log(fields);
+            console.log(JSON.stringify(fields));
+            putPost(fields, function (newRecord) {
+                var newPost = cloneDiv($("#tmplPost"), newRecord, "./uploads/");
+                console.log(newPost);
+                newPost.find("#share").hide();
+                newPost.show();
+                newPost.attr('id', "tmplPost" + newRecord["postid"]);
+                $("#lstBlogs").prepend(newPost);
+                clearForm($("#frmPost"));
+            })
+        });
+    });
+
+    $("#btnSubmitComment").click(function () {
+        var fields = form2json($("#mdlComment"));
+        fields["user"] = currentUser;
+        putComment(fields, function (newCommentData) {
+            var newComment = cloneDiv($("#tmplComment"), newCommentData);
+            newComment.show();
+            newComment.attr("id", "#tmplComment" + newCommentData["valCommentID"]);
+            $("#tmplPost" + newCommentData["valCommentPostID"]).find("#lstComments").append(newComment);
+            newComment2 = newComment.clone();
+            newComment.attr("id", "#tmplPostlstUserPostsComment" + newCommentData["valCommentID"]);
+            $("#tmplPostlstUsersPosts" + newCommentData["valCommentPostID"]).find("#lstComments").append(newComment2);
+            clearForm($("#mdlComment"));
+            $("#mdlComment").hide();
+            increment($("#tmplPostlstAllPosts" + newCommentData["valCommentPostID"]).find("#lblCommentCount"));
+            increment($("#tmplPostlstUsersPosts" + newCommentData["valCommentPostID"]).find("#lblCommentCount"));
+        })
+    });
+
+    $("#btnSubmitShare").click(function () {
+        var fields = form2json($("#mdlShare"));
+        var postid = fields["post_shared"];
+        fields["user"] = currentUser;
+        console.log(fields);
+        putSharedPost(fields, function (res) {
+            clearForm($("#mdlShare"));
+            increment($("#post" + postid).find(".lblShareCount"));
+            $("#mdlShare").hide()
+        })
+    });
+
+    $(".btnDeletePost").click(function () {
+        currentPost = findParent(this, "#tmplPost");
+        postid = currentPost.find(".postid").val;
+        deletePost(postid, function () {
+            deleteDiv(currentPost)
+        })
+        return false;
+    });    
+});
 
 var rxurl = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:\/~\+#]*[\w\-\@?^=%&amp;\/~\+#])?/g;
 
@@ -12,7 +82,7 @@ function populatePostList(list, data, currentUser){
             newPost.find(".btnLikePost").addClass("fa-heart");
             newPost.find(".btnLikePost").removeClass("fa-heart-o");
         }
-        alert("Fubar");
+        
         getComments(postid, function (comments) {
             populateList(newPost.find("#comments"), comments, $("#tmplComment"));
             console.log(comments);
@@ -51,6 +121,32 @@ function btnDeletePost(element) {
         currentPost.hide();
     })
     return false;
+}
+
+function btnEditPost(element) {
+    var currentPost = findParent($(element), "tmplPost");
+    var postid = currentPost.find("#postid").val();
+    getPost(postid, function (editRecord) {
+        console.log(JSON.stringify(editRecord));
+        var editDiv = cloneDiv($("#tmplPostForm"), editRecord, "./uploads/");
+        editDiv.find("#btnSubmitPost").click(function () {
+            uploadAttachments($("#mdlEditForm")).then(function (fields) {
+                inputs = inputs2json($("#mdlEditForm"));
+                updatePost(inputs, function (newRecord) {
+                    if(newRecord["error"]) {
+                        console.log(newRecord["error"])
+                    } else {
+                        json2form($("#tmplPost" + newRecord["postid"]), newRecord, "./uploads/");                        
+                    }                    
+                    $("#mdlEditBox").hide();
+                })
+            });
+        });
+
+
+        $("#mdlEditForm").html(editDiv);
+        $("#mdlEditBox").show();
+    })
 }
 
 function btnLikePost() {

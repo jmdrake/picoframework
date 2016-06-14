@@ -202,7 +202,13 @@ function toggleLikeRecord(user, post, callback){
 
 function updatePost(record, callback){
     $.post("./controllers/updatePost.php", record, function (res) {
-        callback(res);
+        callback(JSON.parse(res)[0]);
+    })
+}
+
+function getPost(record, callback){
+    $.get("./controllers/getPost.php?postid=" + record, function (res) {
+        callback(JSON.parse(res)[0]);
     })
 }
 

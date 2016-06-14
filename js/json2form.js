@@ -7,6 +7,9 @@ function json2form(div, record, href) {
                 case "INPUT":
                     element.val(value);
                     break;
+                case "TEXTAREA":
+                    element.val(value);
+                    break;
                 case "DIV":
                     element.html(value);
                     break;
@@ -30,7 +33,7 @@ function json2form(div, record, href) {
                         element.find("source").attr("src", href + record[key])
                         element.attr("style", "");                        
                     }                  
-                    break;
+                    break;                
             }
     }    
 }
