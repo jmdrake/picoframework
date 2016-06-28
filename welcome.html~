@@ -10,9 +10,9 @@ To change this template use Tools | Templates.
         
     </head>
     <body>
+        <br/><br/><br/>
         <div id="navbar"></div>
         <div class="w3-container" style="background-image: url('./images/banner-icon.png'); ">
-        <br/><br/><br/>        <br/><br/><br/>        <br/><br/><br/>
             <span class="w3-xlarge" id="msgWelcome" style="display: none">Welcome To Godigio H.U.B. (Helping Users Brand)</span>
             <a href="login.html" id="btnLogin" style="display: none"><button class="w3-btn w3-round-xlarge w3-teal w3-border-blue">Login</button></a>
             <a href="register.html" id="btnRegister2" style="display: none">

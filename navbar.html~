@@ -12,7 +12,7 @@
                         <a href="#">Event Management</a>
                     </span>
                 </span>
-                <span class="w3-dropdown-hover">
+                <span class="w3-right w3-dropdown-hover">
                     <a href="#"><i class="fa fa-user"></i> Account</a>
                     <span class="w3-dropdown-content w3-card-4">
                         <a href="#" onclick="btnLoginLogout();" id="btnLoginLogout">Login</a>
