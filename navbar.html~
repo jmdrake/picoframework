@@ -1,4 +1,4 @@
-        <header class="w3-top" onscroll="scrollFunction()">
+        <header class="w3-top">
             <nav class="w3-topnav w3-white">
                 <a href="./welcome.html"><img id="logoimg" src="./images/godigio_transparent.png" alt="logo" height="120px"/></a>
                 <span class="w3-right">

@@ -3,7 +3,9 @@ $("#postcomponent").load("./views/postcomponent.html", function(){
         var previewdiv = "#preview-" + this.id;
         readURL(this, previewdiv);
         $(previewdiv).show();
-    });	
+    });
+
+	alert("Post component loaded");
 
     $(".fileselect").click(function () {
         $(this).parent().find("input").click();

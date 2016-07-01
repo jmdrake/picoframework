@@ -9,7 +9,7 @@ To change this template use Tools | Templates.
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">   
         
     </head>
-    <body onscroll="scrollFunction()">        
+    <body>        
         <div id="navbar"></div>
         <div style="background-image: url('./images/digitaltunnel.jpg')" class="w3-text-white">
         	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>

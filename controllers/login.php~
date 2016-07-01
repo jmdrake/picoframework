@@ -15,6 +15,8 @@ $conn = open_connection();
 
 $sql = mark_sql_post("SELECT id FROM Users WHERE email=[email] AND password=[password]");
 
+// $result = $conn->query($sql);
+echo "I'm still standing";
 
 $result = $conn->query($sql);
 if($result) {

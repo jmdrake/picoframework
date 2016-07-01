@@ -1,5 +1,6 @@
-$(document).ready(function () {
-    getCurrentUser(function (user) {
+$("#postcomponent").load("./views/postcomponent.html", function(){
+	alert("Go team!");
+getCurrentUser(function (user) {
         if (user != "") {
             $("#msgWelcome").html("Godigio H.U.B. News");
         } else {
@@ -53,5 +54,7 @@ $(document).ready(function () {
         var rockNews = JSON.parse(posts);
         populatePostList($("#rockNews"), rockNews);
     });
-});
+
+})
+
 
