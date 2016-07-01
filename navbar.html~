@@ -1,7 +1,12 @@
         <header class="w3-top">
+<<<<<<< HEAD
             <nav class="w3-topnav w3-white">
                 <a href="./welcome.html"><img id="logoimg" src="./images/godigio_transparent.png" alt="logo" height="120px"/></a>
                 <span class="w3-right">
+=======
+            <nav class="w3-topnav">
+                <a href="./welcome.html"><img src="./images/godigio_transparent.png" alt="logo" height="100px"/></a>
+>>>>>>> bf428ac1dee034674835ff7b463be2c9175c1df5
                 <span><a href="#" onclick="btnSearch();">Search </a><input id="search" style="color: #000000"/></span>
                 <button id="btnFanToggle" class="w3-btn w3-black" onclick="btnFanToggle();"style="display: none"></button>
                 <span class="w3-dropdown-hover">
@@ -13,7 +18,11 @@
                         <a href="#">Event Management</a>
                     </span>
                 </span>
+<<<<<<< HEAD
                 <span class="w3-dropdown-hover">
+=======
+                <span class="w3-right w3-dropdown-hover">
+>>>>>>> bf428ac1dee034674835ff7b463be2c9175c1df5
                     <a href="#"><i class="fa fa-user"></i> Account</a>
                     <span class="w3-dropdown-content w3-card-4">
                         <a href="#" onclick="btnLoginLogout();" id="btnLoginLogout">Login</a>
@@ -22,7 +31,10 @@
                         <a href="./register.html" id="btnRegister">Register</a>
                     </span>
                 </span>                
+<<<<<<< HEAD
                 </span>
+=======
+>>>>>>> bf428ac1dee034674835ff7b463be2c9175c1df5
                 <div id="lstSearch" class="w3-row-padding"></div>
             </nav>            
             <br/><br/>            
@@ -33,4 +45,8 @@
                     alt="fanof profile image" width="110" height="90"/>
             </a>
             <div id="name"></div>
+<<<<<<< HEAD
         </div>
+=======
+        </div>
+>>>>>>> bf428ac1dee034674835ff7b463be2c9175c1df5
