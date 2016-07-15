@@ -10,10 +10,9 @@ To change this template use Tools | Templates.
     </head>
     <body>
         <div id="divBanner" class="w3-container center" 
-            style="background-image: url('./images/banner-icon.png'); background-repeat: no-repeat">           
+            style="background-image: url('./images/banner-icon.png'); ">           
             <div class="w3-row w3-container" id="icon">
                 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-
             </div>
         </div>
         <div id="navbar"></div>

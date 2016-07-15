@@ -10,7 +10,7 @@ $("#btnLogin").click(function () {
     login(form2json($("#login_form")), function (results) {
         if (results.indexOf("Error") != 0) {        		  
         	   var userinfo = JSON.parse(results);
-        	   localStorage.setItem("session", userinfo["session"]);
+        	   localStorage.setItem("session", userinfo["session");            
             window.location.replace("index.html?user=" + userinfo["userid"]);
         } else {
             alert(results);

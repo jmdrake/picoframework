@@ -17,12 +17,10 @@ function insertfrompost($sql, $conn){
     $sql .= " VALUES(";
     $numfields = count($fields);
     for($i = 0; $i < $numfields; $i++) {
-        $postval = $_POST[$params[1][$i]];
-        if($postval!=="")
-            $postval = "'" . $postval . "'";
+        if($fields[$i] == "timestamp")
+            $sql .= "Now()";
         else
-            $postval = "NULL";
-        $sql .= "'" . $_POST[$fields[$i]] . "'";
+            $sql .= "'" . $_POST[$fields[$i]] . "'";
 
         if($i+1 < $numfields)
             $sql .= ", ";

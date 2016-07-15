@@ -2,7 +2,7 @@
 $upLoadOk = 1;
 $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["file"]["name"]);
-$filename = $_REQUEST["name"];
+$filename = "user" . $_COOKIE["currentuser"] . $_REQUEST["name"];
 
 if ($_FILES["file"]["size"] > 5000000) {
     echo "Error: Sorry, your file is too large.";

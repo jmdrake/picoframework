@@ -22,6 +22,5 @@ if($result) {
 } else {
     echo("Unable to fetch login record");
 }
-
 $conn->close();
 ?>

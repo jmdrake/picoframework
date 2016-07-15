@@ -8,8 +8,7 @@
  * Outputs: Returns status of deletion or error information
  */
 
-function mark_sql_post($sql) { 	
-	 global $currentuser;     
+function mark_sql_post($sql, $currentuser) { 	     
     preg_match_all("/\[(\w+)]/", $sql, $params);
     $patterns = array();
     $replacements = array();    

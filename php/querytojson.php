@@ -2,27 +2,25 @@
 function querytojson($sql, $conn) {
     $result = $conn->query($sql);
     if($result) {
-        $i = 0;
-        while ($finfo = $result->fetch_field()) {
-            $fields[$i] = $finfo->name;
-            $i++;
-        }
+    $i = 0;
+    while ($finfo = $result->fetch_field()) {
+        $fields[$i] = $finfo->name;
+        $i++;
+    }
 
-        $outp = "[";
-        $numfields = count($fields);
-        while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
-            if ($outp != "[") {$outp .= ",";}
-            $outp .= '{';
-            for($i = 0; $i < $numfields; $i++) {
-                $outp .= '"' . $fields[$i] . '":"' . $rs[$fields[$i]];
-                if($i+1 < $numfields) $outp .= '",';
-            }
-            $outp .= '"}';
+    $outp = "[";
+    $numfields = count($fields);
+    while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+        if ($outp != "[") {$outp .= ",";}
+        $outp .= '{';
+        for($i = 0; $i < $numfields; $i++) {
+            $outp .= '"' . $fields[$i] . '":"' . $rs[$fields[$i]];
+            if($i+1 < $numfields) $outp .= '",';
         }
-        $outp .="]";
-        return $outp;
-    } else {
-        return "Error in SQL : " . $sql;
+        $outp .= '"}';
+    }
+    $outp .="]";
+    return $outp;        
     }
 }
 ?>

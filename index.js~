@@ -13,7 +13,6 @@ $(document).ready(function () {
     var pageUser = window.location.search.split("=")[1];
     if (pageUser == "" || pageUser == undefined)
         window.location.replace("welcome.html");
-    pageUser = pageUser.trim();
     getCurrentUser(function (currentUser) {
         currentUser = currentUser.trim();
 
