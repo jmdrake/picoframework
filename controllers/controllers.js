@@ -64,15 +64,13 @@ function isFan(fan, fanof, callback){
 
 function login(data, callback){
     $.post("./controllers/login.php", data, function (results) {        
-        var r = results.split("\n");
-        if(r.length > 0)
-      	    callback(r[r.length - 1])
-      	else
-     	    callback("");
+    	callback(results.trim());
     })
 }
 
 function logout(callback) {
+	 localStorage.setItem("session", "");
+	 session = "";
     $.get("./controllers/logout.php", function (results) {
         callback(results);
     })
@@ -81,10 +79,9 @@ function logout(callback) {
 function getCurrentUser(callback){
 	 var session = localStorage.getItem("session");	 
     $.get("./controllers/getCurrentUser.php?session=" + session, function(data){
-        callback(data);
+        callback(data.trim());
     })
 }
-
 
 function getFans(user, callback){
     $.get("./controllers/getFans.php?user="+user, function(data){

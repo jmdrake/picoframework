@@ -11,7 +11,7 @@ require "../php/config.php";
 require "../php/mark_sql_post.php";
 
 $conn = open_connection();
-$sql = mark_sql_post("SELECT id, email, password FROM Users WHERE (username=[username] OR email=[email]) AND password=[password]");
+$sql = mark_sql_post("SELECT id, email, password FROM Users WHERE (username=[username] OR email=[username]) AND password=[password]");
 $result = $conn->query($sql);
 if($result) {
     $rs = $result->fetch_array(MYSQLI_ASSOC);

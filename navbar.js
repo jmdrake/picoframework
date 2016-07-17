@@ -8,6 +8,11 @@ $(document).ready(function () {
             $("#btnViewProfile").attr("href", "index.html?user=" + user);
             $("#btnEditProfile").show();
             $("#btnRegister").hide();
+        } else {
+				$("#btnLoginLogout").html("Login");
+            $("#btnViewProfile").hide();
+            $("#btnEditProfile").hide();
+            $("#btnRegister").show();        		
         }
     })
 });

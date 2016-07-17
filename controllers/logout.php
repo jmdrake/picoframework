@@ -1,12 +1,17 @@
 <?php
 /*
- * File : getprofiledata.php
+ * File : logout.php
  * Input type: GET
- * Inputs: user
- * Outputs: Returns name and image fields from user profile
+ * Inputs: None
+ * Outputs: Returns "logged out" message
  */
 
-setcookie("currentuser", "", time() - 3600);
-echo "logged out";
+require "../php/config.php";
+require "../php/mark_sql_post.php";
+
+$conn = open_connection();
+$sql = mark_sql_post("UPDATE Users SET session=NULL WHERE user=[currentuser]");
+$conn->query($sql);
+$conn->close();
 ?>
 
