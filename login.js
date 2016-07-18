@@ -32,7 +32,7 @@ function btnSendResetRequest(){
         if (result.search("0:") >= 0) {            
             $("#mdlReset").find("#message").html("A password reset link sent to your email");
         } else if (result.search("1:") >= 0) {
-            $("#mdlReset").find("#message").html("Uable to sent reset email");
+            $("#mdlReset").find("#message").html("Unable to sent reset email");
         } else if (result.search("2:") >= 0) {
             $("#mdlReset").find("#message").html("Unknown SQL error");
         } else if (result.search("3:") >= 0) {

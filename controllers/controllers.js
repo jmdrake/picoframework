@@ -232,13 +232,13 @@ function getPost(record, callback){
 
 function sendResetRequest(data, callback){
     console.log(data);  
-    $.post("../controllers/passwordreset/sendResetRequest.php", data, function (results) {
+    $.post("./controllers/passwordreset/sendResetRequest.php", data, function (results) {
         callback(results);
     })
 }
 
 function verifyResetToken(token, callback) {
-    $.get("../controllers/passwordreset/verifyResetToken.php?token=" + token, function (data) {
+    $.get("./controllers/passwordreset/verifyResetToken.php?token=" + token, function (data) {
         results = JSON.parse(data);
         if (results.length > 0)
             callback("Ok");
@@ -248,7 +248,7 @@ function verifyResetToken(token, callback) {
 }
 
 function resetPassword(data, callback) {
-    $.post("../controllers/passwordreset/resetPassword.php", data, function(results){        
+    $.post("./controllers/passwordreset/resetPassword.php", data, function(results){        
         callback(results)
     })
 }

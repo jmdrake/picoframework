@@ -79,7 +79,7 @@ function logout(callback) {
 function getCurrentUser(callback){
 	 var session = localStorage.getItem("session");	 
     $.get("./controllers/getCurrentUser.php?session=" + session, function(data){
-        callback(data);
+        callback(data.trim());
     })
 }
 
