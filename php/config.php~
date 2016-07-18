@@ -25,7 +25,6 @@ function set_currentuser(){
 	$session = $_GET["session"];
 	if($session=="") $session = $_POST["session"];
 	$currentuser = currentUserFromSession($conn, $session);
-	echo "Fubar";
 	$conn->close();
 }
 

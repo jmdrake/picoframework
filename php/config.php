@@ -21,11 +21,15 @@ function open_connection(){
 
 function set_currentuser(){
 	global $currentuser;
-	$conn = open_connection();
 	$session = $_GET["session"];
 	if($session=="") $session = $_POST["session"];
-	$currentuser = currentUserFromSession($conn, $session);
-	$conn->close();
+	if($session=="") { 
+		$currentuser = "";
+	} else {
+		$conn = open_connection();
+		$currentuser = currentUserFromSession($conn, $session);
+		$conn->close();	
+	}		
 }
 
 function currentUserFromSession($conn, $session){	
