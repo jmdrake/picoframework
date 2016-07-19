@@ -11,5 +11,7 @@ $smtppassword = 'CdMd0215!';                           // SMTP password
 $smtpport = 25;
 $replyemail = "";
 $replyname = "";
+
+$baseurl = "http://www.godigio.com/H.U.B./";
 ?>
 

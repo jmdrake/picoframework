@@ -1,15 +1,15 @@
 <?php
-$servername = "ratchetlovecom.bizlandmysql.com";
-$username = "ratchetdb";
-$password = 'Ou812abc123!';
-$database = "ratchetlove";
+$servername = "jboycemusic.bizlandmysql.com";
+$username = "godigiouser";
+$password = "acespade";
+$database = "godigio";
 
-$smtphost = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+$smtphost = '';  // Specify main and backup SMTP servers
 $smtpauth = true;                               // Enable SMTP authentication
-$smtpusername = 'johnmdrake@gmail.com';
+$smtpusername = '';
 $smtppassword = 'CdMd0215!';                           // SMTP password
 $smtpport = 25;
-$replyemail = "noreply@ratchetlove.com";
-$replyname = "No reply";
+$replyemail = "";
+$replyname = "";
 ?>
 
