@@ -31,7 +31,7 @@ if($rs = $result->fetch_array(MYSQLI_ASSOC)) {
     if ($conn->query($insertsql) === TRUE) {
         $name = $rs["first_name"] . " " . $rs["last_name"] . "(" . $rs["username"] . ")";
         $subject = "Password Recovery from Godigio.com";
-        $message = "Please follow this link to recover your password.  " . $baseurl . "views/resetpassword.html?guid=" . $guid;
+        $message = "Please follow this link to recover your password.  " . $baseurl . "resetpassword.html?guid=" . $guid;
         if(mail($rs["email"], $subject, $message)) {
 	        echo "0: Okay";
         } else {
