@@ -124,6 +124,53 @@
                 </div>
             </div>
         </section>
+
+<div id="mdlEditBox" class="w3-modal">
+    <span onclick="document.getElementById('mdlEditBox').style.display='none'" class="w3-closebtn">&times;</span>
+    <div id="EditForm" class="w3-row-padding w3-light-grey">
+        <h4>New Post</h4>
+        <textarea class="w3-input" id="text" name="text"></textarea>
+        <input type="hidden" id="postid" name="postid"/>
+        <nav class="w3-topnav">
+            <a href="#">
+                <i class="fa fa-file-image-o fileselect">Image
+                </i>
+                <input type="file" id="image" name="image" accept ="image/*" class="upload" style="display: none"/> 
+            </a>
+            <a href="#">
+                <i class="fa fa-file-video-o fileselect">Video
+                </i>
+                <input type="file" id="video" name="video" accept ="video/*" style="display: none" class="video upload"/>                                     </a>
+            <a href="#">
+                <i class="fa fa-file-audio-o fileselect">Audio
+                </i>
+                <input type="file" id="audio" name="audio" accept ="audio/*" style="display: none" class="audio upload"/>     
+            </a>
+        </nav>                       
+        <div>
+            <img src="./images/100x100.jpg" alt="Prevew Image" id="preview-image" 
+                style="display:none" width="100px" height="100px"/>
+        </div>
+        <div>
+            <video width="128" height="96" controls style="display:none" id="preview-video">
+                <source src="">
+            </video>
+        </div>
+        <div>
+            <audio controls style="display:none" id="preview-audio">
+                <source src="">
+            </audio>
+        </div>
+        <div id="lstTags">                                                                
+        </div>
+        <div id="tmplTag" style="display: none">
+            <input type="checkbox" name="tags"class="w3-check" id="tmplTag">&nbsp;
+            <label>Tag</label>&nbsp;
+        </div>    
+        <button class="btn btn-primary pull-right w3-grey" id="btnSubmitPost">Post</button>
+    </div>
+</div>       
+
         <script type="text/javascript" src="./js/jquery.js"></script>
         <script type="text/javascript" src="./js/formcontrols.js"></script>
         <script type="text/javascript" src="./controllers/controllers.js"></script>

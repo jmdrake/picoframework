@@ -106,16 +106,16 @@
             <a href="#">
                 <i class="fa fa-file-image-o fileselect">Image
                 </i>
-                <input type="file" id="imageupload" name="imageupload" accept ="image/*" class="upload" style="display: none"/> 
+                <input type="file" id="image" name="image" accept ="image/*" class="upload" style="display: none"/> 
             </a>
             <a href="#">
                 <i class="fa fa-file-video-o fileselect">Video
                 </i>
-                <input type="file" id="videoupload" name="videoupload" accept ="video/*" style="display: none" class="video upload"/>                                     </a>
+                <input type="file" id="video" name="video" accept ="video/*" style="display: none" class="video upload"/>                                     </a>
             <a href="#">
                 <i class="fa fa-file-audio-o fileselect">Audio
                 </i>
-                <input type="file" id="audioupload" name="audioupload" accept ="audio/*" style="display: none" class="audio upload"/>     
+                <input type="file" id="audio" name="audio" accept ="audio/*" style="display: none" class="audio upload"/>     
             </a>
         </nav>                       
         <div>

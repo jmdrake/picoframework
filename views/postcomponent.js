@@ -128,23 +128,8 @@ function btnEditPost(element) {
     var postid = currentPost.find("#postid").val();
     getPost(postid, function (editRecord) {
         console.log(JSON.stringify(editRecord));
-        var editDiv = cloneDiv($("#tmplPostForm"), editRecord, "./uploads/");
-        editDiv.find("#btnSubmitPost").click(function () {
-            uploadAttachments($("#mdlEditForm")).then(function (fields) {
-                inputs = inputs2json($("#mdlEditForm"));
-                updatePost(inputs, function (newRecord) {
-                    if(newRecord["error"]) {
-                        console.log(newRecord["error"])
-                    } else {
-                        json2form($("#tmplPost" + newRecord["postid"]), newRecord, "./uploads/");                        
-                    }                    
-                    $("#mdlEditBox").hide();
-                })
-            });
-        });
+        json2form($("#mdlEditBox"), editRecord, "./uploads/");
 
-
-        $("#mdlEditForm").html(editDiv);
         $("#mdlEditBox").show();
     })
 }

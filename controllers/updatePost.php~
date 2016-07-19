@@ -11,7 +11,7 @@ require "../php/mark_sql_post.php";
 require "../php/querytojson.php";
 $conn = open_connection();
 
-$updatesql = mark_sql_post("UPDATE Posts SET text=[text], image=[imageupload], audio=[audioupload], video=[videoupload] WHERE id=[postid]");
+$updatesql = mark_sql_post("UPDATE Posts SET text=[text], image=[image], audio=[audio], video=[video] WHERE id=[postid]");
 
 $selsql = mark_sql_post("SELECT text, Posts.id AS postid, Users.id AS userid, userimage, Posts.image AS image, audio, video, tags 
 FROM Posts INNER JOIN Users ON Posts.user = Users.id WHERE Posts.id = [postid]");
