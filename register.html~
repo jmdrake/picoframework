@@ -8,16 +8,7 @@ To change this template use Tools | Templates.
         <link rel="stylesheet" href="./css/w3.css"/>
     </head>
     <body>
-        <br/><br/>
-        <header class="w3-top">
-            <nav class="w3-topnav w3-black">
-                <a href="./index.html">Home</a>
-                <a href="#">Post</a>
-                <a href="#" id="fantoggle">Fan</a>
-                <span>Search <input style="color: #000000"/></span>
-            </nav>            
-        </header>
-        <img src="./images/newgodigiologo.png" width="100px"/>
+		  <div id="navbar"></div>
         <div class="w3-form w3-third" id="register_form">
             <div class="w3-group">      
                 <input class="w3-input" name="email" id="email" style="width:100%;" type="text" required="true">
