@@ -46,13 +46,12 @@ $(document).ready(function () {
     });
 });
 
-function uploadImages(profileData){
-    var id = $("#id").val();
+function uploadImages(profileData){    
     return new Promise(function (resolve, reject) {
         var filecount = 2;
         var semaphore = filecount;
         $("progress").attr("max", semaphore);
-        var filename = "userimage" + id;
+        var filename = "userimage";
         uploadImageFile($("#userimageupload"), filename, function (res) {
             if (res.indexOf("Error:") >= 0)
                 if (res.indexOf("No file selected") >= 0)
@@ -66,7 +65,7 @@ function uploadImages(profileData){
             if (semaphore == 0)
                 resolve(profileData);
         });
-        var filename = "bannerimage" + id;
+        filename = "bannerimage";
         uploadImageFile($("#bannerimageupload"), filename, function (res) {
             if (res.indexOf("Error:") >= 0)
                 if (res.indexOf("No file selected") >= 0)

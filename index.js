@@ -33,7 +33,7 @@ $(document).ready(function () {
             $("#btnLoginLogout").html("Log In");
         }
 
-        getUsersPosts(pageUser, currentUser, function (postData) {
+        getUsersPosts(pageUser, function (postData) {
             var postList = JSON.parse(postData);
             $("#postcount").html(postList.length)
             populatePostList($("#lstBlogs"), postList, currentUser, "./uploads/");
@@ -55,8 +55,10 @@ $(document).ready(function () {
             var newDiv = $("#tmplTag").clone();
             newDiv.find("input").val(tags[i]);
             newDiv.find("label").html(tags[i]);
-            $("#lstTags").append(newDiv);
+            // $("#lstTags").append(newDiv);
             newDiv.show();
+				newDiv.find("input").attr("id", "tag_" + tags[i]);
+            $(".tags").append(newDiv);            
         }
         console.log(profileData);
     });
@@ -66,6 +68,8 @@ $(document).ready(function () {
         $("#fancount").html(fanList.length);
         populateList($("#lstFans"), fanList, $("#tmplFan"), function (div, record) {
             div.find("a").attr("href", "?user=" + record["userid"]);
+            div.show();
+            $("#lstFans").append(div);
         }, "./uploads/");
     });
 
@@ -74,6 +78,8 @@ $(document).ready(function () {
         $("#favcount").html(favList.length);
         populateList($("#lstFavs"), favList, $("#tmplFan"), function (div, record) {
             div.find("a").attr("href", "?user=" + record["userid"]);
+            div.show();
+            $("#lstFavs").append(div);
         }, "./uploads/");
     });
 
@@ -118,83 +124,10 @@ function getSource(input) {
     }       
 }
 
-function uploadAttachments(form){
-    return new Promise(function (resolve, reject) {
-        attachments = form.find(".upload");
-        var fields = {};
-        var filecount = attachments.length;
-        var semaphore = filecount;
-        $("progress").attr("max", semaphore);
-        for (i = 0; i < filecount; i++) {
-            var input = attachments[i];
-            fields[input.id] = getSource(input);
-            uploadAttachment(input, function (res) {
-                if (res.indexOf("Error:") != 0)
-                    fields[res.split(":")[0]] = res.split(":")[1];                    
-                semaphore--;
-                $("progress").attr("value", filecount - semaphore);
-                if (semaphore == 0)
-                    resolve(fields);
-            })
-        }
-    })
-}
-
 function updateCommentList(prefix, postid, newComment) {
     var post = $(prefix + postid);
     post.find("#lstComments").prepend(newComment);
     increment(post.find("#lblCommentCount"));
-}
-
-function setPostControls(newPost){
-    newPost.find(".btnLikePost").click(function () {
-        var post = findParent($(this), "tmplPost");
-        var postid = post.find("#postid").val();
-        toggleLikeRecord(currentUser, postid, function (likecount) {
-            post.find("#likecount").html(likecount);
-        });
-        $(this).toggleClass("fa-heart-o");
-        $(this).toggleClass("fa-heart");
-        return false;
-    });
-    if(!(currentUser == newPost.find("#valUserID").val())){
-        newPost.find(".btnSharePost").click(function () {
-            var post = findParent($(this), "tmplPost");
-            var postid = post.find("#postid").val();
-            $("#valSharePostID").val(postid);
-            $("#lblShareText").html(post.find("#lblText").html());
-            $("#imgShareImage").attr("src", post.find("#imgPostImage").attr("src"));           
-            if (!($("#imgShareImage").attr("src") == "./images/100x100.jpg"))
-                $("#imgShareImage").show();
-            $("#mdlShare").show();
-            return false;
-        });
-    } else {
-        var btnShare = newPost.find(".btnSharePost");
-        btnShare.parent().attr("href", "");
-        btnShare.click(function(){return false});        
-    }
-    newPost.find(".btnCommentPost").click(function () {
-        var post = findParent($(this), "tmplPost");
-        var postid = post.find("#postid").val();
-        $("#valCommentPostID").val(postid);
-        $("#mdlComment").show();
-        return false;
-    });    
-    newPost.find(".btnDeletePost").click(function () {
-        currentPost = findParent($(this), "#tmplPost");
-        postid = currentPost.find(".postid").val;
-        deletePost(postid, function () {
-            deleteDiv(currentPost)
-        })
-        return false;
-    })
-}
-
-function setLike(post){
-    var likeIcon = post.find(".btnLike");
-    likeIcon.removeClass("fa-heart-o");
-    likeIcon.addClass("fa-heart");
 }
 
 function findParent(node, id){
@@ -207,22 +140,4 @@ function findParent(node, id){
     }        
     return node
 }
-
-function likepost(){
-    alert("Like this post");
-    console.log($(this));
-}
-
-function sharepost(){
-    alert("Share this post");
-}
-
-function replypost(){
-    alert("Reply to this post");
-}
-
-function deletepost(){
-    alert("Delete this post");
-}
-
 

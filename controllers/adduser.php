@@ -3,7 +3,7 @@
 require "../php/config.php";
 // require "../php/insertfrompost.php";
 require "../php/mark_sql_post.php";
-echo "Hello world";
+
 $conn = open_connection();
 $sql = mark_sql_post("INSERT INTO Users(name, username, email, password) VALUES ([name], [username], [email], [password])");
 

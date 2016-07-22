@@ -1,4 +1,4 @@
-function readURL(input, previewimg) {
+  function readURL(input, previewimg) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
@@ -11,9 +11,11 @@ function readURL(input, previewimg) {
 function uploadAnonymousFile(input, fileext, callback){
     var file_data = $(input).prop('files')[0];
     var form_data = new FormData();                  
+	 var session = localStorage.getItem("session");
     form_data.append('file', file_data);
     form_data.append('ext', fileext);
     form_data.append('type', input.id);
+    form_data.append('session', session);
     $.ajax({
         url: './php/uploadAnonymousFile.php', // point to server-side PHP script 
         dataType: 'text',  // what to expect back from the PHP script, if anything
@@ -29,10 +31,11 @@ function uploadAnonymousFile(input, fileext, callback){
 }
 
 function uploadFile(input, filename, callback) {
+	 var session = localStorage.getItem("session");
     var file_data = $(input).prop('files')[0];
     var form_data = new FormData();                  
     form_data.append('file', file_data);
-    form_data.append('name', filename);
+    form_data.append('name', filename + "|" + session);
     $.ajax({
         url: './php/upload.php', // point to server-side PHP script 
         dataType: 'text',  // what to expect back from the PHP script, if anything
@@ -52,8 +55,9 @@ function uploadImageFile(input, filename, callback){
         var fileext = input.prop('files')[0]["type"].split("/")[1];
         if("PNGJPGJPEGGIF".indexOf(fileext.toUpperCase()) >= 0) {
             uploadFile(input, filename + "." + fileext, function (res) {
-                if (res.indexOf("Successful:")==0) {
-                    callback(filename + "." + fileext)
+                if (res.indexOf("Successful:")>=0) {
+                	  callback(res.split("/")[1])
+                    // callback(filename + "." + fileext)
                 } else {
                     callback(res);
                 }

@@ -137,10 +137,11 @@ function getFavs(user, callback){
     })
 }
 
-function getUsersPosts(pageuser, currentuser, callback) {
-    $.get("./controllers/getUsersPosts.php?pageuser="+pageuser+"&currentuser=" + currentuser, function(data){
-        callback(data);
-    })    
+function getUsersPosts(pageuser, callback) {
+	var session = localStorage.getItem("session");	 	
+	$.get("./controllers/getUsersPosts.php?pageuser="+pageuser+"&session=" + session, function(data){
+		callback(data);
+	})    
 }
 
 function getAllPosts(pageuser, callback) {
@@ -209,9 +210,9 @@ function likesPost(user, post, callback){
     })    
 }
 
-function toggleLikeRecord(user, post, callback){
+function toggleLikeRecord(post, callback){
 	 var session = localStorage.getItem("session");	 	
-    $.post("./controllers/toggleLikeRecord.php", {"userid": user, "postid": post, "session" : session }, function (likecount) {              
+    $.post("./controllers/toggleLikeRecord.php", {"postid": post, "session" : session }, function (likecount) {              
         callback(likecount);
     })
 }

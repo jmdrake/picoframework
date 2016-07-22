@@ -11,10 +11,16 @@ $("#btnRegister").click(function(){
         console.log(results);
         if(results.indexOf("Duplicate")>=0) {
             alert("User record for " + $("#email").val() + " already exists");
-        } else {
-            login(form2json($("#register_form")), function(userid){
-                window.location.replace("index.html?user=" + userid);
-            })
+        } else {            
+				login(form2json($("#register_form")), function (results) {
+					if (results.indexOf("Error") != 0) {        		  
+						var userinfo = JSON.parse(results);
+						localStorage.setItem("session", userinfo["session"]);
+						window.location.replace("index.html?user=" + userinfo["userid"]);
+					} else {
+						alert(results);
+					}
+				});            
         }        
     });
 });

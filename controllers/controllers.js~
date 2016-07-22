@@ -137,10 +137,11 @@ function getFavs(user, callback){
     })
 }
 
-function getUsersPosts(pageuser, currentuser, callback) {
-    $.get("./controllers/getUsersPosts.php?pageuser="+pageuser+"&currentuser=" + currentuser, function(data){
-        callback(data);
-    })    
+function getUsersPosts(pageuser, callback) {
+	var session = localStorage.getItem("session");	 	
+	$.get("./controllers/getUsersPosts.php?pageuser="+pageuser, function(data){
+		callback(data);
+	})    
 }
 
 function getAllPosts(pageuser, callback) {
@@ -209,9 +210,9 @@ function likesPost(user, post, callback){
     })    
 }
 
-function toggleLikeRecord(user, post, callback){
+function toggleLikeRecord(post, callback){
 	 var session = localStorage.getItem("session");	 	
-    $.post("./controllers/toggleLikeRecord.php", {"userid": user, "postid": post, "session" : session }, function (likecount) {              
+    $.post("./controllers/toggleLikeRecord.php", {"postid": post, "session" : session }, function (likecount) {              
         callback(likecount);
     })
 }
@@ -232,13 +233,13 @@ function getPost(record, callback){
 
 function sendResetRequest(data, callback){
     console.log(data);  
-    $.post("../controllers/passwordreset/sendResetRequest.php", data, function (results) {
+    $.post("./controllers/passwordreset/sendResetRequest.php", data, function (results) {
         callback(results);
     })
 }
 
 function verifyResetToken(token, callback) {
-    $.get("../controllers/passwordreset/verifyResetToken.php?token=" + token, function (data) {
+    $.get("./controllers/passwordreset/verifyResetToken.php?token=" + token, function (data) {
         results = JSON.parse(data);
         if (results.length > 0)
             callback("Ok");
@@ -248,7 +249,7 @@ function verifyResetToken(token, callback) {
 }
 
 function resetPassword(data, callback) {
-    $.post("../controllers/passwordreset/resetPassword.php", data, function(results){        
+    $.post("./controllers/passwordreset/resetPassword.php", data, function(results){        
         callback(results)
     })
 }

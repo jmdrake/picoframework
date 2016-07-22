@@ -20,20 +20,19 @@ function open_connection(){
 
 
 function set_currentuser(){
-	global $currentuser;
-	$session = $_GET["session"];
-	if($session=="") $session = $_POST["session"];
+	global $currentuser;	
+	$session = $_REQUEST["session"];
 	if($session=="") { 
 		$currentuser = "";
 	} else {
 		$conn = open_connection();
-		$currentuser = currentUserFromSession($conn, $session);
+		$currentuser = currentUserFromSession($conn, $session);		
 		$conn->close();	
 	}		
 }
 
 function currentUserFromSession($conn, $session){	
-	$sql = "SELECT id FROM Users WHERE session='" . $session . "'";
+	$sql = "SELECT id FROM Users WHERE session='" . $session . "'";	
 	$result = $conn->query($sql);	
 	if($result) {
 		$rs = $result->fetch_array(MYSQLI_ASSOC);

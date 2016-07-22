@@ -4,9 +4,9 @@ function clearForm(form) {
     for (var i = 0; i < numfields; i++)
         fields[i].value = "";
     form.find(".upload").files = [];
-    var img = form.find("#preview-img");
-    img.attr('src', '');
-    img.hide();
+    form.find(".upload").val("");    
+    form.find(".preview").hide();
+    form.find(".preview").attr("src", "");        
 }
 
 function populateDiv(div, record, href) {
@@ -41,11 +41,14 @@ function increment(e){
 }
 
 function populateList(div, data, template, callback, href){    
-    var newDiv;
-    for(var i = 0; i < data.length; i++){        
-        newDiv = cloneDiv(template, data[i], href);        
-        div.append(newDiv);
-        newDiv.show();
-        if(callback != undefined){
-            callback(newDiv, data[i])}}
+	var newDiv;
+	for(var i = 0; i < data.length; i++){        
+		newDiv = cloneDiv(template, data[i], href);        
+		if(callback != undefined){
+			callback(newDiv, data[i])
+		} else {
+			div.append(newDiv);        
+			newDiv.show();
+		}
+	}
 }

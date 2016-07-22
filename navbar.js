@@ -39,14 +39,15 @@ function btnSearch() {
 }
 
 function btnFanToggle() {
+	 var pageUser = window.location.search.split("=")[1].trim();
     if ($("#btnFanToggle").html() == "Fan")
-        addFan({ "fanof": pageUser }, function (data) {
-            console.log(data);
+        addFan({ "fanof": pageUser}, function (result) {
+            console.log(result);
             $("#btnFanToggle").html("Unfan");
         })
     else
-        deleteFan({ "fanof": pageUser }, function (data) {
-            console.log(data);
+        deleteFan({ "fanof": pageUser }, function (result) {
+            console.log(result);
             $("#btnFanToggle").html("Fan");
         })    
 }

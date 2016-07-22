@@ -8,6 +8,11 @@ $(document).ready(function () {
             $("#btnViewProfile").attr("href", "index.html?user=" + user);
             $("#btnEditProfile").show();
             $("#btnRegister").hide();
+        } else {
+				$("#btnLoginLogout").html("Login");
+            $("#btnViewProfile").hide();
+            $("#btnEditProfile").hide();
+            $("#btnRegister").show();        		
         }
     })
 });
@@ -34,8 +39,9 @@ function btnSearch() {
 }
 
 function btnFanToggle() {
+	 var pageUser = window.location.search.split("=")[1].trim();
     if ($("#btnFanToggle").html() == "Fan")
-        addFan({ "fanof": pageUser }, function (data) {
+        addFan({ "fanof": pageUser}, function (data) {
             console.log(data);
             $("#btnFanToggle").html("Unfan");
         })

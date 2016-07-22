@@ -10,7 +10,13 @@ require "../php/config.php";
 require "../php/deletefrompost.php";
 
 $conn = open_connection();
-$sql = "DELETE FROM FanMatrix WHERE fan = [fan] AND fanof = [fanof]";
-echo deletefrompost($sql, $conn);
+$sql = mark_sql_post("DELETE FROM FanMatrix WHERE fan = [currentuser] AND fanof = [fanof]");
+
+if ($conn->query($sql) === TRUE) {
+    echo "Ok";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
 $conn->close();
 ?>

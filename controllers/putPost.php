@@ -12,13 +12,14 @@ require "../php/mark_sql_post.php";
 require "../php/querytojson.php";
 
 $conn = open_connection();
-$sql = mark_sql_post("INSERT INTO Posts(text, user, image, audio, video, tags) 
-VALUES ([text], [currentuser], [image], [audio], [video], [tags])");
+$timestamp = time();
+$sql = mark_sql_post("INSERT INTO Posts(text, user, image, audio, video, tags, timestamp) 
+VALUES ([text], [currentuser], [image], [audio], [video], [tags], '" . $timestamp . "');");
 
 $results = $conn->query($sql);    
 
-$selquery = "SELECT text, Posts.id AS postid, Users.id AS userid, userimage, Posts.image AS image, audio, video, tags 
-FROM Posts INNER JOIN Users ON Posts.user = Users.id WHERE Posts.id = " . mysqli_insert_id($conn);
+$selquery = mark_sql_post("SELECT text, Posts.id AS postid, Users.id AS userid, userimage, Posts.image AS image, audio, video, tags 
+FROM Posts INNER JOIN Users ON Posts.user = Users.id WHERE Posts.user = [currentuser] AND Posts.timestamp = " . $timestamp);
 
 echo querytojson($selquery, $conn);
 $conn->close();

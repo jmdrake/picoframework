@@ -8,22 +8,26 @@ To change this template use Tools | Templates.
         <link rel="stylesheet" href="./css/w3.css"/>
     </head>
     <body>
+        <div style="background-image: url('./images/digitaltunnel.jpg')" class="w3-text-white">
+        	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        	            <span class="w3-xlarge w3-blue w3-text-white" id="msgWelcome" style="display: none; opacity: 0.7">Welcome To Godigio H.U.B. (Helping Users Brand)</span>
+        </div>    
 		  <div id="navbar"></div>
         <div class="w3-form w3-third" id="register_form">
             <div class="w3-group">      
-                <input class="w3-input" name="email" id="email" style="width:100%;" type="text" required="true">
-                <label class="w3-label">Email</label>
-            </div>
-            <div class="w3-group">      
-                <input class="w3-input" name="name" id="name" style="width:100%;" type="text" required="true">
+                <input class="w3-input w3-border" name="name" id="name" style="width:100%;" type="text" required="true">
                 <label class="w3-label">Name</label>
             </div>
             <div class="w3-group">      
-                <input class="w3-input" name="password" id="password" style="width:100%;" type="password" required="true">
+                <input class="w3-input w3-border" name="username" id="username" style="width:100%;" type="text" required="true">
+                <label class="w3-label">Username</label>
+            </div>
+            <div class="w3-group">      
+                <input class="w3-input w3-border" name="password" id="password" style="width:100%;" type="password" required="true">
                 <label class="w3-label">Password</label>
             </div>            
             <div class="w3-group">      
-                <input class="w3-input" name="password_confirm" id="password_confirm" style="width:100%;" type="password" required="true">
+                <input class="w3-input w3-border" name="password_confirm" id="password_confirm" style="width:100%;" type="password" required="true">
                 <label class="w3-label">Password Confirm</label>
             </div>                        
             <button type="button" id="btnRegister" class="w3-btn w3-right w3-theme">Register</button>
@@ -33,5 +37,6 @@ To change this template use Tools | Templates.
         <script src="./js/clearForm.js"></script>
         <script src="./controllers/controllers.js"></script>        
         <script src="register.js"></script>
+        <script src="navbar.js"></script>
     </body>
 </html>
