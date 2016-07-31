@@ -12,6 +12,7 @@ require "../php/mark_sql_get.php";
 
 $conn = open_connection();
 
+/*
 $sql = mark_sql_get(
 "SELECT 
     Posts.id AS postid, 
@@ -31,7 +32,31 @@ $sql = mark_sql_get(
 FROM Posts INNER JOIN USERS ON Posts.user = Users.id 
 WHERE Posts.user = [pageuser] 
 OR Posts.user IN (SELECT fanof FROM FanMatrix WHERE fan = [pageuser]) 
-ORDER BY valPostID DESC");
+ORDER BY valPostID DESC");*/
+
+$sql = mark_sql_get("
+SELECT 
+    p.id AS postid, 
+    Users.id AS userid, 
+    userimage, 
+    Users.name AS username, 
+    p.text, 
+    p.tags,
+    p.post_shared, 
+    p.image AS image, 
+    p.video,
+    p.audio,
+    (SELECT COUNT(*) FROM Likes WHERE post = p.id) AS likecount, 
+    (SELECT COUNT(*) FROM Comments WHERE post = p.id) AS commentcount, 
+    p.id IN (SELECT post FROM Likes WHERE Likes.user = [currentuser]) AS liked,
+	s.text AS shared_text,
+	(SELECT COUNT(*) FROM Posts
+         WHERE post_shared = p.id) AS share_count
+FROM Posts AS p 
+LEFT JOIN Posts AS s
+ON p.post_shared = s.id 
+INNER JOIN Users ON p.user = Users.id
+WHERE p.user = [pageuser];");
 
 // echo $sql;
 echo querytojson($sql, $conn);

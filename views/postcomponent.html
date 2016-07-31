@@ -70,6 +70,23 @@
             <button id="btnDeletePost" onclick="btnDeletePost(this);"><i class="fa fa-trash"></i></button>
             <button id="btnEditPost" onclick="btnEditPost(this);"><i class="fa fa-pencil"></i></button>
         </nav>
+        <div id="divShare">
+	        <div id="shared_text" style="word-wrap: break-word">
+	        </div>
+	        <div>
+	            <img id="shared_image" src="./images/100x100.jpg" alt="post image" style="max-width:90%; display: none"/>
+	        </div>
+	        <div>
+	            <video width="128" height="96" controls style="display:none" id="shared_video">
+	                <source src="">
+	            </video>
+	        </div>
+	        <div>
+	            <audio controls style="display:none" id="shared_audio">
+	                <source src="">
+	            </audio>                        
+	        </div>        
+        </div>
         <div id="comments"></div>
     </div>
 </div>

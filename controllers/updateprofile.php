@@ -10,7 +10,7 @@ require "../php/config.php";
 require "../php/mark_sql_post.php";
 $conn = open_connection();
 
-$sql = mark_sql_post("UPDATE Users SET name=[name], dob=[dob], userimage=[userimage], bannerimage=[bannerimage], location=[location], genres=[genres], interests=[interests], timestamp=Now() WHERE id=[id]");
+$sql = mark_sql_post("UPDATE Users SET name=[name], username=[username], dob=[dob], userimage=[userimage], bannerimage=[bannerimage], location=[location], genres=[genres], interests=[interests], timestamp=Now() WHERE id=[id]");
 
 // echo "Fubar";
 if ($conn->query($sql) === TRUE) {

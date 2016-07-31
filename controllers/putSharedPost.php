@@ -13,7 +13,7 @@ $conn = open_connection();
 
 // $sql = "INSERT INTO Posts(text, user, post_shared)";
 // echo insertfrompost($sql, $conn);
-$sql = mark_sql_post("INSERT INTO Posts(text, user, post_shared) VALUES([text], [currentuser], [postid])");
+$sql = mark_sql_post("INSERT INTO Posts(text, user, post_shared) VALUES([text], [currentuser], [post_shared])");
 
 if ($conn->query($sql) === TRUE) {
     echo "Ok";

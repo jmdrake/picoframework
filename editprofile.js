@@ -16,6 +16,9 @@ $(document).ready(function () {
             window.location.replace("welcome.html");
         getProfileData(user, function (profileData) {
             json2form($("#frmProfile"), profileData, "./uploads/");
+            if(profileData["username"] == "") {
+            	$("#username").parent().show();
+            }
             console.log(profileData);
         })
     })

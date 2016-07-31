@@ -46,7 +46,7 @@
 <div class="w3-card w3-row" id="tmplPost" style="display: none">
     <div class="w3-two-thirds">
         <input type="hidden" name="postid" id="postid"/>
-        <div id="text" style="word-wrap: break-word">
+        <div id="shared_text" style="word-wrap: break-word">
             Text
         </div>
         <div>
@@ -70,6 +70,23 @@
             <button id="btnDeletePost" onclick="btnDeletePost(this);"><i class="fa fa-trash"></i></button>
             <button id="btnEditPost" onclick="btnEditPost(this);"><i class="fa fa-pencil"></i></button>
         </nav>
+        <div id="divShare">
+	        <div id="shared_text" style="word-wrap: break-word">
+	        </div>
+	        <div>
+	            <img id="shared_image" src="./images/100x100.jpg" alt="post image" style="max-width:90%; display: none"/>
+	        </div>
+	        <div>
+	            <video width="128" height="96" controls style="display:none" id="shared_video">
+	                <source src="">
+	            </video>
+	        </div>
+	        <div>
+	            <audio controls style="display:none" id="shared_audio">
+	                <source src="">
+	            </audio>                        
+	        </div>        
+        </div>
         <div id="comments"></div>
     </div>
 </div>
@@ -148,7 +165,7 @@
             <span onclick="$('#mdlShare').hide();" class="w3-closebtn">&times</span>
             <p>Share This Post</p>
             <textarea cols="50" class="w3-input w3-border" id="text" name="text"></textarea><br/>
-            <input type="hidden" class="w3-input" id="postid" name="post_shared"/>
+            <input type="hidden" class="w3-input" id="post_shared" name="post_shared"/>
             <button id="btnSubmitShare" class="w3-btn">Submit</button>
         </div>
         <div id="posttext"></div>

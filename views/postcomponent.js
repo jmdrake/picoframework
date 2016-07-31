@@ -108,7 +108,13 @@ function populatePostList(list, data, currentUser){
             newPost.find("#btnLikePost").find("i").addClass("fa-heart");
             newPost.find("#btnLikePost").find("i").removeClass("fa-heart-o");
         }
-        
+        if(record["shared_text"] != "") {
+				var sharedtext = unescape(record["shared_text"]).replace(/<script>/, "&lt;script>").replace(/<\/script>/, "&lt;/script>");	        		
+        		newPost.find("#shared_text").html(sharedtext.replace(rxurl, function foo(x) { return '<a href="' + x + '">Link</a>' }));
+        }
+        if(record["shared_image"]!="") newPost.find("#shared_image").show();
+        if(record["shared_audio"]!="") newPost.find("#shared_audio").show();
+        if(record["shared_video"]!="") newPost.find("#shared_video").show();
         if(record["userid"] == currentUser) {
         		newPost.find("#btnSharePost").hide();
         } else {
