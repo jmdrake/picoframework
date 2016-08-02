@@ -19,7 +19,7 @@ if($rs = $result->fetch_array(MYSQLI_ASSOC)) {
     if($_POST["password"] != $_POST["passwordconfirm"]) {
         echo "Error: Passwords do not match";
     } else {
-        $updatesql = "UPDATE Users SET password='" . $_POST["password"] . "' WHERE user=" . $rs["user"];
+        $updatesql = "UPDATE Users SET password='" . $_POST["password"] . "' WHERE id=" . $rs["user"];
         if($conn->query($updatesql)) {
             $delsql = "DELETE FROM Recovery WHERE token=[token]";
             if($conn->query($delsql)) {
