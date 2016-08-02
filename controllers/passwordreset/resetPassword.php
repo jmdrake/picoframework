@@ -21,7 +21,7 @@ if($rs = $result->fetch_array(MYSQLI_ASSOC)) {
     } else {
         $updatesql = "UPDATE Users SET password='" . $_POST["password"] . "' WHERE id=" . $rs["user"];
         if($conn->query($updatesql)) {
-            $delsql = "DELETE FROM Recovery WHERE token=[token]";
+            $delsql = mark_sql_post("DELETE FROM Recovery WHERE token=[token]");
             if($conn->query($delsql)) {
                 echo "Ok";    
             } else {
