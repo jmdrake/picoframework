@@ -29,8 +29,8 @@ function btnSendResetRequest(){
     sendResetRequest(resetrequest, function (result) {
         console.log(result);
         $("#mdlReset").find("#message").show();
-        if (result.search("0:") >= 0) {            
-            $("#mdlReset").find("#message").html("A password reset link sent to your email");
+        if (result.search("0:") >= 0) {            has 
+            $("#mdlReset").find("#message").html("A password reset link has been sent to your email");
         } else if (result.search("1:") >= 0) {
             $("#mdlReset").find("#message").html("Unable to sent reset email");
         } else if (result.search("2:") >= 0) {

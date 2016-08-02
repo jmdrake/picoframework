@@ -12,6 +12,6 @@ $smtpport = 25;
 $replyemail = "";
 $replyname = "";
 
-$baseurl = "http://www.godigio.com/H.U.B./";
+$baseurl = "http://www.godigio.com/hub/";
 ?>
 

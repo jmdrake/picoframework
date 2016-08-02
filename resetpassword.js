@@ -5,6 +5,7 @@ $("#navbar").load("navbar.html", function () {
 
 var guid;
 $(document).ready(function () {
+	 $("#btnReset").prop("disabled", true);
     if ((match = location.href.match(/\?guid=([^&]*)/)) != null) {
         guid = match[1];
         verifyResetToken(guid, function (result) {
@@ -13,10 +14,10 @@ $(document).ready(function () {
             } else {
                 $("#divErrorMessage").show()
             }
-        })
+        });        
     } else {
         $("#divErrorMessage").show()
-    }
+    }    
 });
 
 function btnReset() {
@@ -33,4 +34,12 @@ function btnReset() {
             }
         })
     }
+}
+
+function chkMatch(){
+	if($("#password").val() == $("#passwordconfirm").val()){
+		$("#btnReset").prop("disabled", false)
+	} else {
+		$("#btnReset").prop("disabled", true)
+	}
 }
