@@ -118,6 +118,7 @@ CREATE TABLE IF NOT EXISTS `Recovery` (
 CREATE TABLE IF NOT EXISTS `Users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(80) NOT NULL,
+  `username` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(40) NOT NULL,
   `image` varchar(40) DEFAULT NULL,
