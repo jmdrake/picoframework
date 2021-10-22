@@ -5,7 +5,7 @@ require "../php/config.php";
 require "../php/mark_sql_post.php";
 
 $conn = open_connection();
-$sql = mark_sql_post("INSERT INTO Users(name, username, email, password) VALUES ([name], [username], [email], [password])");
+$sql = mark_sql_post("INSERT INTO Users(name, username, email, password) VALUES ([name], [username], [email], [password], [session])");
 
 if ($conn->query($sql) === TRUE) {
     echo "Ok";
