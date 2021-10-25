@@ -38,9 +38,13 @@ $(document).ready(function () {
 
         uploadImages(fields).then(
             function (response) {
-                updateProfile(fields, function (res) {
-                    console.log(res);
-                    window.location.replace("./index.html?user=" + fields["id"]);
+                updateProfile(fields, function (res) 
+                    if(res.search("Error") >= 0) {
+                        console.log(res);
+                        alert("Error updating profile");
+                    } else {
+                        window.location.replace("./index.html?user=" + fields["id"]);
+                    }
                 })
             }, function (error) {
                 console.log(error)
