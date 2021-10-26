@@ -91,6 +91,7 @@ CREATE TABLE IF NOT EXISTS `Posts` (
   `video` varchar(60) DEFAULT NULL,
   `audio` varchar(60) DEFAULT NULL,
   `tags` varchar(80) DEFAULT NULL,
+  'timestamp' int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   FULLTEXT KEY `tags` (`tags`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
